@@ -1,0 +1,11 @@
+{
+  "$comment": "Generated file do not hand edit",
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
+  "name": "aether",
+  "version": "@AETHER_VERSION_MAJOR@.@AETHER_VERSION_MINOR@.@AETHER_VERSION_PATCH@.@AETHER_VERSION_TWEAK@",
+  "builtin-baseline": "d5ec528843d29e3a52d745a64b469f810b2cedbf",
+  "dependencies": [
+    "openssl"
+    @QT_LIBS@
+  ]
+}

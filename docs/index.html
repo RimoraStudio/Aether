@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aether: Share one keyboard and mouse across computers</title>
+  <meta name="description" content="Aether is an open-source keyboard and mouse sharing utility for Windows, macOS, and Linux.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased">
+
+  <nav class="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+      <a href="#" class="flex items-center gap-2 text-lg font-bold tracking-tight text-slate-900">
+        <svg class="h-8 w-8 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16"/><path d="M4 5a8 8 0 0 1 16 0 8 8 0 0 1-16 0Z"/><path d="M20 19a8 8 0 0 0-16 0"/></svg>
+        Aether
+      </a>
+      <div class="hidden items-center gap-8 text-sm font-medium text-slate-600 md:flex">
+        <a href="#features" class="hover:text-indigo-600">Features</a>
+        <a href="#how-it-works" class="hover:text-indigo-600">How it works</a>
+        <a href="#install" class="hover:text-indigo-600">Install</a>
+        <a href="#docs" class="hover:text-indigo-600">Docs</a>
+        <a href="https://github.com/deskflow/deskflow" target="_blank" rel="noopener" class="hover:text-indigo-600">Source</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="relative overflow-hidden bg-white pt-20 pb-28 md:pt-32 md:pb-40">
+    <div class="mx-auto max-w-5xl px-6 text-center">
+      <div class="inline-flex items-center gap-2 rounded-full bg-indigo-50 px-3 py-1 text-sm font-medium text-indigo-700">
+        <span class="h-2 w-2 rounded-full bg-indigo-600"></span>
+        Open source, cross-platform input sharing
+      </div>
+      <h1 class="mt-6 text-5xl font-extrabold tracking-tight text-slate-900 md:text-7xl">
+        One desk.<br class="md:hidden" /> Many computers.
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-600 md:text-xl">
+        Aether lets you control multiple computers with a single keyboard and mouse. Move the cursor from one screen to the next, share the clipboard, and keep everything encrypted over the network.
+      </p>
+      <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <a href="#install" class="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-6 py-3 text-base font-semibold text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Aether
+        </a>
+        <a href="https://github.com/deskflow/deskflow" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-6 py-3 text-base font-semibold text-slate-700 hover:bg-slate-50">
+          View source on GitHub
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <section id="features" class="bg-slate-100 py-20">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="mb-12 text-center">
+        <h2 class="text-3xl font-bold text-slate-900 md:text-4xl">Everything you need to share input</h2>
+        <p class="mt-4 text-lg text-slate-600">Aether handles the messy networking so your devices feel like one desktop.</p>
+      </div>
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <article class="rounded-2xl bg-white p-8 shadow-sm">
+          <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-100 text-indigo-600">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900">Seamless screen crossing</h3>
+          <p class="mt-2 text-slate-600">Drag the cursor off the edge of one screen and onto another. No button pressing, no manual switching.</p>
+        </article>
+        <article class="rounded-2xl bg-white p-8 shadow-sm">
+          <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-100 text-indigo-600">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900">Shared clipboard</h3>
+          <p class="mt-2 text-slate-600">Copy text and images on one machine and paste on another. It works in both directions automatically.</p>
+        </article>
+        <article class="rounded-2xl bg-white p-8 shadow-sm">
+          <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-100 text-indigo-600">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900">TLS encryption</h3>
+          <p class="mt-2 text-slate-600">Server and client traffic is encrypted so your keystrokes and clipboard data stay private on the network.</p>
+        </article>
+        <article class="rounded-2xl bg-white p-8 shadow-sm">
+          <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-100 text-indigo-600">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><path d="M6 8h.01"/><path d="M10 8h.01"/><path d="M14 8h.01"/><path d="M18 8h.01"/></svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900">Cross-platform</h3>
+          <p class="mt-2 text-slate-600">Run the server on Windows, macOS, or Linux and mix clients across all three. X11 and Wayland are both supported.</p>
+        </article>
+        <article class="rounded-2xl bg-white p-8 shadow-sm">
+          <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-100 text-indigo-600">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900">Protocol compatibility</h3>
+          <p class="mt-2 text-slate-600">Aether speaks the Synergy and Barrier wire protocols, so it can connect alongside existing tools on your network.</p>
+        </article>
+        <article class="rounded-2xl bg-white p-8 shadow-sm">
+          <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-100 text-indigo-600">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900">Easy configuration</h3>
+          <p class="mt-2 text-slate-600">The Qt-based GUI lets you arrange screens, set hotkeys, and configure autostart without editing files.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="how-it-works" class="bg-white py-20">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="mb-12 text-center">
+        <h2 class="text-3xl font-bold text-slate-900 md:text-4xl">How it works</h2>
+      </div>
+      <div class="grid gap-8 md:grid-cols-3">
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-indigo-100 text-xl font-bold text-indigo-600">1</div>
+          <h3 class="text-lg font-semibold text-slate-900">Set the server</h3>
+          <p class="mt-2 text-slate-600">Pick the computer that owns the physical keyboard and mouse and run Aether in server mode.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-indigo-100 text-xl font-bold text-indigo-600">2</div>
+          <h3 class="text-lg font-semibold text-slate-900">Arrange screens</h3>
+          <p class="mt-2 text-slate-600">Drag each client screen into the grid to match how your monitors are physically laid out.</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-indigo-100 text-xl font-bold text-indigo-600">3</div>
+          <h3 class="text-lg font-semibold text-slate-900">Move the cursor</h3>
+          <p class="mt-2 text-slate-600">Slide the cursor off one screen edge and it instantly appears on the next machine. That is it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="install" class="bg-slate-100 py-20">
+    <div class="mx-auto max-w-4xl px-6">
+      <div class="mb-10 text-center">
+        <h2 class="text-3xl font-bold text-slate-900 md:text-4xl">Install Aether</h2>
+        <p class="mt-4 text-lg text-slate-600">Choose your platform below. Prebuilt releases are published through the upstream Deskflow infrastructure while Aether builds its own release channel.</p>
+      </div>
+      <div class="rounded-2xl bg-white p-2 shadow-sm">
+        <div class="flex gap-2 border-b border-slate-100 p-2" role="tablist">
+          <button onclick="setPlatform('windows')" id="tab-windows" class="tab-btn flex-1 rounded-lg py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50" aria-selected="false">Windows</button>
+          <button onclick="setPlatform('macos')" id="tab-macos" class="tab-btn flex-1 rounded-lg py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50" aria-selected="false">macOS</button>
+          <button onclick="setPlatform('linux')" id="tab-linux" class="tab-btn flex-1 rounded-lg py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50" aria-selected="false">Linux</button>
+          <button onclick="setPlatform('source')" id="tab-source" class="tab-btn flex-1 rounded-lg py-2 text-sm font-semibold text-slate-600 hover:bg-slate-50" aria-selected="false">Source</button>
+        </div>
+        <div class="p-6" id="tab-content">
+          <noscript>Please enable JavaScript to see platform instructions.</noscript>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="docs" class="bg-white py-20">
+    <div class="mx-auto max-w-5xl px-6">
+      <div class="mb-10 text-center">
+        <h2 class="text-3xl font-bold text-slate-900 md:text-4xl">Documentation</h2>
+        <p class="mt-4 text-lg text-slate-600">Everything you need to set up, configure, and extend Aether.</p>
+      </div>
+      <div class="grid gap-6 md:grid-cols-2">
+        <a href="Configuration.md" class="group rounded-2xl border border-slate-200 bg-slate-50 p-6 hover:border-indigo-300 hover:bg-indigo-50/30">
+          <h3 class="text-lg font-semibold text-slate-900 group-hover:text-indigo-700">Configuration</h3>
+          <p class="mt-2 text-slate-600">Search paths, GUI keys, and config file options for every platform.</p>
+        </a>
+        <a href="dev/build.md" class="group rounded-2xl border border-slate-200 bg-slate-50 p-6 hover:border-indigo-300 hover:bg-indigo-50/30">
+          <h3 class="text-lg font-semibold text-slate-900 group-hover:text-indigo-700">Build guide</h3>
+          <p class="mt-2 text-slate-600">How to build Aether from source, including dependency and packaging notes.</p>
+        </a>
+        <a href="dev/protocol_reference.md" class="group rounded-2xl border border-slate-200 bg-slate-50 p-6 hover:border-indigo-300 hover:bg-indigo-50/30">
+          <h3 class="text-lg font-semibold text-slate-900 group-hover:text-indigo-700">Protocol reference</h3>
+          <p class="mt-2 text-slate-600">A technical reference to the Synergy/Barrier compatible wire protocol.</p>
+        </a>
+        <a href="Security.md" class="group rounded-2xl border border-slate-200 bg-slate-50 p-6 hover:border-indigo-300 hover:bg-indigo-50/30">
+          <h3 class="text-lg font-semibold text-slate-900 group-hover:text-indigo-700">Security</h3>
+          <p class="mt-2 text-slate-600">Security policy and how to report vulnerabilities.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-slate-200 bg-slate-50 py-20">
+    <div class="mx-auto max-w-4xl px-6 text-center">
+      <h2 class="text-3xl font-bold text-slate-900 md:text-4xl">Ready to share your input?</h2>
+      <p class="mt-4 text-lg text-slate-600">Get Aether today and turn a cluster of computers into one continuous workspace.</p>
+      <div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+        <a href="#install" class="inline-flex items-center justify-center rounded-lg bg-indigo-600 px-6 py-3 text-base font-semibold text-white hover:bg-indigo-700">Install Aether</a>
+        <a href="https://github.com/deskflow/deskflow" target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-6 py-3 text-base font-semibold text-slate-700 hover:bg-slate-50">Explore the source</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-white py-12">
+    <div class="mx-auto max-w-6xl px-6">
+      <div class="flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-8 md:flex-row">
+        <p class="text-sm text-slate-500">&copy; Aether Devs. Aether is based on Deskflow and is not affiliated with the upstream project.</p>
+        <div class="flex gap-6 text-sm font-medium text-slate-600">
+          <a href="Security.md" class="hover:text-indigo-600">Security</a>
+          <a href="Issues.md" class="hover:text-indigo-600">Issues</a>
+          <a href="https://github.com/deskflow/deskflow" target="_blank" rel="noopener" class="hover:text-indigo-600">Source</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const instructions = {
+      windows: `
+        <h3 class="text-xl font-semibold text-slate-900 mb-3">Install on Windows</h3>
+        <ol class="list-decimal list-inside space-y-2 text-slate-700 leading-relaxed">
+          <li>Download the latest <code class="bg-slate-100 px-1 rounded">aether-&lt;version&gt;-windows-x64.msi</code> from the <a href="https://github.com/deskflow/deskflow/releases" class="text-indigo-600 hover:underline">releases page</a>.</li>
+          <li>Run the installer and follow the prompts.</li>
+          <li>Launch <strong>Aether</strong> from the Start menu or desktop shortcut.</li>
+          <li>Set one PC as the server, connect the others as clients, and arrange your screens.</li>
+        </ol>
+      `,
+      macos: `
+        <h3 class="text-xl font-semibold text-slate-900 mb-3">Install on macOS</h3>
+        <ol class="list-decimal list-inside space-y-2 text-slate-700 leading-relaxed">
+          <li>Download the latest <code class="bg-slate-100 px-1 rounded">aether-&lt;version&gt;-macos.dmg</code> from the <a href="https://github.com/deskflow/deskflow/releases" class="text-indigo-600 hover:underline">releases page</a>.</li>
+          <li>Open the DMG and drag <strong>Aether</strong> into Applications.</li>
+          <li>Launch Aether from Applications.</li>
+          <li>Grant accessibility permissions when prompted, then configure your screens.</li>
+        </ol>
+      `,
+      linux: `
+        <h3 class="text-xl font-semibold text-slate-900 mb-3">Install on Linux</h3>
+        <ul class="list-disc list-inside space-y-2 text-slate-700 leading-relaxed">
+          <li><strong>Flatpak:</strong> build from <code class="bg-slate-100 px-1 rounded">deploy/linux/flatpak/org.aether.aether.yml</code>.</li>
+          <li><strong>Debian/Ubuntu:</strong> install the <code class="bg-slate-100 px-1 rounded">.deb</code> package from the <a href="https://github.com/deskflow/deskflow/releases" class="text-indigo-600 hover:underline">releases page</a>.</li>
+          <li><strong>Fedora/openSUSE:</strong> install the <code class="bg-slate-100 px-1 rounded">.rpm</code> package from the releases page.</li>
+          <li><strong>Arch:</strong> run <code class="bg-slate-100 px-1 rounded">makepkg</code> on the generated <code class="bg-slate-100 px-1 rounded">PKGBUILD</code> in the build output.</li>
+        </ul>
+      `,
+      source: `
+        <h3 class="text-xl font-semibold text-slate-900 mb-3">Build from source</h3>
+        <p class="mb-3 text-slate-700">See the <a href="dev/build.md" class="text-indigo-600 hover:underline">build guide</a> for full details. In short:</p>
+        <pre class="overflow-x-auto rounded-lg bg-slate-900 p-4 text-sm text-slate-100"><code>cmake -S . -B build
+cmake --build build</code></pre>
+        <p class="mt-3 text-slate-700">You will need CMake 3.24+, Qt 6.7+, and OpenSSL 3.0+. Most other dependencies are fetched automatically.</p>
+      `
+    };
+
+    function setPlatform(name) {
+      document.getElementById('tab-content').innerHTML = instructions[name];
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-indigo-600', 'text-white');
+        btn.classList.add('text-slate-600', 'hover:bg-slate-50');
+      });
+      const active = document.getElementById('tab-' + name);
+      active.classList.remove('text-slate-600', 'hover:bg-slate-50');
+      active.classList.add('bg-indigo-600', 'text-white');
+    }
+
+    setPlatform('windows');
+  </script>
+
+</body>
+</html>
