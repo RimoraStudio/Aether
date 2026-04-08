@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Install Aether</title>
+  <meta name="description" content="Step-by-step installation instructions for Windows, macOS, Linux, and source builds.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>body { font-family: 'Inter', system-ui, sans-serif; }</style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased">
+<nav class="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+    <a href="index.html" class="flex items-center gap-2 text-lg font-bold tracking-tight text-slate-900">
+      <svg class="h-8 w-8 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16"/><path d="M4 5a8 8 0 0 1 16 0 8 8 0 0 1-16 0Z"/><path d="M20 19a8 8 0 0 0-16 0"/></svg>
+      Aether
+    </a>
+    <div class="hidden items-center gap-8 text-sm font-medium md:flex">
+      <a href="index.html" class="text-slate-600 hover:text-indigo-600">Home</a>
+      <a href="download.html" class="text-slate-600 hover:text-indigo-600">Download</a>
+      <a href="install.html" class="text-indigo-600">Install</a>
+      <a href="docs.html" class="text-slate-600 hover:text-indigo-600">Docs</a>
+      <a href="about.html" class="text-slate-600 hover:text-indigo-600">About</a>
+      <a href="https://github.com/neang-mengseang/Aether" target="_blank" rel="noopener" class="text-slate-600 hover:text-indigo-600">Source</a>
+    </div>
+    <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="md:hidden rounded-lg p-2 text-slate-600 hover:bg-slate-100">
+      <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden border-t border-slate-100 px-6 py-4 md:hidden space-y-3 text-sm font-medium text-slate-600">
+    <a href="index.html" class="block hover:text-indigo-600">Home</a>
+    <a href="download.html" class="block hover:text-indigo-600">Download</a>
+    <a href="install.html" class="block hover:text-indigo-600">Install</a>
+    <a href="docs.html" class="block hover:text-indigo-600">Docs</a>
+    <a href="about.html" class="block hover:text-indigo-600">About</a>
+    <a href="https://github.com/neang-mengseang/Aether" target="_blank" rel="noopener" class="block hover:text-indigo-600">Source</a>
+  </div>
+</nav>
+<section class="bg-white py-20">
+  <div class="mx-auto max-w-4xl px-6">
+    <div class="text-center">
+      <h1 class="text-4xl font-extrabold tracking-tight text-slate-900 md:text-5xl">Install Aether</h1>
+      <p class="mt-4 text-lg text-slate-600">Choose your platform for step-by-step instructions.</p>
+    </div>
+
+    <div class="mt-12 space-y-10">
+      <div class="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
+        <h2 class="text-2xl font-bold text-slate-900">Windows</h2>
+        <ol class="mt-4 list-decimal list-inside space-y-2 text-slate-700 leading-relaxed">
+          <li>Download the latest <code class="bg-slate-100 px-1 rounded">aether-&lt;version&gt;-windows-x64.msi</code> from the <a class="text-indigo-600 hover:underline" href="download.html">download page</a>.</li>
+          <li>Run the installer and follow the prompts.</li>
+          <li>Launch <strong>Aether</strong> from the Start menu or desktop shortcut.</li>
+          <li>On the first PC choose <strong>Server</strong>, on the others choose <strong>Client</strong>, then arrange your screens.</li>
+        </ol>
+      </div>
+
+      <div class="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
+        <h2 class="text-2xl font-bold text-slate-900">macOS</h2>
+        <ol class="mt-4 list-decimal list-inside space-y-2 text-slate-700 leading-relaxed">
+          <li>Download the latest <code class="bg-slate-100 px-1 rounded">aether-&lt;version&gt;-macos.dmg</code> from the <a class="text-indigo-600 hover:underline" href="download.html">download page</a>.</li>
+          <li>Open the DMG and drag <strong>Aether</strong> into Applications.</li>
+          <li>Launch Aether from Applications and grant accessibility permissions when prompted.</li>
+          <li>Configure the server, then add clients.</li>
+        </ol>
+      </div>
+
+      <div class="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
+        <h2 class="text-2xl font-bold text-slate-900">Linux</h2>
+        <ul class="mt-4 list-disc list-inside space-y-2 text-slate-700 leading-relaxed">
+          <li><strong>Flatpak:</strong> build from <code class="bg-slate-100 px-1 rounded">deploy/linux/flatpak/org.aether.aether.yml</code>.</li>
+          <li><strong>Debian/Ubuntu:</strong> install the <code class="bg-slate-100 px-1 rounded">.deb</code> package from the <a class="text-indigo-600 hover:underline" href="download.html">download page</a>.</li>
+          <li><strong>Fedora/openSUSE:</strong> install the <code class="bg-slate-100 px-1 rounded">.rpm</code> package from the <a class="text-indigo-600 hover:underline" href="download.html">download page</a>.</li>
+          <li><strong>Arch:</strong> run <code class="bg-slate-100 px-1 rounded">makepkg</code> on the generated <code class="bg-slate-100 px-1 rounded">PKGBUILD</code> in the build output.</li>
+        </ul>
+      </div>
+
+      <div id="source" class="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
+        <h2 class="text-2xl font-bold text-slate-900">Build from source</h2>
+        <p class="mt-4 text-slate-700">See the <a class="text-indigo-600 hover:underline" href="dev/build.md">build guide</a> for full details. In short:</p>
+        <pre class="mt-4 overflow-x-auto rounded-lg bg-slate-900 p-4 text-sm text-slate-100"><code>cmake -S . -B build
+cmake --build build</code></pre>
+        <p class="mt-4 text-slate-700">You will need CMake 3.24+, Qt 6.7+, and OpenSSL 3.0+. Most other dependencies are fetched automatically.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<footer class="bg-white py-12">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-8 md:flex-row">
+      <p class="text-sm text-slate-500">&copy; Aether Devs. Aether is based on Deskflow and is not affiliated with the upstream project.</p>
+      <div class="flex gap-6 text-sm font-medium text-slate-600">
+        <a href="docs.html" class="hover:text-indigo-600">Docs</a>
+        <a href="install.html" class="hover:text-indigo-600">Install</a>
+        <a href="https://github.com/neang-mengseang/Aether" target="_blank" rel="noopener" class="hover:text-indigo-600">Source</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

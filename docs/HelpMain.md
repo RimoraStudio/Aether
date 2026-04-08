@@ -2,8 +2,8 @@
 
 ## Introduction
 
-- [Homepage](https://deskflow.org) - Project home page
-- [Code](https://github.com/deskflow/deskflow) - Read the code
+- [Homepage](https://neang-mengseang.github.io/Aether) - Project home page
+- [Code](https://github.com/neang-mengseang/Aether) - Read the code
 
 Aether is based on Deskflow and is not affiliated with the upstream Deskflow project.
 
@@ -16,5 +16,5 @@ Aether is based on Deskflow and is not affiliated with the upstream Deskflow pro
 
 ## Getting help online
 
-- View the [Wiki](https://github.com/deskflow/deskflow/wiki) for online user guides.
-- Start a [new discussion](https://github.com/deskflow/deskflow/discussions) on the upstream GitHub project.
+- View the [Wiki](https://github.com/neang-mengseang/Aether/wiki) for online user guides.
+- Start a [new discussion](https://github.com/neang-mengseang/Aether/discussions) on the upstream GitHub project.

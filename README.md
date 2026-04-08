@@ -15,7 +15,7 @@ Aether is based on Deskflow, an open-source fork of the Synergy code base.
 
 ## Download and install
 
-Prebuilt installers and packages are available on the [releases page](https://github.com/deskflow/deskflow/releases). Choose the file that matches your operating system.
+Prebuilt installers and packages are available on the [releases page](https://github.com/neang-mengseang/Aether/releases). Choose the file that matches your operating system.
 
 ### Windows
 
