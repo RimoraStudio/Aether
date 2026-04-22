@@ -5,67 +5,63 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Aether</title>
   <meta name="description" content="Learn about Aether, its license, and its relationship to Deskflow.">
-  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>body { font-family: 'Inter', system-ui, sans-serif; }</style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&family=Fira+Code&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
 </head>
-<body class="bg-slate-50 text-slate-900 antialiased">
-<nav class="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur">
-  <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-    <a href="index.html" class="flex items-center gap-2 text-lg font-bold tracking-tight text-slate-900">
-      <svg class="h-8 w-8 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16"/><path d="M4 5a8 8 0 0 1 16 0 8 8 0 0 1-16 0Z"/><path d="M20 19a8 8 0 0 0-16 0"/></svg>
-      Aether
-    </a>
-    <div class="hidden items-center gap-8 text-sm font-medium md:flex">
-      <a href="index.html" class="text-slate-600 hover:text-indigo-600">Home</a>
-      <a href="download.html" class="text-slate-600 hover:text-indigo-600">Download</a>
-      <a href="install.html" class="text-slate-600 hover:text-indigo-600">Install</a>
-      <a href="docs.html" class="text-slate-600 hover:text-indigo-600">Docs</a>
-      <a href="about.html" class="text-indigo-600">About</a>
-      <a href="https://github.com/neang-mengseang/Aether" target="_blank" rel="noopener" class="text-slate-600 hover:text-indigo-600">Source</a>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><svg class="h-8 w-8" viewBox="0 0 24 24" fill="none">
+  <circle cx="12" cy="12" r="10" stroke="url(#logoGrad)" stroke-width="2" opacity="0.25"/>
+  <path d="M4 12h16" stroke="url(#logoGrad)" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M4 5a8 8 0 0 1 16 4 8 8 0 0 1-16 7" stroke="url(#logoGrad)" stroke-width="1.5" stroke-linecap="round"/>
+  <defs><linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs>
+</svg> Aether</a>
+    <div class="nav-links"><a href="index.html" class="">Home</a>
+      <a href="download.html" class="">Download</a>
+      <a href="install.html" class="">Install</a>
+      <a href="docs.html" class="">Docs</a>
+      <a href="about.html" class="active">About</a>
+      <a href="https://github.com/neang-mengseang/Aether" target="_blank" rel="noopener">Source</a>
     </div>
-    <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="md:hidden rounded-lg p-2 text-slate-600 hover:bg-slate-100">
-      <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    <button class="mobile-toggle" aria-label="Menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
   </div>
-  <div id="mobile-menu" class="hidden border-t border-slate-100 px-6 py-4 md:hidden space-y-3 text-sm font-medium text-slate-600">
-    <a href="index.html" class="block hover:text-indigo-600">Home</a>
-    <a href="download.html" class="block hover:text-indigo-600">Download</a>
-    <a href="install.html" class="block hover:text-indigo-600">Install</a>
-    <a href="docs.html" class="block hover:text-indigo-600">Docs</a>
-    <a href="about.html" class="block hover:text-indigo-600">About</a>
-    <a href="https://github.com/neang-mengseang/Aether" target="_blank" rel="noopener" class="block hover:text-indigo-600">Source</a>
+  <div id="mobile-menu"><a href="index.html">Home</a>
+      <a href="download.html">Download</a>
+      <a href="install.html">Install</a>
+      <a href="docs.html">Docs</a>
+      <a href="about.html">About</a>
+    <a href="https://github.com/neang-mengseang/Aether" target="_blank" rel="noopener">Source</a>
   </div>
 </nav>
-<section class="bg-white py-20">
-  <div class="mx-auto max-w-4xl px-6">
-    <div class="text-center">
-      <h1 class="text-4xl font-extrabold tracking-tight text-slate-900 md:text-5xl">About Aether</h1>
-      <p class="mt-4 text-lg text-slate-600">Aether is an open-source keyboard and mouse sharing utility.</p>
-    </div>
-    <div class="mt-12 space-y-8 text-slate-700 leading-relaxed">
-      <p>Aether lets one keyboard and mouse control multiple computers on the same network. The cursor moves from one screen to the next as if the machines were a single desktop. Clipboard sharing and TLS encryption are built in.</p>
-      <p>Aether is based on <a href="https://deskflow.org" target="_blank" rel="noopener" class="text-indigo-600 hover:underline">Deskflow</a>, which itself continues the lineage of the original Synergy project. Aether is an independent rebrand and is not affiliated with the upstream Deskflow project.</p>
-      <h2 class="text-2xl font-bold text-slate-900">License</h2>
-      <p>Aether is distributed under the same licenses as Deskflow. Source code is licensed under GPL-2.0-only with an OpenSSL exception, or as noted per file. See <code>LICENSE</code> and <code>LICENSES/</code> for full details.</p>
-      <h2 class="text-2xl font-bold text-slate-900">Source</h2>
-      <p>The source code is available on GitHub at <a href="https://github.com/neang-mengseang/Aether" target="_blank" rel="noopener" class="text-indigo-600 hover:underline">neang-mengseang/Aether</a>.</p>
+<section class="section" style="padding-top:4rem;">
+  <div class="container" style="max-width:48rem;">
+    <h1 class="section-title reveal">About Aether</h1>
+    <p class="section-sub reveal">Aether is an open-source keyboard and mouse sharing utility.</p>
+    <div class="card reveal" style="margin-top:2rem;">
+      <p style="color:var(--muted);">Aether lets one keyboard and mouse control multiple computers on the same network. The cursor moves from one screen to the next as if the machines were a single desktop. Clipboard sharing and TLS encryption are built in.</p>
+      <p style="color:var(--muted);">Aether is based on <a class="glow-link" href="https://deskflow.org" target="_blank" rel="noopener">Deskflow</a>, which itself continues the lineage of the original Synergy project. Aether is an independent rebrand and is not affiliated with the upstream Deskflow project.</p>
+      <h2 style="margin-top:1.75rem;margin-bottom:0.5rem;">License</h2>
+      <p style="color:var(--muted);">Aether is distributed under the same licenses as Deskflow. Source code is licensed under GPL-2.0-only with an OpenSSL exception, or as noted per file. See <code>LICENSE</code> and <code>LICENSES/</code> for full details.</p>
+      <h2 style="margin-top:1.75rem;margin-bottom:0.5rem;">Source</h2>
+      <p style="color:var(--muted);">The source code is available on GitHub at <a class="glow-link" href="https://github.com/neang-mengseang/Aether" target="_blank" rel="noopener">neang-mengseang/Aether</a>.</p>
     </div>
   </div>
 </section>
-<footer class="bg-white py-12">
-  <div class="mx-auto max-w-6xl px-6">
-    <div class="flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-8 md:flex-row">
-      <p class="text-sm text-slate-500">&copy; Aether Devs. Aether is based on Deskflow and is not affiliated with the upstream project.</p>
-      <div class="flex gap-6 text-sm font-medium text-slate-600">
-        <a href="docs.html" class="hover:text-indigo-600">Docs</a>
-        <a href="install.html" class="hover:text-indigo-600">Install</a>
-        <a href="https://github.com/neang-mengseang/Aether" target="_blank" rel="noopener" class="hover:text-indigo-600">Source</a>
-      </div>
+<footer class="reveal">
+  <div class="footer-inner">
+    <p>&copy; Aether Devs. Aether is based on Deskflow and is not affiliated with the upstream project.</p>
+    <div class="flex gap-6" style="display:flex;gap:1.5rem;">
+      <a class="glow-link" href="docs.html">Docs</a>
+      <a class="glow-link" href="install.html">Install</a>
+      <a class="glow-link" href="https://github.com/neang-mengseang/Aether" target="_blank" rel="noopener">Source</a>
     </div>
   </div>
 </footer>
+<script src="assets/site.js"></script>
 </body>
 </html>
