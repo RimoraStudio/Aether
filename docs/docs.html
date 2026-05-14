@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,19 +7,19 @@
   <meta name="description" content="Read Aether configuration, build, protocol, and security documentation.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&family=Fira+Code&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Space+Grotesk:wght@700&family=Fira+Code&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="logo"><svg class="h-8 w-8" viewBox="0 0 24 24" fill="none">
-  <circle cx="12" cy="12" r="10" stroke="url(#logoGrad)" stroke-width="2" opacity="0.25"/>
-  <path d="M4 12h16" stroke="url(#logoGrad)" stroke-width="1.5" stroke-linecap="round"/>
-  <path d="M4 5a8 8 0 0 1 16 4 8 8 0 0 1-16 7" stroke="url(#logoGrad)" stroke-width="1.5" stroke-linecap="round"/>
-  <defs><linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs>
+    <a href="index.html" class="logo"><svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+  <circle cx="12" cy="12" r="10" stroke="#6366f1" stroke-width="2" opacity="0.3"/>
+  <path d="M4 12h16" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M4 5a8 8 0 0 1 16 4 8 8 0 0 1-16 7" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round"/>
 </svg> Aether</a>
-    <div class="nav-links"><a href="index.html" class="">Home</a>
+    <div class="nav-links">
+      <a href="index.html" class="">Home</a>
       <a href="download.html" class="">Download</a>
       <a href="install.html" class="">Install</a>
       <a href="docs.html" class="active">Docs</a>
@@ -30,7 +30,8 @@
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
   </div>
-  <div id="mobile-menu"><a href="index.html">Home</a>
+  <div id="mobile-menu">
+    <a href="index.html">Home</a>
       <a href="download.html">Download</a>
       <a href="install.html">Install</a>
       <a href="docs.html">Docs</a>
@@ -38,33 +39,36 @@
     <a href="https://github.com/neang-mengseang/Aether" target="_blank" rel="noopener">Source</a>
   </div>
 </nav>
-<section class="section" style="padding-top:4rem;">
+<div class="page-header reveal">
+  <h1 class="page-title">Documentation</h1>
+  <p class="page-sub">Everything you need to set up, configure, and extend Aether.</p>
+</div>
+
+<section class="section" style="padding-top:0;">
   <div class="container">
-    <h1 class="section-title reveal">Documentation</h1>
-    <p class="section-sub reveal">Everything you need to set up, configure, and extend Aether.</p>
-    <div class="grid-2" style="margin-top:3rem;">
-      <a href="Configuration.md" class="card reveal" style="text-decoration:none;">
-        <h3 style="margin-top:0;">Configuration</h3>
+    <div class="grid-2">
+      <a href="Configuration.md" class="card card-hover reveal card-link">
+        <h3>Configuration</h3>
         <p>Search paths, GUI keys, and config file options for every platform.</p>
       </a>
-      <a href="dev/build.md" class="card reveal" style="text-decoration:none;">
-        <h3 style="margin-top:0;">Build guide</h3>
+      <a href="dev/build.md" class="card card-hover reveal card-link">
+        <h3>Build guide</h3>
         <p>How to build Aether from source, including dependency and packaging notes.</p>
       </a>
-      <a href="dev/protocol_reference.md" class="card reveal" style="text-decoration:none;">
-        <h3 style="margin-top:0;">Protocol reference</h3>
+      <a href="dev/protocol_reference.md" class="card card-hover reveal card-link">
+        <h3>Protocol reference</h3>
         <p>A technical reference to the Synergy/Barrier compatible wire protocol.</p>
       </a>
-      <a href="Security.md" class="card reveal" style="text-decoration:none;">
-        <h3 style="margin-top:0;">Security</h3>
+      <a href="Security.md" class="card card-hover reveal card-link">
+        <h3>Security</h3>
         <p>Security policy and how to report vulnerabilities.</p>
       </a>
-      <a href="Issues.md" class="card reveal" style="text-decoration:none;">
-        <h3 style="margin-top:0;">Issue reporting</h3>
+      <a href="Issues.md" class="card card-hover reveal card-link">
+        <h3>Issue reporting</h3>
         <p>Guidelines for reporting bugs and asking for help.</p>
       </a>
-      <a href="HelpMain.md" class="card reveal" style="text-decoration:none;">
-        <h3 style="margin-top:0;">Help home</h3>
+      <a href="HelpMain.md" class="card card-hover reveal card-link">
+        <h3>Help home</h3>
         <p>Overview of guides and online resources.</p>
       </a>
     </div>
@@ -72,11 +76,11 @@
 </section>
 <footer class="reveal">
   <div class="footer-inner">
-    <p>&copy; Aether Devs. Aether is based on Deskflow and is not affiliated with the upstream project.</p>
-    <div class="flex gap-6" style="display:flex;gap:1.5rem;">
-      <a class="glow-link" href="docs.html">Docs</a>
-      <a class="glow-link" href="install.html">Install</a>
-      <a class="glow-link" href="https://github.com/neang-mengseang/Aether" target="_blank" rel="noopener">Source</a>
+    <p>&copy; Aether Devs. Based on Deskflow, not affiliated with the upstream project.</p>
+    <div class="footer-links">
+      <a href="docs.html">Docs</a>
+      <a href="install.html">Install</a>
+      <a href="https://github.com/neang-mengseang/Aether" target="_blank" rel="noopener">Source</a>
     </div>
   </div>
 </footer>

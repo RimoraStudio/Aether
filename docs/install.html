@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,19 +7,19 @@
   <meta name="description" content="Step-by-step installation instructions for Windows, macOS, Linux, and source builds.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&family=Fira+Code&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Space+Grotesk:wght@700&family=Fira+Code&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="logo"><svg class="h-8 w-8" viewBox="0 0 24 24" fill="none">
-  <circle cx="12" cy="12" r="10" stroke="url(#logoGrad)" stroke-width="2" opacity="0.25"/>
-  <path d="M4 12h16" stroke="url(#logoGrad)" stroke-width="1.5" stroke-linecap="round"/>
-  <path d="M4 5a8 8 0 0 1 16 4 8 8 0 0 1-16 7" stroke="url(#logoGrad)" stroke-width="1.5" stroke-linecap="round"/>
-  <defs><linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop stop-color="#6366f1"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs>
+    <a href="index.html" class="logo"><svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+  <circle cx="12" cy="12" r="10" stroke="#6366f1" stroke-width="2" opacity="0.3"/>
+  <path d="M4 12h16" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M4 5a8 8 0 0 1 16 4 8 8 0 0 1-16 7" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round"/>
 </svg> Aether</a>
-    <div class="nav-links"><a href="index.html" class="">Home</a>
+    <div class="nav-links">
+      <a href="index.html" class="">Home</a>
       <a href="download.html" class="">Download</a>
       <a href="install.html" class="active">Install</a>
       <a href="docs.html" class="">Docs</a>
@@ -30,7 +30,8 @@
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
   </div>
-  <div id="mobile-menu"><a href="index.html">Home</a>
+  <div id="mobile-menu">
+    <a href="index.html">Home</a>
       <a href="download.html">Download</a>
       <a href="install.html">Install</a>
       <a href="docs.html">Docs</a>
@@ -38,11 +39,13 @@
     <a href="https://github.com/neang-mengseang/Aether" target="_blank" rel="noopener">Source</a>
   </div>
 </nav>
-<section class="section" style="padding-top:4rem;">
-  <div class="container" style="max-width:50rem;">
-    <h1 class="section-title reveal">Install Aether</h1>
-    <p class="section-sub reveal">Choose your platform for step-by-step instructions.</p>
+<div class="page-header reveal">
+  <h1 class="page-title">Install Aether</h1>
+  <p class="page-sub">Choose your platform for step-by-step instructions.</p>
+</div>
 
+<section class="section" style="padding-top:0;">
+  <div class="container">
     <div class="tabs reveal">
       <button class="tab active">Windows</button>
       <button class="tab">macOS</button>
@@ -50,12 +53,12 @@
       <button class="tab">Source</button>
     </div>
 
-    <div class="reveal" style="min-height:20rem;">
+    <div class="reveal">
       <div class="tab-panel active">
-        <div class="card">
-          <h2 style="margin-top:0;">Install on Windows</h2>
-          <ol style="color:var(--muted);padding-left:1.2rem;">
-            <li>Download the latest <code>aether-&lt;version&gt;-windows-x64.msi</code> from the <a class="glow-link" href="download.html">download page</a>.</li>
+        <div class="card content-block">
+          <h2>Install on Windows</h2>
+          <ol>
+            <li>Download the latest <code>aether-<version>-windows-x64.msi</code> from the <a href="download.html">download page</a>.</li>
             <li>Run the installer and follow the prompts.</li>
             <li>Launch <strong>Aether</strong> from the Start menu or desktop shortcut.</li>
             <li>On the first PC choose <strong>Server</strong>, on the others choose <strong>Client</strong>, then arrange your screens.</li>
@@ -63,10 +66,10 @@
         </div>
       </div>
       <div class="tab-panel">
-        <div class="card">
-          <h2 style="margin-top:0;">Install on macOS</h2>
-          <ol style="color:var(--muted);padding-left:1.2rem;">
-            <li>Download the latest <code>aether-&lt;version&gt;-macos.dmg</code> from the <a class="glow-link" href="download.html">download page</a>.</li>
+        <div class="card content-block">
+          <h2>Install on macOS</h2>
+          <ol>
+            <li>Download the latest <code>aether-<version>-macos.dmg</code> from the <a href="download.html">download page</a>.</li>
             <li>Open the DMG and drag <strong>Aether</strong> into Applications.</li>
             <li>Launch Aether from Applications and grant accessibility permissions when prompted.</li>
             <li>Configure the server, then add clients.</li>
@@ -74,23 +77,23 @@
         </div>
       </div>
       <div class="tab-panel">
-        <div class="card">
-          <h2 style="margin-top:0;">Install on Linux</h2>
-          <ul style="color:var(--muted);padding-left:1.2rem;">
+        <div class="card content-block">
+          <h2>Install on Linux</h2>
+          <ul>
             <li><strong>Flatpak:</strong> build from <code>deploy/linux/flatpak/org.aether.aether.yml</code>.</li>
-            <li><strong>Debian/Ubuntu:</strong> install the <code>.deb</code> package from the <a class="glow-link" href="download.html">download page</a>.</li>
-            <li><strong>Fedora/openSUSE:</strong> install the <code>.rpm</code> package from the <a class="glow-link" href="download.html">download page</a>.</li>
+            <li><strong>Debian/Ubuntu:</strong> install the <code>.deb</code> package from the <a href="download.html">download page</a>.</li>
+            <li><strong>Fedora/openSUSE:</strong> install the <code>.rpm</code> package from the <a href="download.html">download page</a>.</li>
             <li><strong>Arch:</strong> run <code>makepkg</code> on the generated <code>PKGBUILD</code> in the build output.</li>
           </ul>
         </div>
       </div>
       <div class="tab-panel" id="source">
-        <div class="card">
-          <h2 style="margin-top:0;">Build from source</h2>
-          <p style="color:var(--muted);">See the <a class="glow-link" href="dev/build.md">build guide</a> for full details. In short:</p>
+        <div class="card content-block">
+          <h2>Build from source</h2>
+          <p>See the <a href="dev/build.md">build guide</a> for full details. In short:</p>
           <div class="code-block">cmake -S . -B build
 cmake --build build</div>
-          <p style="color:var(--muted);">You will need CMake 3.24+, Qt 6.7+, and OpenSSL 3.0+. Most other dependencies are fetched automatically.</p>
+          <p>You will need CMake 3.24+, Qt 6.7+, and OpenSSL 3.0+. Most other dependencies are fetched automatically.</p>
         </div>
       </div>
     </div>
@@ -98,11 +101,11 @@ cmake --build build</div>
 </section>
 <footer class="reveal">
   <div class="footer-inner">
-    <p>&copy; Aether Devs. Aether is based on Deskflow and is not affiliated with the upstream project.</p>
-    <div class="flex gap-6" style="display:flex;gap:1.5rem;">
-      <a class="glow-link" href="docs.html">Docs</a>
-      <a class="glow-link" href="install.html">Install</a>
-      <a class="glow-link" href="https://github.com/neang-mengseang/Aether" target="_blank" rel="noopener">Source</a>
+    <p>&copy; Aether Devs. Based on Deskflow, not affiliated with the upstream project.</p>
+    <div class="footer-links">
+      <a href="docs.html">Docs</a>
+      <a href="install.html">Install</a>
+      <a href="https://github.com/neang-mengseang/Aether" target="_blank" rel="noopener">Source</a>
     </div>
   </div>
 </footer>
