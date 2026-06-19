@@ -62,7 +62,7 @@ async function loadLatestRelease() {
     setLink('mac-link', mac);
     setLink('linux-link', lin);
   } catch (e) {
-    status.innerHTML = '<p style="color:var(--text-muted);margin-bottom:16px;">No releases published yet.</p><a class="btn btn-secondary" href="install.html#source">Build from source</a>';
+    status.innerHTML = '<p style="color:var(--text-muted);margin-bottom:16px;">No releases published yet.</p><a class="btn btn-secondary" href="download.html#source">Build from source</a>';
   }
 }
 loadLatestRelease();

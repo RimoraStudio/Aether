@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Aether</title>
-  <meta name="description" content="Learn about Aether, its license, and its relationship to Deskflow.">
+  <meta name="description" content="Learn about Aether, its features, license, and technical details.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Space+Grotesk:wght@700&family=Fira+Code&display=swap" rel="stylesheet">
@@ -14,14 +14,13 @@
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="logo"><svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-  <circle cx="12" cy="12" r="10" stroke="#6366f1" stroke-width="2" opacity="0.3"/>
-  <path d="M4 12h16" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round"/>
-  <path d="M4 5a8 8 0 0 1 16 4 8 8 0 0 1-16 7" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round"/>
+  <circle cx="12" cy="12" r="10" stroke="#4f46e5" stroke-width="2" opacity="0.3"/>
+  <path d="M4 12h16" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M4 5a8 8 0 0 1 16 4 8 8 0 0 1-16 7" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round"/>
 </svg> Aether</a>
     <div class="nav-links">
       <a href="index.html" class="">Home</a>
       <a href="download.html" class="">Download</a>
-      <a href="install.html" class="">Install</a>
       <a href="docs.html" class="">Docs</a>
       <a href="about.html" class="active">About</a>
       <a href="https://github.com/neang-mengseang/Aether" target="_blank" rel="noopener">Source</a>
@@ -33,35 +32,95 @@
   <div id="mobile-menu">
     <a href="index.html">Home</a>
       <a href="download.html">Download</a>
-      <a href="install.html">Install</a>
       <a href="docs.html">Docs</a>
       <a href="about.html">About</a>
     <a href="https://github.com/neang-mengseang/Aether" target="_blank" rel="noopener">Source</a>
   </div>
 </nav>
+<main>
 <div class="page-header reveal">
   <h1 class="page-title">About Aether</h1>
-  <p class="page-sub">Aether is an open-source keyboard and mouse sharing utility.</p>
+  <p class="page-sub">An open-source keyboard and mouse sharing utility for Windows, macOS, and Linux.</p>
 </div>
 
 <section class="section" style="padding-top:0;">
   <div class="container">
     <div class="card content-block reveal">
-      <p>Aether lets one keyboard and mouse control multiple computers on the same network. The cursor moves from one screen to the next as if the machines were a single desktop. Clipboard sharing and TLS encryption are built in.</p>
-      <p>Aether is based on <a href="https://deskflow.org" target="_blank" rel="noopener">Deskflow</a>, which itself continues the lineage of the original Synergy project. Aether is an independent rebrand and is not affiliated with the upstream Deskflow project.</p>
+      <p>Aether lets one keyboard and mouse control multiple computers on the same local network. The cursor moves from one screen to the next as if the machines were a single desktop. Clipboard sharing and TLS encryption are built in, so your input data stays private on the wire.</p>
+      <p>Aether is built with C++20 and Qt 6, and uses the Synergy and Barrier wire protocols for broad interoperability. It runs as a server on your primary machine and as a client on each secondary machine, communicating over your existing LAN.</p>
+
+      <h2 style="margin-top:32px;">Why Aether</h2>
+      <p>Hardware KVM switches are expensive and require physical cable switching. Software alternatives often lack encryption, cross-platform support, or active maintenance. Aether combines seamless screen crossing, clipboard sharing, TLS encryption, and broad protocol compatibility in a single open-source package.</p>
+
+      <h2 style="margin-top:32px;">Key features</h2>
+      <ul>
+        <li><strong>Seamless cursor crossing:</strong> move the cursor off one screen edge and onto the next without any hotkey or button press.</li>
+        <li><strong>Clipboard sharing:</strong> copy on one machine, paste on another. Text and images both work.</li>
+        <li><strong>TLS encryption:</strong> all client-server traffic is encrypted. Certificates are generated and managed automatically.</li>
+        <li><strong>Cross-platform:</strong> Windows, macOS, and Linux with both X11 and Wayland support.</li>
+        <li><strong>Protocol compatibility:</strong> interoperates with Synergy and Barrier clients and servers.</li>
+        <li><strong>Qt-based GUI:</strong> visual screen arrangement, hotkey configuration, and system tray integration.</li>
+        <li><strong>Open source:</strong> GPL-2.0 with OpenSSL exception. No telemetry, no accounts, no lock-in.</li>
+      </ul>
+
       <h2 style="margin-top:32px;">License</h2>
-      <p>Aether is distributed under the same licenses as Deskflow. Source code is licensed under GPL-2.0-only with an OpenSSL exception, or as noted per file. See <code>LICENSE</code> and <code>LICENSES/</code> for full details.</p>
+      <p>Aether is distributed under GPL-2.0-only with an OpenSSL exception, or as noted per file. See <code>LICENSE</code> and <code>LICENSES/</code> in the repository for full details.</p>
+
       <h2 style="margin-top:32px;">Source</h2>
-      <p>The source code is available on GitHub at <a href="https://github.com/neang-mengseang/Aether" target="_blank" rel="noopener">neang-mengseang/Aether</a>.</p>
+      <p>The source code is available on GitHub at <a href="https://github.com/neang-mengseang/Aether" target="_blank" rel="noopener">neang-mengseang/Aether</a>. Contributions, bug reports, and feature requests are welcome.</p>
     </div>
   </div>
 </section>
+
+<section class="section section-alt">
+  <div class="container">
+    <h2 class="section-title reveal">Technical details</h2>
+    <p class="section-sub reveal">Built on a mature, battle-tested codebase.</p>
+    <div class="grid-3">
+      <div class="card reveal">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg></div>
+        <h3>C++20 and Qt 6</h3>
+        <p>Modern C++ with Qt 6 for cross-platform GUI and system integration.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>OpenSSL TLS</h3>
+        <p>Industry-standard TLS encryption for all network traffic between server and clients.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg></div>
+        <h3>CMake build system</h3>
+        <p>CMake 3.24+ with automatic dependency fetching for a clean build experience.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title reveal">Roadmap</h2>
+    <p class="section-sub reveal">What is being built next for Aether.</p>
+    <div class="card content-block reveal">
+      <h3 style="margin-bottom:12px;">Virtual display streaming</h3>
+      <p>Turn a second machine into a wireless monitor for your main machine. No HDMI cable. The main machine creates a virtual display using an IddCx driver, streams the screen content over LAN with H.264/H.265 encoding, and the sub machine renders it fullscreen. Input from the sub machine flows back to the main machine.</p>
+      <p style="margin-top:16px;">Planned milestones:</p>
+      <ul>
+        <li><strong>Milestone 1:</strong> Virtual display driver integration and screen capture (POC)</li>
+        <li><strong>Milestone 2:</strong> Video encoding, network streaming, and client-side rendering</li>
+        <li><strong>Milestone 3:</strong> Input forwarding from display client back to server</li>
+        <li><strong>Milestone 4:</strong> GUI integration, driver bundling, and production release</li>
+      </ul>
+      <p style="margin-top:16px;">Read the full technical design in the <a href="virtual-display-plan.html">virtual display plan</a>.</p>
+    </div>
+  </div>
+</section>
+</main>
 <footer class="reveal">
   <div class="footer-inner">
-    <p>&copy; Aether Devs. Based on Deskflow, not affiliated with the upstream project.</p>
+    <p>&copy; Aether Devs. Open source under GPL-2.0 with OpenSSL exception.</p>
     <div class="footer-links">
       <a href="docs.html">Docs</a>
-      <a href="install.html">Install</a>
+      <a href="download.html">Download</a>
       <a href="https://github.com/neang-mengseang/Aether" target="_blank" rel="noopener">Source</a>
     </div>
   </div>

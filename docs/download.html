@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Download Aether</title>
-  <meta name="description" content="Download the latest Aether release for Windows, macOS, or Linux.">
+  <title>Download and install Aether</title>
+  <meta name="description" content="Download Aether for Windows, macOS, or Linux, and follow the step-by-step installation guide.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Space+Grotesk:wght@700&family=Fira+Code&display=swap" rel="stylesheet">
@@ -14,14 +14,13 @@
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="logo"><svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-  <circle cx="12" cy="12" r="10" stroke="#6366f1" stroke-width="2" opacity="0.3"/>
-  <path d="M4 12h16" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round"/>
-  <path d="M4 5a8 8 0 0 1 16 4 8 8 0 0 1-16 7" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round"/>
+  <circle cx="12" cy="12" r="10" stroke="#4f46e5" stroke-width="2" opacity="0.3"/>
+  <path d="M4 12h16" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M4 5a8 8 0 0 1 16 4 8 8 0 0 1-16 7" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round"/>
 </svg> Aether</a>
     <div class="nav-links">
       <a href="index.html" class="">Home</a>
       <a href="download.html" class="active">Download</a>
-      <a href="install.html" class="">Install</a>
       <a href="docs.html" class="">Docs</a>
       <a href="about.html" class="">About</a>
       <a href="https://github.com/neang-mengseang/Aether" target="_blank" rel="noopener">Source</a>
@@ -33,15 +32,15 @@
   <div id="mobile-menu">
     <a href="index.html">Home</a>
       <a href="download.html">Download</a>
-      <a href="install.html">Install</a>
       <a href="docs.html">Docs</a>
       <a href="about.html">About</a>
     <a href="https://github.com/neang-mengseang/Aether" target="_blank" rel="noopener">Source</a>
   </div>
 </nav>
+<main>
 <div class="page-header reveal">
-  <h1 class="page-title">Download Aether</h1>
-  <p class="page-sub">Get the latest release for your platform.</p>
+  <h1 class="page-title">Download and install</h1>
+  <p class="page-sub">Get Aether for your platform and follow the setup guide.</p>
 </div>
 
 <section class="section" style="padding-top:0;">
@@ -49,40 +48,121 @@
     <div id="release-status" class="release-box reveal">Loading latest release...</div>
 
     <div class="grid-4" style="margin-top:48px;">
-      <a id="win-link" href="https://github.com/neang-mengseang/Aether/releases" target="_blank" rel="noopener" class="card card-hover reveal" style="text-align:center;">
-        <div class="step-num">W</div>
+      <a id="win-link" href="https://github.com/neang-mengseang/Aether/releases" target="_blank" rel="noopener" class="card card-hover reveal dl-card">
+        <div class="dl-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.5l7.5-1.02v7.02H3V5.5zm0 13l7.5 1.02v-6.99H3v5.97zm8.5 1.13L21 21V12.5h-9.5v7.13zM11.5 4.48V11.5H21V3l-9.5 1.48z"/></svg></div>
         <h3>Windows</h3>
         <p>x64 installer</p>
+        <span class="dl-action">Download</span>
       </a>
-      <a id="mac-link" href="https://github.com/neang-mengseang/Aether/releases" target="_blank" rel="noopener" class="card card-hover reveal" style="text-align:center;">
-        <div class="step-num">M</div>
+      <a id="mac-link" href="https://github.com/neang-mengseang/Aether/releases" target="_blank" rel="noopener" class="card card-hover reveal dl-card">
+        <div class="dl-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 12.04c-.03-3.02 2.47-4.47 2.58-4.54-1.41-2.06-3.6-2.34-4.38-2.37-1.86-.19-3.64 1.1-4.59 1.1-.95 0-2.41-1.07-3.96-1.04-2.03.03-3.91 1.18-4.96 3-2.12 3.67-.54 9.1 1.52 12.08 1.01 1.46 2.21 3.1 3.78 3.04 1.52-.06 2.09-.98 3.93-.98 1.83 0 2.36.98 3.96.95 1.64-.03 2.67-1.49 3.67-2.96 1.16-1.7 1.64-3.34 1.66-3.43-.04-.02-3.18-1.22-3.21-4.85zM14.27 3.7c.84-1.02 1.41-2.43 1.26-3.84-1.21.05-2.69.81-3.56 1.82-.78.89-1.46 2.32-1.28 3.7 1.35.1 2.74-.69 3.58-1.68z"/></svg></div>
         <h3>macOS</h3>
         <p>Universal binary</p>
+        <span class="dl-action">Download</span>
       </a>
-      <a id="linux-link" href="https://github.com/neang-mengseang/Aether/releases" target="_blank" rel="noopener" class="card card-hover reveal" style="text-align:center;">
-        <div class="step-num">L</div>
+      <a id="linux-link" href="https://github.com/neang-mengseang/Aether/releases" target="_blank" rel="noopener" class="card card-hover reveal dl-card">
+        <div class="dl-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M12.504 0c-.155 0-.315.008-.48.021-4.226.333-3.105 4.783-3.17 6.298-.076 1.092-.3 1.953-1.05 3.02-.885 1.051-2.127 2.75-2.716 4.521-.278.832-.41 1.684-.287 2.489a.424.424 0 00-.11.135c-.26.268-.45.6-.663.839-.199.199-.485.267-.797.4-.313.136-.658.269-.864.68-.09.189-.136.394-.132.602 0 .199.027.4.055.536.058.399.116.728.04.97-.249.68-.28 1.145-.106 1.484.174.334.535.47.94.601.81.2 1.91.135 2.774.6.926.466 1.862.67 2.603.47.526-.116 1.001-.451 1.238-.93.366-.004.765-.17 1.405-.336.435-.13.965-.244 1.564-.244 1.567 0 2.45.5 3.346.93.893.43 1.78.775 2.97.775.4 0 .78-.04 1.13-.12.527-.12 1.001-.45 1.238-.93.527-.12 1.001-.45 1.238-.93.366-.004.765-.17 1.405-.336.435-.13.965-.244 1.564-.244 1.567 0 2.45.5 3.346.93.893.43 1.78.775 2.97.775.4 0 .78-.04 1.13-.12.527-.12.527-.12 1.238-.93.366-.004.765-.17 1.405-.336.435-.13.965-.244 1.564-.244 1.567 0 2.45.5 3.346.93.893.43 1.78.775 2.97.775.4 0 .78-.04 1.13-.12.527-.12 1.001-.45 1.238-.93.366-.004.765-.17 1.405-.336.435-.13.965-.244 1.564-.244z"/></svg></div>
         <h3>Linux</h3>
         <p>deb, rpm, Flatpak</p>
+        <span class="dl-action">Download</span>
       </a>
-      <a href="install.html#source" class="card card-hover reveal" style="text-align:center;">
-        <div class="step-num">S</div>
+      <a href="#source" class="card card-hover reveal dl-card">
+        <div class="dl-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
         <h3>Source</h3>
         <p>Build from source</p>
+        <span class="dl-action">Build guide</span>
       </a>
-    </div>
-
-    <div class="card reveal" style="max-width:48rem;margin:48px auto 0;">
-      <h3 style="margin-bottom:8px;">Prefer a package manager?</h3>
-      <p>Aether supports Flatpak, deb, rpm, and Arch PKGBUILD packages. See the <a href="install.html">install guide</a> for details.</p>
     </div>
   </div>
 </section>
+
+<section class="section section-alt">
+  <div class="container">
+    <h2 class="section-title reveal">Installation guide</h2>
+    <p class="section-sub reveal">Step-by-step instructions for each platform.</p>
+    <div class="tabs reveal">
+      <button class="tab active">Windows</button>
+      <button class="tab">macOS</button>
+      <button class="tab">Linux</button>
+      <button class="tab">Source</button>
+    </div>
+
+    <div class="reveal">
+      <div class="tab-panel active">
+        <div class="card content-block">
+          <h2>Install on Windows</h2>
+          <ol>
+            <li>Download the latest <code>aether-windows-x64.msi</code> using the Windows button above.</li>
+            <li>Run the installer and follow the prompts. Administrator privileges are required.</li>
+            <li>Launch <strong>Aether</strong> from the Start menu or desktop shortcut.</li>
+            <li>On the first PC choose <strong>Server</strong>, on the others choose <strong>Client</strong>.</li>
+            <li>Arrange your screens in the GUI by dragging them to match your physical layout.</li>
+            <li>Set hotkeys for screen switching if desired, then start the server.</li>
+          </ol>
+          <p style="margin-top:16px;">Aether runs in the system tray. Right-click the tray icon to start, stop, or reconfigure the server at any time.</p>
+        </div>
+      </div>
+      <div class="tab-panel">
+        <div class="card content-block">
+          <h2>Install on macOS</h2>
+          <ol>
+            <li>Download the latest <code>aether-macos.dmg</code> using the macOS button above.</li>
+            <li>Open the DMG and drag <strong>Aether</strong> into your Applications folder.</li>
+            <li>Launch Aether from Applications. On first launch, grant Accessibility permissions when prompted so Aether can capture input.</li>
+            <li>Configure the server on your primary Mac, then add client machines by hostname or IP.</li>
+            <li>Arrange screens in the GUI to match your physical monitor layout.</li>
+          </ol>
+          <p style="margin-top:16px;">macOS may require you to allow Aether in System Settings under Privacy and Security. The app will guide you through this on first launch.</p>
+        </div>
+      </div>
+      <div class="tab-panel">
+        <div class="card content-block">
+          <h2>Install on Linux</h2>
+          <ul>
+            <li><strong>Flatpak:</strong> build from <code>deploy/linux/flatpak/org.aether.aether.yml</code> with <code>flatpak-builder</code>.</li>
+            <li><strong>Debian/Ubuntu:</strong> install the <code>.deb</code> package using the Linux button above, then run <code>sudo apt install ./aether-*.deb</code>.</li>
+            <li><strong>Fedora/openSUSE:</strong> install the <code>.rpm</code> package using <code>sudo dnf install aether-*.rpm</code> or <code>sudo zypper install aether-*.rpm</code>.</li>
+            <li><strong>Arch:</strong> run <code>makepkg</code> on the generated <code>PKGBUILD</code> in the build output, then install with <code>pacman -U</code>.</li>
+          </ul>
+          <p style="margin-top:16px;">On Linux, Aether supports both X11 and Wayland. The correct backend is selected automatically based on your session type. For Wayland, the portal-based input capture is used where available.</p>
+        </div>
+      </div>
+      <div class="tab-panel" id="source">
+        <div class="card content-block">
+          <h2>Build from source</h2>
+          <p>See the <a href="build.html">build guide</a> for full details. Quick start:</p>
+          <div class="code-block">git clone https://github.com/neang-mengseang/Aether.git
+cd Aether
+cmake -S . -B build
+cmake --build build</div>
+          <p style="margin-top:16px;">You will need CMake 3.24+, Qt 6.7+, and OpenSSL 3.0+. Most other dependencies are fetched automatically by CMake. See the build guide for platform-specific notes and packaging instructions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="grid-2">
+      <div class="card reveal">
+        <h3 style="margin-bottom:8px;">System requirements</h3>
+        <p>Windows 10 or later, macOS 12 Monterey or later, or a modern Linux distribution with X11 or Wayland. Network connectivity between all machines on the same LAN.</p>
+      </div>
+      <div class="card reveal">
+        <h3 style="margin-bottom:8px;">Package managers</h3>
+        <p>Aether supports Flatpak, deb, rpm, and Arch PKGBUILD packages. Once a release is published, the download buttons above will link directly to the correct asset for each platform.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
 <footer class="reveal">
   <div class="footer-inner">
-    <p>&copy; Aether Devs. Based on Deskflow, not affiliated with the upstream project.</p>
+    <p>&copy; Aether Devs. Open source under GPL-2.0 with OpenSSL exception.</p>
     <div class="footer-links">
       <a href="docs.html">Docs</a>
-      <a href="install.html">Install</a>
+      <a href="download.html">Download</a>
       <a href="https://github.com/neang-mengseang/Aether" target="_blank" rel="noopener">Source</a>
     </div>
   </div>

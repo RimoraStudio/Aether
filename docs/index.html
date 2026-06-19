@@ -14,14 +14,13 @@
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="logo"><svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-  <circle cx="12" cy="12" r="10" stroke="#6366f1" stroke-width="2" opacity="0.3"/>
-  <path d="M4 12h16" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round"/>
-  <path d="M4 5a8 8 0 0 1 16 4 8 8 0 0 1-16 7" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round"/>
+  <circle cx="12" cy="12" r="10" stroke="#4f46e5" stroke-width="2" opacity="0.3"/>
+  <path d="M4 12h16" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M4 5a8 8 0 0 1 16 4 8 8 0 0 1-16 7" stroke="#4f46e5" stroke-width="1.5" stroke-linecap="round"/>
 </svg> Aether</a>
     <div class="nav-links">
       <a href="index.html" class="active">Home</a>
       <a href="download.html" class="">Download</a>
-      <a href="install.html" class="">Install</a>
       <a href="docs.html" class="">Docs</a>
       <a href="about.html" class="">About</a>
       <a href="https://github.com/neang-mengseang/Aether" target="_blank" rel="noopener">Source</a>
@@ -33,12 +32,12 @@
   <div id="mobile-menu">
     <a href="index.html">Home</a>
       <a href="download.html">Download</a>
-      <a href="install.html">Install</a>
       <a href="docs.html">Docs</a>
       <a href="about.html">About</a>
     <a href="https://github.com/neang-mengseang/Aether" target="_blank" rel="noopener">Source</a>
   </div>
 </nav>
+<main>
 <header class="hero">
   <div class="hero-content">
     <div class="reveal">
@@ -51,12 +50,44 @@
       </div>
     </div>
     <div class="hero-visual reveal">
-      <svg class="hero-svg" viewBox="0 0 420 120">
-        <rect class="screen" x="20" y="25" width="90" height="70" rx="8"/>
-        <rect class="screen" x="165" y="15" width="90" height="80" rx="8"/>
-        <rect class="screen" x="310" y="25" width="90" height="70" rx="8"/>
-        <path class="beam" d="M110 60 L165 60 M255 60 L310 60"/>
-        <g class="cursor-g"><path d="M0 0 L14 0 L6 6 L12 18 L7 20 L0 10 Z" fill="currentColor"/></g>
+      <svg class="hero-svg" viewBox="0 0 420 200" fill="none">
+        <g>
+          <rect x="20" y="20" width="160" height="100" rx="6" fill="var(--surface)" stroke="var(--border)" stroke-width="1.5"/>
+          <rect x="28" y="28" width="144" height="84" rx="3" fill="var(--bg)"/>
+          <rect x="28" y="28" width="144" height="12" rx="3" fill="var(--surface)"/>
+          <circle cx="36" cy="34" r="2.5" fill="#ef4444" opacity="0.7"/>
+          <circle cx="44" cy="34" r="2.5" fill="#eab308" opacity="0.7"/>
+          <circle cx="52" cy="34" r="2.5" fill="#22c55e" opacity="0.7"/>
+          <rect x="36" y="48" width="80" height="4" rx="2" fill="var(--border)"/>
+          <rect x="36" y="58" width="60" height="3" rx="1.5" fill="var(--border)" opacity="0.6"/>
+          <rect x="36" y="66" width="100" height="3" rx="1.5" fill="var(--border)" opacity="0.6"/>
+          <rect x="36" y="74" width="70" height="3" rx="1.5" fill="var(--border)" opacity="0.6"/>
+          <rect id="btn-1" x="36" y="86" width="50" height="14" rx="3" fill="var(--primary)" opacity="0.15" class="click-target"/>
+          <rect x="88" y="120" width="24" height="8" fill="var(--border)"/>
+          <rect x="78" y="128" width="44" height="4" rx="2" fill="var(--border)"/>
+        </g>
+        <g>
+          <rect x="240" y="20" width="160" height="100" rx="6" fill="var(--surface)" stroke="var(--border)" stroke-width="1.5"/>
+          <rect x="248" y="28" width="144" height="84" rx="3" fill="var(--bg)"/>
+          <rect x="248" y="28" width="144" height="12" rx="3" fill="var(--surface)"/>
+          <circle cx="256" cy="34" r="2.5" fill="#ef4444" opacity="0.7"/>
+          <circle cx="264" cy="34" r="2.5" fill="#eab308" opacity="0.7"/>
+          <circle cx="272" cy="34" r="2.5" fill="#22c55e" opacity="0.7"/>
+          <rect x="256" y="48" width="80" height="4" rx="2" fill="var(--border)"/>
+          <rect x="256" y="58" width="100" height="3" rx="1.5" fill="var(--border)" opacity="0.6"/>
+          <rect x="256" y="66" width="60" height="3" rx="1.5" fill="var(--border)" opacity="0.6"/>
+          <rect x="256" y="74" width="90" height="3" rx="1.5" fill="var(--border)" opacity="0.6"/>
+          <rect id="btn-2" x="256" y="86" width="50" height="14" rx="3" fill="var(--primary)" opacity="0.15" class="click-target"/>
+          <rect x="308" y="120" width="24" height="8" fill="var(--border)"/>
+          <rect x="298" y="128" width="44" height="4" rx="2" fill="var(--border)"/>
+        </g>
+        <path class="beam" d="M180 70 L240 70"/>
+        <circle id="ripple-1" cx="61" cy="93" r="0" fill="none" stroke="var(--primary)" stroke-width="2" opacity="0" class="ripple"/>
+        <circle id="ripple-2" cx="281" cy="93" r="0" fill="none" stroke="var(--primary)" stroke-width="2" opacity="0" class="ripple"/>
+        <circle id="trail" cx="0" cy="0" r="8" fill="var(--primary)" opacity="0" class="cursor-trail"/>
+        <g class="cursor-g">
+          <path d="M0 0 L0 16 L4 12 L7 18 L10 17 L7 11 L12 11 Z" fill="var(--primary)" stroke="var(--bg)" stroke-width="1.5" stroke-linejoin="round"/>
+        </g>
       </svg>
     </div>
   </div>
@@ -70,53 +101,78 @@
       <div class="card card-hover reveal">
         <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
         <h3>Seamless screen crossing</h3>
-        <p>Drag the cursor off one screen and onto another without pressing any buttons.</p>
+        <p>Drag the cursor off one screen and onto another without pressing any buttons. Aether tracks edge positions so the transition feels instant and natural.</p>
       </div>
       <div class="card card-hover reveal">
         <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div>
         <h3>Shared clipboard</h3>
-        <p>Copy and paste text and images between systems automatically.</p>
+        <p>Copy and paste text and images between systems automatically. Your clipboard content travels with the cursor as it crosses screen boundaries.</p>
       </div>
       <div class="card card-hover reveal">
         <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
         <h3>TLS encryption</h3>
-        <p>Server and client traffic is encrypted to keep your input data private.</p>
+        <p>Server and client traffic is encrypted with TLS to keep your input data private. Aether generates and manages certificates for you automatically.</p>
       </div>
       <div class="card card-hover reveal">
         <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
         <h3>Cross-platform</h3>
-        <p>Windows, macOS, and Linux. X11 and Wayland are both supported.</p>
+        <p>Windows, macOS, and Linux. X11 and Wayland are both supported on Linux, so Aether works across mixed-OS setups without compromise.</p>
       </div>
       <div class="card card-hover reveal">
         <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
         <h3>Protocol compatibility</h3>
-        <p>Works with the Synergy and Barrier wire protocols for broad interoperability.</p>
+        <p>Works with the Synergy and Barrier wire protocols for broad interoperability. Connect Aether to existing Synergy or Barrier clients and servers.</p>
       </div>
       <div class="card card-hover reveal">
         <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 1-14 0"/></svg></div>
         <h3>Qt-based GUI</h3>
-        <p>Arrange screens, set hotkeys, and configure autostart without editing files.</p>
+        <p>Arrange screens visually, set hotkeys, and configure autostart without editing config files. The GUI lives in your system tray for quick access.</p>
       </div>
     </div>
   </div>
 </section>
 
 <section class="section">
+  <div class="container">
+    <h2 class="section-title reveal">How it works</h2>
+    <p class="section-sub reveal">Aether runs as a server on your primary machine and as a client on each secondary machine.</p>
+    <div class="grid-3">
+      <div class="card reveal">
+        <div class="step-num">1</div>
+        <h3 style="text-align:center;margin-bottom:8px;">Install</h3>
+        <p style="text-align:center;">Download and install Aether on every computer you want to connect.</p>
+      </div>
+      <div class="card reveal">
+        <div class="step-num">2</div>
+        <h3 style="text-align:center;margin-bottom:8px;">Configure</h3>
+        <p style="text-align:center;">Set one machine as server, arrange screens in the GUI, and add clients by hostname.</p>
+      </div>
+      <div class="card reveal">
+        <div class="step-num">3</div>
+        <h3 style="text-align:center;margin-bottom:8px;">Share</h3>
+        <p style="text-align:center;">Move your cursor across screen edges. One keyboard and mouse, many computers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
   <div class="container" style="text-align:center;">
     <h2 class="section-title reveal">Get Aether now</h2>
     <p class="section-sub reveal">Download the latest release or build from source in minutes.</p>
     <div class="reveal" style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;">
       <a href="download.html" class="btn btn-primary">Go to downloads</a>
-      <a href="install.html" class="btn btn-secondary">Install instructions</a>
+      <a href="docs.html" class="btn btn-secondary">Read the docs</a>
     </div>
   </div>
 </section>
+</main>
 <footer class="reveal">
   <div class="footer-inner">
-    <p>&copy; Aether Devs. Based on Deskflow, not affiliated with the upstream project.</p>
+    <p>&copy; Aether Devs. Open source under GPL-2.0 with OpenSSL exception.</p>
     <div class="footer-links">
       <a href="docs.html">Docs</a>
-      <a href="install.html">Install</a>
+      <a href="download.html">Download</a>
       <a href="https://github.com/neang-mengseang/Aether" target="_blank" rel="noopener">Source</a>
     </div>
   </div>
