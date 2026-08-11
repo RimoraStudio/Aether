@@ -5,7 +5,7 @@
 	<project_license>GPL-2.0-only</project_license>
 	<name>Aether</name>
 	<developer id="org.aether">
-		<name>Deskflow Developers</name>
+		<name>Aether Devs</name>
 	</developer>
 	<summary>Software Keyboard and mouse sharing</summary>
 	<summary xml:lang="zh_CN">用软件共享键鼠</summary>
@@ -22,34 +22,34 @@
 		</p>
 	</description>
 	<launchable type="desktop-id">org.aether.aether.desktop</launchable>
-	<url type="homepage">https://deskflow.org</url>
-	<url type="bugtracker">https://github.com/deskflow/deskflow/issues</url>
-	<url type="faq">https://github.com/deskflow/deskflow/wiki/Project-FAQ</url>
-	<url type="help">https://github.com/deskflow/deskflow/wiki#user-guides</url>
-	<url type="vcs-browser">https://github.com/deskflow/deskflow</url>
+	<url type="homepage">https://github.com/neang-mengseang/Aether</url>
+	<url type="bugtracker">https://github.com/neang-mengseang/Aether/issues</url>
+	<url type="faq">https://github.com/neang-mengseang/Aether/wiki/Project-FAQ</url>
+	<url type="help">https://github.com/neang-mengseang/Aether/wiki#user-guides</url>
+	<url type="vcs-browser">https://github.com/neang-mengseang/Aether</url>
 	<screenshots>
 		<screenshot type="default">
-			<image>https://deskflow.org/screenshots/deskflow-client.png</image>
+			<image>https://github.com/neang-mengseang/Aether/screenshots/aether-client.png</image>
 			<caption>Aether in client mode on KDE</caption>
 		</screenshot>
 		<screenshot>
-			<image>https://deskflow.org/screenshots/deskflow-server.png</image>
+			<image>https://github.com/neang-mengseang/Aether/screenshots/aether-server.png</image>
 			<caption>Aether in server mode on KDE</caption>
 		</screenshot>
 		<screenshot>
-			<image>https://deskflow.org/screenshots/deskflow-log.png</image>
+			<image>https://github.com/neang-mengseang/Aether/screenshots/aether-log.png</image>
 			<caption>Aether with the log visible on KDE</caption>
 		</screenshot>
 		<screenshot>
-			<image>https://deskflow.org/screenshots/deskflow-client-dark.png</image>
+			<image>https://github.com/neang-mengseang/Aether/screenshots/aether-client-dark.png</image>
 			<caption>Aether in client mode on KDE (dark mode)</caption>
 		</screenshot>
 		<screenshot>
-			<image>https://deskflow.org/screenshots/deskflow-server-dark.png</image>
+			<image>https://github.com/neang-mengseang/Aether/screenshots/aether-server-dark.png</image>
 			<caption>Aether in server mode on KDE (dark mode)</caption>
 		</screenshot>
 		<screenshot>
-			<image>https://deskflow.org/screenshots/deskflow-log-dark.png</image>
+			<image>https://github.com/neang-mengseang/Aether/screenshots/aether-log-dark.png</image>
 			<caption>Aether with the log visible on KDE (dark mode)</caption>
 		</screenshot>
 	</screenshots>
@@ -110,7 +110,7 @@
 					<li>Consolidate Debug levels to remove DEBUG3-5 levels</li>
 				</ul>
 			</description>
-			<url>https://github.com/deskflow/deskflow/releases/tag/v1.26.0</url>
+			<url>https://github.com/neang-mengseang/Aether/releases/tag/v1.26.0</url>
 		</release>
 		<release version="1.25.0" date="2025-11-21" urgency="high">
 			<description>
@@ -140,7 +140,7 @@
 					<li>Fixed crash caused by hostnames with invalid characters returned default value</li>
 				</ul>
 			</description>
-			<url>https://github.com/deskflow/deskflow/releases/tag/v1.25.0</url>
+			<url>https://github.com/neang-mengseang/Aether/releases/tag/v1.25.0</url>
 		</release>
 		<release version="1.24.0" date="2025-09-11" urgency="high">
 			<description>
@@ -162,7 +162,7 @@
 					<li>Chore: Clean more sonar smells</li>
 				</ul>
 			</description>
-			<url>https://github.com/deskflow/deskflow/releases/tag/v1.24.0</url>
+			<url>https://github.com/neang-mengseang/Aether/releases/tag/v1.24.0</url>
 		</release>
 		<release version="1.23.0" date="2025-07-23" urgency="high">
 			<description>
@@ -182,7 +182,7 @@
 					<li>Chore: Clean more sonar smells</li>
 				</ul>
 			</description>
-			<url>https://github.com/deskflow/deskflow/releases/tag/v1.23.0</url>
+			<url>https://github.com/neang-mengseang/Aether/releases/tag/v1.23.0</url>
 		</release>
 		<release version="1.22.0" date="2025-05-28" urgency="high">
 			<description>
@@ -206,7 +206,7 @@
 					<li>Chore: Clean up sonar scan code smells</li>
 				</ul>
 			</description>
-			<url>https://github.com/deskflow/deskflow/releases/tag/v1.22.0</url>
+			<url>https://github.com/neang-mengseang/Aether/releases/tag/v1.22.0</url>
 		</release>
 		<release version="1.21.2" date="2025-04-07" urgency="high">
 			<description>
@@ -216,7 +216,7 @@
 					<li>Fix: Windows settings in wrong locations</li>
 				</ul>
 			</description>
-			<url>https://github.com/deskflow/deskflow/releases/tag/v1.21.2</url>
+			<url>https://github.com/neang-mengseang/Aether/releases/tag/v1.21.2</url>
 		</release>
 		<release version="1.21.1" date="2025-03-31" urgency="high">
 			<description>
@@ -228,7 +228,7 @@
 					<li>Fix: Windows settings saving blocked for non admin users </li>
 				</ul>
 			</description>
-			<url>https://github.com/deskflow/deskflow/releases/tag/v1.21.1</url>
+			<url>https://github.com/neang-mengseang/Aether/releases/tag/v1.21.1</url>
 		</release>
 		<release version="1.21.0" date="2025-03-27" urgency="high">
 			<description>
@@ -243,7 +243,7 @@
 					<li>Fix issues with windows installer when msvc is missing</li>
 				</ul>
 			</description>
-			<url>https://github.com/deskflow/deskflow/releases/tag/v1.21.0</url>
+			<url>https://github.com/neang-mengseang/Aether/releases/tag/v1.21.0</url>
 		</release>
 		<release version="1.20.1" date="2025-03-07" urgency="low">
 			<description>
@@ -254,7 +254,7 @@
 					<li>Feature: Prevent Windows binaries running if MSVC runtime too old</li>
 				</ul>
 			</description>
-			<url>https://github.com/deskflow/deskflow/releases/tag/v1.20.1</url>
+			<url>https://github.com/neang-mengseang/Aether/releases/tag/v1.20.1</url>
 		</release>
 		<release version="1.20.0" date="2025-03-03" urgency="high">
 			<description>
@@ -270,7 +270,7 @@
 					<li>Win32: Fix clear settings</li>
 				</ul>
 			</description>
-			<url>https://github.com/deskflow/deskflow/releases/tag/v1.20.0</url>
+			<url>https://github.com/neang-mengseang/Aether/releases/tag/v1.20.0</url>
 		</release>
 		<release version="1.19.0" date="2025-01-31" urgency="high">
 			<description>
@@ -290,7 +290,7 @@
 					<li>Lots of Internal Cleanup</li>
 				</ul>
 			</description>
-			<url>https://github.com/deskflow/deskflow/releases/tag/v1.19.0</url>
+			<url>https://github.com/neang-mengseang/Aether/releases/tag/v1.19.0</url>
 		</release>
 		<release version="1.18.0" date="2024-12-26" urgency="high">
 			<description>
@@ -309,7 +309,7 @@
 					<li>Update the windows clipboard format listener to monitor the clipboard</li>
 				</ul>
 			</description>
-			<url>https://github.com/deskflow/deskflow/releases/tag/v1.18.0</url>
+			<url>https://github.com/neang-mengseang/Aether/releases/tag/v1.18.0</url>
 		</release>
 		<release version="1.17.2" date="2024-11-20" urgency="medium">
 			<description>
@@ -363,7 +363,7 @@
 					<li>ci: build flatpaks</li>
 				</ul>
 			</description>
-			<url>https://github.com/deskflow/deskflow/releases/tag/v1.17.2</url>
+			<url>https://github.com/neang-mengseang/Aether/releases/tag/v1.17.2</url>
 		</release>
 		<release version="1.17.1" date="2024-11-07" urgency="high">
 			<description>
@@ -480,7 +480,7 @@
 					<li>ci: adjust pacakge script to use the names we would like when in cpack</li>
 				</ul>
 			</description>
-			<url>https://github.com/deskflow/deskflow/releases/tag/v1.17.1</url>
+			<url>https://github.com/neang-mengseang/Aether/releases/tag/v1.17.1</url>
 		</release>
 		<release version="1.17.0" date="2024-10-02" urgency="low">
 			<description>
@@ -530,7 +530,7 @@
 					<li>Use sonarsource/sonarcloud-github-c-cpp</li>
 				</ul>
 			</description>
-			<url>https://github.com/deskflow/deskflow/releases/tag/v1.17.0</url>
+			<url>https://github.com/neang-mengseang/Aether/releases/tag/v1.17.0</url>
 		</release>
 	</releases>
 </component>

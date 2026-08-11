@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Space+Grotesk:wght@700&family=Fira+Code&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/site.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
 </head>
 <body>
 <nav>
@@ -38,69 +39,27 @@
   </div>
 </nav>
 <main>
-<div class="page-header reveal">
-  <h1 class="page-title">Documentation</h1>
-  <p class="page-sub">Everything you need to set up, configure, and extend Aether.</p>
+<div class="docs-layout">
+  <aside class="docs-sidebar">
+    <h3>User guides</h3>
+    <ul>
+      <li><a href="#" data-doc="Configuration.md" class="active">Configuration</a></li>
+      <li><a href="#" data-doc="HelpMain.md">Help home</a></li>
+      <li><a href="#" data-doc="Security.md">Security</a></li>
+      <li><a href="#" data-doc="Issues.md">Issue reporting</a></li>
+    </ul>
+    <hr class="docs-divider">
+    <h3>Developer docs</h3>
+    <ul>
+      <li><a href="#" data-doc="dev/build.md">Build guide</a></li>
+      <li><a href="#" data-doc="dev/protocol_reference.md">Protocol reference</a></li>
+      <li><a href="#" data-doc="dev/virtual-display-plan.md">Virtual display plan</a></li>
+    </ul>
+  </aside>
+  <div class="docs-content">
+    <div id="doc-render"></div>
+  </div>
 </div>
-
-<section class="section" style="padding-top:0;">
-  <div class="container">
-    <div class="grid-2">
-      <a href="configuration.html" class="card card-hover reveal card-link">
-        <h3>Configuration</h3>
-        <p>Search paths, GUI keys, and config file options for every platform. Learn how Aether stores settings and where to find them.</p>
-      </a>
-      <a href="build.html" class="card card-hover reveal card-link">
-        <h3>Build guide</h3>
-        <p>How to build Aether from source, including dependency setup, CMake options, and packaging notes for each platform.</p>
-      </a>
-      <a href="protocol-reference.html" class="card card-hover reveal card-link">
-        <h3>Protocol reference</h3>
-        <p>A technical reference to the Synergy and Barrier compatible wire protocol that Aether uses for client-server communication.</p>
-      </a>
-      <a href="security.html" class="card card-hover reveal card-link">
-        <h3>Security</h3>
-        <p>Security policy, TLS encryption details, and how to report vulnerabilities responsibly.</p>
-      </a>
-      <a href="issues.html" class="card card-hover reveal card-link">
-        <h3>Issue reporting</h3>
-        <p>Guidelines for reporting bugs, requesting features, and asking for help. Includes log collection tips.</p>
-      </a>
-      <a href="helpmain.html" class="card card-hover reveal card-link">
-        <h3>Help home</h3>
-        <p>Overview of all guides, troubleshooting tips, and online resources for getting the most out of Aether.</p>
-      </a>
-      <a href="virtual-display-plan.html" class="card card-hover reveal card-link">
-        <h3>Virtual display plan</h3>
-        <p>Technical design for adding virtual display streaming. Turn a second machine into a wireless monitor over LAN.</p>
-      </a>
-    </div>
-  </div>
-</section>
-
-<section class="section section-alt">
-  <div class="container">
-    <h2 class="section-title reveal">Quick start</h2>
-    <p class="section-sub reveal">Get Aether running in three steps.</p>
-    <div class="grid-3">
-      <div class="card reveal">
-        <div class="step-num">1</div>
-        <h3 style="text-align:center;margin-bottom:8px;">Install</h3>
-        <p style="text-align:center;">Download Aether from the <a href="download.html">download page</a> and install it on every computer.</p>
-      </div>
-      <div class="card reveal">
-        <div class="step-num">2</div>
-        <h3 style="text-align:center;margin-bottom:8px;">Configure</h3>
-        <p style="text-align:center;">Set one machine as the server. Arrange screens in the GUI to match your physical layout.</p>
-      </div>
-      <div class="card reveal">
-        <div class="step-num">3</div>
-        <h3 style="text-align:center;margin-bottom:8px;">Connect</h3>
-        <p style="text-align:center;">Start the server, then launch Aether as a client on each secondary machine. Move your cursor across edges.</p>
-      </div>
-    </div>
-  </div>
-</section>
 </main>
 <footer class="reveal">
   <div class="footer-inner">
@@ -113,5 +72,49 @@
   </div>
 </footer>
 <script src="assets/site.js"></script>
+<script>
+(function() {
+  var links = document.querySelectorAll('.docs-sidebar a[data-doc]');
+  var render = document.getElementById('doc-render');
+
+  function loadDoc(docPath, linkEl) {
+    links.forEach(function(l) { l.classList.remove('active'); });
+    if (linkEl) linkEl.classList.add('active');
+    render.innerHTML = '<p style="color:var(--text-muted);">Loading...</p>';
+    fetch(docPath)
+      .then(function(r) {
+        if (!r.ok) throw new Error('not found');
+        return r.text();
+      })
+      .then(function(md) {
+        md = md.replace(/Configuration\.md/g, '#Configuration.md')
+               .replace(/HelpMain\.md/g, '#HelpMain.md')
+               .replace(/Issues\.md/g, '#Issues.md')
+               .replace(/Security\.md/g, '#Security.md')
+               .replace(/dev\/build\.md/g, '#dev/build.md')
+               .replace(/build\.md/g, '#dev/build.md')
+               .replace(/dev\/protocol_reference\.md/g, '#dev/protocol_reference.md')
+               .replace(/protocol_reference\.md/g, '#dev/protocol_reference.md')
+               .replace(/dev\/virtual-display-plan\.md/g, '#dev/virtual-display-plan.md')
+               .replace(/virtual-display-plan\.md/g, '#dev/virtual-display-plan.md')
+               .replace(/Readme\.md/g, '#Readme.md');
+        render.innerHTML = marked.parse(md);
+        window.scrollTo(0, 0);
+      })
+      .catch(function() {
+        render.innerHTML = '<p style="color:var(--text-muted);">Failed to load document.</p>';
+      });
+  }
+
+  links.forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      loadDoc(link.getAttribute('data-doc'), link);
+    });
+  });
+
+  loadDoc('Configuration.md', links[0]);
+})();
+</script>
 </body>
 </html>

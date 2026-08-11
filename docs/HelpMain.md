@@ -5,7 +5,7 @@
 - [Homepage](https://neang-mengseang.github.io/Aether) - Project home page
 - [Code](https://github.com/neang-mengseang/Aether) - Read the code
 
-Aether is based on Deskflow and is not affiliated with the upstream Deskflow project.
+Aether is an open-source keyboard and mouse sharing utility for Windows, macOS, and Linux.
 
 ## User Guides
 

@@ -1,6 +1,6 @@
-# SPDX-FileCopyrightText: (C) 2024 Deskflow Developers
+# SPDX-FileCopyrightText: (C) 2024 Aether Devs
 # SPDX-License-Identifier: MIT
-# Maintainer: Deskflow Developers
+# Maintainer: Aether Devs
 
 _basename=@CMAKE_PROJECT_NAME@
 pkgname=${_basename}-git

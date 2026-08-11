@@ -1,6 +1,6 @@
 /*
  * Aether -- mouse and keyboard sharing utility
- * SPDX-FileCopyrightText: (C) 2025 Deskflow Developers
+ * SPDX-FileCopyrightText: (C) 2025 Aether Devs
  * SPDX-FileCopyrightText: (C) 2010 - 2018, 2024 - 2025 Synergy App Ltd
  * SPDX-FileCopyrightText: (C) 2002 - 2007 Chris Schoeneman
  * SPDX-License-Identifier: GPL-2.0-only WITH LicenseRef-OpenSSL-Exception

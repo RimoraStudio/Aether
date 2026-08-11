@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: (C) 2025-2026 Deskflow Contributors
+# SPDX-FileCopyrightText: (C) 2025-2026 Aether Contributors
 # SPDX-License-Identifier: MIT
 
 # Warning: Do not use for CI/production, as the `entitlements-dev.plist` file adds special

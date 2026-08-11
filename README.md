@@ -2,7 +2,7 @@
 
 Aether is an open-source keyboard and mouse sharing utility. Use one keyboard, mouse, or trackpad to control nearby computers as if they shared a single desktop. It supports Windows, macOS, and Linux, keeps traffic encrypted with TLS, and stays compatible with the Synergy and Barrier wire protocols.
 
-Aether is based on Deskflow, an open-source fork of the Synergy code base.
+Aether is an open-source fork of the Synergy code base.
 
 ## Features
 
@@ -63,4 +63,4 @@ Security issues should follow the policy in [docs/Security.md](docs/Security.md)
 
 ## License
 
-Aether is distributed under the same licenses as Deskflow. Source code is licensed under a GPL-2.0-only with OpenSSL exception, or as noted per file. See `LICENSE` and `LICENSES/` for details.
+Aether is distributed under GPL-2.0 with an OpenSSL exception. Source code is licensed under a GPL-2.0-only with OpenSSL exception, or as noted per file. See `LICENSE` and `LICENSES/` for details.

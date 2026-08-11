@@ -5,7 +5,7 @@ Aether is a free and open-source keyboard and mouse sharing app. Use the keyboar
 - [Homepage](https://neang-mengseang.github.io/Aether)
 - [Code](https://github.com/neang-mengseang/Aether)
 
-Aether is based on Deskflow and is not affiliated with the upstream Deskflow project.
+Aether is an open-source keyboard and mouse sharing utility for Windows, macOS, and Linux.
 
 ## Getting help online
 

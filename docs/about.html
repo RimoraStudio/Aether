@@ -40,57 +40,106 @@
 <main>
 <div class="page-header reveal">
   <h1 class="page-title">About Aether</h1>
-  <p class="page-sub">An open-source keyboard and mouse sharing utility for Windows, macOS, and Linux.</p>
+  <p class="page-sub">Open-source keyboard and mouse sharing for Windows, macOS, and Linux.</p>
 </div>
 
 <section class="section" style="padding-top:0;">
   <div class="container">
-    <div class="card content-block reveal">
-      <p>Aether lets one keyboard and mouse control multiple computers on the same local network. The cursor moves from one screen to the next as if the machines were a single desktop. Clipboard sharing and TLS encryption are built in, so your input data stays private on the wire.</p>
-      <p>Aether is built with C++20 and Qt 6, and uses the Synergy and Barrier wire protocols for broad interoperability. It runs as a server on your primary machine and as a client on each secondary machine, communicating over your existing LAN.</p>
-
-      <h2 style="margin-top:32px;">Why Aether</h2>
-      <p>Hardware KVM switches are expensive and require physical cable switching. Software alternatives often lack encryption, cross-platform support, or active maintenance. Aether combines seamless screen crossing, clipboard sharing, TLS encryption, and broad protocol compatibility in a single open-source package.</p>
-
-      <h2 style="margin-top:32px;">Key features</h2>
-      <ul>
-        <li><strong>Seamless cursor crossing:</strong> move the cursor off one screen edge and onto the next without any hotkey or button press.</li>
-        <li><strong>Clipboard sharing:</strong> copy on one machine, paste on another. Text and images both work.</li>
-        <li><strong>TLS encryption:</strong> all client-server traffic is encrypted. Certificates are generated and managed automatically.</li>
-        <li><strong>Cross-platform:</strong> Windows, macOS, and Linux with both X11 and Wayland support.</li>
-        <li><strong>Protocol compatibility:</strong> interoperates with Synergy and Barrier clients and servers.</li>
-        <li><strong>Qt-based GUI:</strong> visual screen arrangement, hotkey configuration, and system tray integration.</li>
-        <li><strong>Open source:</strong> GPL-2.0 with OpenSSL exception. No telemetry, no accounts, no lock-in.</li>
-      </ul>
-
-      <h2 style="margin-top:32px;">License</h2>
-      <p>Aether is distributed under GPL-2.0-only with an OpenSSL exception, or as noted per file. See <code>LICENSE</code> and <code>LICENSES/</code> in the repository for full details.</p>
-
-      <h2 style="margin-top:32px;">Source</h2>
-      <p>The source code is available on GitHub at <a href="https://github.com/neang-mengseang/Aether" target="_blank" rel="noopener">neang-mengseang/Aether</a>. Contributions, bug reports, and feature requests are welcome.</p>
+    <div class="grid-2">
+      <div class="card reveal">
+        <h3 style="margin-bottom:12px;">What is Aether</h3>
+        <p>Aether lets one keyboard and mouse control multiple computers on the same local network. The cursor moves from one screen to the next as if the machines were a single desktop. Clipboard sharing and TLS encryption are built in, so your input data stays private on the wire.</p>
+        <p style="margin-top:16px;">Aether runs as a server on your primary machine and as a client on each secondary machine, communicating over your existing LAN. No special hardware, no cloud services, no accounts.</p>
+      </div>
+      <div class="card reveal">
+        <h3 style="margin-bottom:12px;">Why use Aether</h3>
+        <p>Hardware KVM switches are expensive and require physical cable switching. Other software alternatives often lack encryption, cross-platform support, or active maintenance.</p>
+        <p style="margin-top:16px;">Aether combines seamless screen crossing, clipboard sharing, TLS encryption, and broad protocol compatibility in a single open-source package. No telemetry, no accounts, no lock-in.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="section section-alt">
   <div class="container">
-    <h2 class="section-title reveal">Technical details</h2>
-    <p class="section-sub reveal">Built on a mature, battle-tested codebase.</p>
+    <h2 class="section-title reveal">Key features</h2>
+    <p class="section-sub reveal">Everything you need to share one input across multiple machines.</p>
     <div class="grid-3">
-      <div class="card reveal">
-        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg></div>
-        <h3>C++20 and Qt 6</h3>
-        <p>Modern C++ with Qt 6 for cross-platform GUI and system integration.</p>
+      <div class="card card-hover reveal">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <h3>Seamless screen crossing</h3>
+        <p>Move the cursor off one screen edge and onto the next without any hotkey or button press.</p>
       </div>
-      <div class="card reveal">
+      <div class="card card-hover reveal">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div>
+        <h3>Clipboard sharing</h3>
+        <p>Copy on one machine, paste on another. Text and images both work across all platforms.</p>
+      </div>
+      <div class="card card-hover reveal">
         <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <h3>OpenSSL TLS</h3>
-        <p>Industry-standard TLS encryption for all network traffic between server and clients.</p>
+        <h3>TLS encryption</h3>
+        <p>All client-server traffic is encrypted. Certificates are generated and managed automatically.</p>
+      </div>
+      <div class="card card-hover reveal">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <h3>Cross-platform</h3>
+        <p>Windows, macOS, and Linux. X11 and Wayland are both supported on Linux.</p>
+      </div>
+      <div class="card card-hover reveal">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+        <h3>Protocol compatibility</h3>
+        <p>Interoperates with Synergy and Barrier clients and servers out of the box.</p>
+      </div>
+      <div class="card card-hover reveal">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 1-14 0"/></svg></div>
+        <h3>Qt-based GUI</h3>
+        <p>Visual screen arrangement, hotkey configuration, and system tray integration.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title reveal">Built with</h2>
+    <p class="section-sub reveal">A modern, battle-tested technology stack.</p>
+    <div class="grid-4">
+      <div class="card reveal" style="text-align:center;">
+        <div class="card-icon" style="margin:0 auto 16px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg></div>
+        <h3 style="font-size:16px;">C++20</h3>
+        <p style="font-size:14px;">Modern C++ standard</p>
+      </div>
+      <div class="card reveal" style="text-align:center;">
+        <div class="card-icon" style="margin:0 auto 16px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg></div>
+        <h3 style="font-size:16px;">Qt 6.7+</h3>
+        <p style="font-size:14px;">Cross-platform GUI</p>
+      </div>
+      <div class="card reveal" style="text-align:center;">
+        <div class="card-icon" style="margin:0 auto 16px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3 style="font-size:16px;">OpenSSL 3.0+</h3>
+        <p style="font-size:14px;">TLS encryption</p>
+      </div>
+      <div class="card reveal" style="text-align:center;">
+        <div class="card-icon" style="margin:0 auto 16px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg></div>
+        <h3 style="font-size:16px;">CMake 3.24+</h3>
+        <p style="font-size:14px;">Build system</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="grid-2">
+      <div class="card reveal">
+        <h3 style="margin-bottom:12px;">License</h3>
+        <p>Aether is distributed under GPL-2.0-only with an OpenSSL exception, or as noted per file. See <code>LICENSE</code> and <code>LICENSES/</code> in the repository for full details.</p>
+        <p style="margin-top:16px;">No telemetry, no accounts, no lock-in. The source is yours to read, modify, and redistribute under the license terms.</p>
       </div>
       <div class="card reveal">
-        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg></div>
-        <h3>CMake build system</h3>
-        <p>CMake 3.24+ with automatic dependency fetching for a clean build experience.</p>
+        <h3 style="margin-bottom:12px;">Source and community</h3>
+        <p>The source code is available on GitHub at <a href="https://github.com/neang-mengseang/Aether" target="_blank" rel="noopener">neang-mengseang/Aether</a>.</p>
+        <p style="margin-top:16px;">Contributions, bug reports, and feature requests are welcome. See the <a href="docs.html">docs page</a> for guides, or open an <a href="https://github.com/neang-mengseang/Aether/issues" target="_blank" rel="noopener">issue</a> to report a bug.</p>
       </div>
     </div>
   </div>
@@ -100,18 +149,33 @@
   <div class="container">
     <h2 class="section-title reveal">Roadmap</h2>
     <p class="section-sub reveal">What is being built next for Aether.</p>
-    <div class="card content-block reveal">
-      <h3 style="margin-bottom:12px;">Virtual display streaming</h3>
-      <p>Turn a second machine into a wireless monitor for your main machine. No HDMI cable. The main machine creates a virtual display using an IddCx driver, streams the screen content over LAN with H.264/H.265 encoding, and the sub machine renders it fullscreen. Input from the sub machine flows back to the main machine.</p>
-      <p style="margin-top:16px;">Planned milestones:</p>
-      <ul>
-        <li><strong>Milestone 1:</strong> Virtual display driver integration and screen capture (POC)</li>
-        <li><strong>Milestone 2:</strong> Video encoding, network streaming, and client-side rendering</li>
-        <li><strong>Milestone 3:</strong> Input forwarding from display client back to server</li>
-        <li><strong>Milestone 4:</strong> GUI integration, driver bundling, and production release</li>
-      </ul>
-      <p style="margin-top:16px;">Read the full technical design in the <a href="virtual-display-plan.html">virtual display plan</a>.</p>
+    <div class="timeline reveal">
+      <div class="timeline-item current">
+        <div class="timeline-dot"></div>
+        <span class="timeline-status">In progress</span>
+        <h3>Virtual display driver integration</h3>
+        <p>Detect and integrate the open source IddCx Virtual Display Driver. Create and destroy virtual monitors on demand. Implement DXGI Desktop Duplication screen capture. Proof of concept with raw frame transmission.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <span class="timeline-status">Planned</span>
+        <h3>Video encoding and streaming</h3>
+        <p>Encode captured frames with FFmpeg using H.264 or H.265 with hardware acceleration. Stream encoded frames over the network using the existing TLS socket and chunked transfer. Client-side decoding and fullscreen rendering.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <span class="timeline-status">Planned</span>
+        <h3>Input forwarding from display client</h3>
+        <p>Capture mouse and keyboard events on the display client. Forward them back to the server using new protocol messages. Server injects input into the virtual display coordinate space. Full interactive loop working end to end.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <span class="timeline-status">Planned</span>
+        <h3>GUI integration and production release</h3>
+        <p>Add display management UI to the Aether GUI. Bundle the VDD driver with the installer. Persist display configuration. Documentation and testing across Windows versions. Production ready release.</p>
+      </div>
     </div>
+    <p style="text-align:center;margin-top:32px;" class="reveal">Read the full technical design in the <a href="virtual-display-plan.html">virtual display plan</a>.</p>
   </div>
 </section>
 </main>

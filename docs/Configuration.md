@@ -108,7 +108,7 @@ This section contains options used by the GUI it will begin with `[gui]`
 | shownServerFirstStartMessage   | `true` or `false` | When `true` GUI has shown the user the Aether server is now running message [default: false] |
 | shownVerionInTitle             | `true` or `false` | When `true` GUI will include the version in the window title [default: false] |
 | startCoreWithGui               | `true` or `false` | When true the Core will be started with the GUI. It is set to the Core's state on exit. |
-| updateCheckUrl                 | URL               | The URL to use when checking for a new version number, it should return a version [default: https://api.deskflow.org/version]|
+| updateCheckUrl                 | URL               | The URL to use when checking for a new version number, it should return a version [default: https://api.github.com/repos/neang-mengseang/Aether/releases/latest]|
 
 ### Log
 
@@ -658,7 +658,7 @@ end
 
 ### AltGr key
 
-The following screen config allows the mapping for ''Alt'' to ''AltGr''. Although this may not work, see [https://github.com/deskflow/deskflow-core/issues/4411 bug #4411].
+The following screen config allows the mapping for ''Alt'' to ''AltGr''. Note that this may not work on all platforms.
 ```
 section: screens
 	client1:

@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: (C) 2025 Deskflow Developers
+# SPDX-FileCopyrightText: (C) 2025 Aether Devs
 # SPDX-License-Identifier: MIT
 
 add_subdirectory(config)

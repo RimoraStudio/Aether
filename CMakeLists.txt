@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: (C) 2024 - 2026 Deskflow Developers
+# SPDX-FileCopyrightText: (C) 2024 - 2026 Aether Devs
 # SPDX-FileCopyrightText: (C) 2012 - 2024 Symless Ltd
 # SPDX-FileCopyrightText: (C) 2009 - 2012 Nick Bolton
 # SPDX-License-Identifier: MIT
@@ -94,7 +94,7 @@ project(
   aether
   VERSION "${AETHER_VERSION_MAJOR}.${AETHER_VERSION_MINOR}.${AETHER_VERSION_PATCH}.${AETHER_VERSION_TWEAK}"
   DESCRIPTION "Keyboard and mouse sharing utility"
-  HOMEPAGE_URL "https://deskflow.org"
+  HOMEPAGE_URL "https://github.com/neang-mengseang/Aether"
   LANGUAGES C CXX
 )
 
@@ -102,7 +102,7 @@ project(
 set(CMAKE_PROJECT_PROPER_NAME "Aether")
 set(CMAKE_PROJECT_VENDOR "${CMAKE_PROJECT_PROPER_NAME} Devs")
 set(CMAKE_PROJECT_COPYRIGHT "(C) 2024-2026 ${CMAKE_PROJECT_VENDOR}")
-set(CMAKE_PROJECT_CONTACT "${CMAKE_PROJECT_PROPER_NAME} <maintainers@deskflow.org>")
+set(CMAKE_PROJECT_CONTACT "${CMAKE_PROJECT_PROPER_NAME} <maintainers@github.com/neang-mengseang/Aether>")
 set(CMAKE_PROJECT_REV_FQDN "org.aether.aether")
 
 #Unset the vars used in the project call

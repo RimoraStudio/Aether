@@ -2,4 +2,4 @@
 aether(1), aether-core(1)
 
 All documentation is on the web, so please point your browser at
-<https://github.com/deskflow/deskflow/wiki> and surf away.
+<https://github.com/neang-mengseang/Aether/wiki> and surf away.

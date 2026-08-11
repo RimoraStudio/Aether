@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: (C) 2024 - 2026 Deskflow Developers
+# SPDX-FileCopyrightText: (C) 2024 - 2026 Aether Devs
 # SPDX-FileCopyrightText: (C) 2024 Symless Ltd
 # SPDX-License-Identifier: MIT
 

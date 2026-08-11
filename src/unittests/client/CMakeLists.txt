@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: (C) 2026 Deskflow Developers
+# SPDX-FileCopyrightText: (C) 2026 Aether Devs
 # SPDX-License-Identifier: MIT
 
 if(WIN32)
