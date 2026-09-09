@@ -35,6 +35,78 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   });
+
+  // Theme toggle
+  const themeToggle = document.querySelector('.theme-toggle');
+  if (themeToggle) {
+    const saved = localStorage.getItem('aether-theme');
+    if (saved) document.documentElement.setAttribute('data-theme', saved);
+    themeToggle.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const isDark = current === 'dark' ||
+        (!current && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      const next = isDark ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('aether-theme', next);
+    });
+  }
+
+  // Mobile docs sidebar toggle
+  const docsToggle = document.querySelector('.docs-mobile-toggle');
+  const docsSidebar = document.querySelector('.docs-sidebar');
+  const docsOverlay = document.querySelector('.docs-overlay');
+  if (docsToggle && docsSidebar) {
+    docsToggle.addEventListener('click', () => {
+      docsSidebar.classList.toggle('open');
+      if (docsOverlay) docsOverlay.classList.toggle('open');
+    });
+    if (docsOverlay) {
+      docsOverlay.addEventListener('click', () => {
+        docsSidebar.classList.remove('open');
+        docsOverlay.classList.remove('open');
+      });
+    }
+  }
+
+  // Reading progress bar
+  const progress = document.querySelector('.reading-progress');
+  if (progress) {
+    const updateProgress = () => {
+      const scrolled = window.scrollY;
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = total > 0 ? (scrolled / total * 100) + '%' : '0%';
+    };
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  }
+
+  // Scroll to top button
+  const scrollTop = document.querySelector('.scroll-top');
+  if (scrollTop) {
+    window.addEventListener('scroll', () => {
+      scrollTop.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+    scrollTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // Copy buttons on code blocks
+  document.querySelectorAll('pre').forEach(pre => {
+    if (pre.querySelector('.code-copy')) return;
+    const btn = document.createElement('button');
+    btn.className = 'code-copy';
+    btn.textContent = 'Copy';
+    btn.addEventListener('click', () => {
+      const code = pre.querySelector('code');
+      navigator.clipboard.writeText(code ? code.textContent : pre.textContent).then(() => {
+        btn.textContent = 'Copied';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+      });
+    });
+    pre.appendChild(btn);
+  });
 });
 
 // Download page: fetch latest release
