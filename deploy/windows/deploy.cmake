@@ -76,25 +76,26 @@ if (NOT "${WIX_APP}" STREQUAL "")
   string(TOLOWER "${CMAKE_PROJECT_PROPER_NAME}" AETHER_PKG_NAME)
   set(AETHER_MSI_FILE "${AETHER_PKG_NAME}-${PACKAGE_VERSION_LABEL}-${OS_STRING}.msi")
   set(AETHER_EXE_FILE "${AETHER_PKG_NAME}-${PACKAGE_VERSION_LABEL}-${OS_STRING}.exe")
+  set(AETHER_PKG_DIR "${CMAKE_BINARY_DIR}")
 
   configure_file(
     ${MY_DIR}/Bundle.wxs.in
     ${CMAKE_CURRENT_BINARY_DIR}/Bundle.wxs @ONLY
   )
 
-  add_custom_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/${AETHER_EXE_FILE}"
+  add_custom_command(OUTPUT "${AETHER_PKG_DIR}/${AETHER_EXE_FILE}"
     COMMAND ${WIX_APP} build
       ${CMAKE_CURRENT_BINARY_DIR}/Bundle.wxs
-      -o "${CMAKE_CURRENT_BINARY_DIR}/${AETHER_EXE_FILE}"
+      -o "${AETHER_PKG_DIR}/${AETHER_EXE_FILE}"
       -ext "WixToolset.Util.wixext" -ext "WixToolset.Bal.wixext"
     DEPENDS
       "${CMAKE_CURRENT_BINARY_DIR}/Bundle.wxs"
-      "${CMAKE_CURRENT_BINARY_DIR}/${AETHER_MSI_FILE}"
+      "${AETHER_PKG_DIR}/${AETHER_MSI_FILE}"
     COMMENT "Building Aether EXE bootstrapper"
     VERBATIM
   )
 
   add_custom_target(aether_exe_bootstrapper
-    DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/${AETHER_EXE_FILE}"
+    DEPENDS "${AETHER_PKG_DIR}/${AETHER_EXE_FILE}"
   )
 endif()

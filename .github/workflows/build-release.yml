@@ -136,7 +136,6 @@ jobs:
 
       - name: Build EXE installer
         run: cmake --build build --config Release -j8 --target aether_exe_bootstrapper
-        continue-on-error: true
 
       - name: Verify artifacts
         shell: bash

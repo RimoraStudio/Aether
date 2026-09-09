@@ -20,7 +20,7 @@ SPDX-License-Identifier: MIT
 
     <Chain>
       <MsiPackage
-        SourceFile="@CMAKE_CURRENT_BINARY_DIR@/aether-@PACKAGE_VERSION_LABEL@-@OS_STRING@.msi"
+        SourceFile="@AETHER_PKG_DIR@/aether-@PACKAGE_VERSION_LABEL@-@OS_STRING@.msi"
         Compressed="yes" />
     </Chain>
   </Bundle>
