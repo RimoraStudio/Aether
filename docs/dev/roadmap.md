@@ -209,6 +209,33 @@ src/lib/aether/ProtocolTypes.h              # File transfer message types
 
 ## v1.3.0 - UX Improvements
 
+### Network resilience (WiFi lag fix)
+- **Problem**: TCP head-of-line blocking causes mouse freezes and keystroke bursts on laggy WiFi
+- **UDP transport option**: Add UDP mode for input events (no head-of-line blocking)
+  - Mouse moves use UDP (lossy OK, latest position wins)
+  - Keystrokes use TCP (must be reliable)
+  - Auto-fallback to TCP if UDP blocked
+  - Files: `src/lib/net/UdpStream.h/cpp`, `src/lib/aether/ProtocolTypes.h`
+- **Input coalescing**: Merge rapid mouse events to reduce bandwidth
+  - Drop intermediate mouse moves, send only latest position
+  - Configurable rate (default 125Hz)
+  - Files: `src/lib/server/Server.cpp`, `src/lib/client/Client.cpp`
+- **Connection quality indicator**: Show latency in status bar
+  - Measure RTT via heartbeat
+  - Color: green (<50ms), yellow (50-150ms), red (>150ms)
+  - Files: `src/lib/gui/StatusBar.h/cpp`, `src/lib/net/ConnectionMonitor.h/cpp`
+- **Local input fallback**: If connection drops, immediately return control to local machine
+  - Detect connection loss within 500ms
+  - Release keyboard/mouse grab instantly
+  - Files: `src/lib/server/Server.cpp`, `src/lib/client/Client.cpp`
+- **Adaptive timeout**: Detect lag early and reconnect faster
+  - Dynamic timeout based on measured RTT
+  - Exponential backoff for reconnect attempts
+  - Files: `src/lib/net/SocketMultiplexer.cpp`, `src/lib/aether/ConnectionManager.h/cpp`
+- **QoS marking**: Tag packets for router priority (DSCP EF)
+  - Optional, enabled by default
+  - Files: `src/lib/net/TCPSocket.cpp`, `src/lib/net/UDPSocket.cpp`
+
 ### Dark mode
 - Add theme toggle to GUI
 - Qt6 supports dark palettes natively
@@ -235,7 +262,7 @@ src/lib/aether/ProtocolTypes.h              # File transfer message types
 - Files: `src/lib/gui/dialogs/StatusDashboard.h/cpp`
 
 ### Estimated effort
-1-2 weeks
+2-3 weeks
 
 ---
 
