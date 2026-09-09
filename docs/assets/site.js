@@ -40,8 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Theme toggle
   const themeToggle = document.querySelector('.theme-toggle');
   if (themeToggle) {
-    const saved = localStorage.getItem('aether-theme');
-    if (saved) document.documentElement.setAttribute('data-theme', saved);
     themeToggle.addEventListener('click', () => {
       const current = document.documentElement.getAttribute('data-theme');
       const isDark = current === 'dark' ||

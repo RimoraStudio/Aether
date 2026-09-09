@@ -172,13 +172,18 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y \
+            build-essential \
+            cmake \
+            git \
             ninja-build \
+            pkg-config \
             libssl-dev \
             libx11-dev \
             libx11-xcb-dev \
             libxkbcommon-dev \
             libxkbcommon-x11-dev \
             libxkbregistry-dev \
+            libxkbfile-dev \
             libxext-dev \
             libxi-dev \
             libxtst-dev \
@@ -190,13 +195,12 @@ jobs:
             libdbus-1-dev \
             libglib2.0-dev \
             libportal-dev \
-            libei-dev \
-            pkg-config
+            libei-dev
 
       - name: Verify system packages
         run: |
           echo "Checking required packages..."
-          for pkg in ninja-build libssl-dev libx11-dev libxkbcommon-dev libxkbregistry-dev libxext-dev libxi-dev libxtst-dev libxinerama-dev libxrandr-dev libgl1-mesa-dev libegl-dev libwayland-dev libdbus-1-dev libglib2.0-dev libportal-dev libei-dev pkg-config; do
+          for pkg in build-essential cmake git ninja-build pkg-config libssl-dev libx11-dev libxkbcommon-dev libxkbregistry-dev libxkbfile-dev libxext-dev libxi-dev libxtst-dev libxinerama-dev libxrandr-dev libgl1-mesa-dev libegl-dev libwayland-dev libdbus-1-dev libglib2.0-dev libportal-dev libei-dev; do
             if dpkg -s "$pkg" >/dev/null 2>&1; then
               echo "  OK: $pkg"
             else
