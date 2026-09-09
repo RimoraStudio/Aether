@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: (C) 2026 Aether Devs
+# SPDX-FileCopyrightText: (C) 2026 Rimora Studio
 # SPDX-License-Identifier: MIT
 
 if(WIN32)

@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: (C) 2024 Aether Devs
+# SPDX-FileCopyrightText: (C) 2024 Rimora Studio
 # SPDX-FileCopyrightText: (C) 2012 - 2024 Symless Ltd
 # SPDX-FileCopyrightText: (C) 2009 - 2012 Nick Bolton
 # SPDX-License-Identifier: MIT

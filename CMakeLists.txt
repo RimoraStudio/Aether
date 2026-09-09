@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: (C) 2024 - 2026 Aether Devs
+# SPDX-FileCopyrightText: (C) 2025 - 2026 Rimora Studio
 # SPDX-FileCopyrightText: (C) 2012 - 2024 Symless Ltd
 # SPDX-FileCopyrightText: (C) 2009 - 2012 Nick Bolton
 # SPDX-License-Identifier: MIT
@@ -41,7 +41,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Fallback for when git can not be found
 set(AETHER_VERSION_MAJOR 1)
-set(AETHER_VERSION_MINOR 26)
+set(AETHER_VERSION_MINOR 0)
 set(AETHER_VERSION_PATCH 0)
 set(AETHER_VERSION_TWEAK 0)
 
@@ -100,9 +100,9 @@ project(
 
 # Define Additional "PROJECT" vars for packaging and metadata
 set(CMAKE_PROJECT_PROPER_NAME "Aether")
-set(CMAKE_PROJECT_VENDOR "${CMAKE_PROJECT_PROPER_NAME} Devs")
-set(CMAKE_PROJECT_COPYRIGHT "(C) 2024-2026 ${CMAKE_PROJECT_VENDOR}")
-set(CMAKE_PROJECT_CONTACT "${CMAKE_PROJECT_PROPER_NAME} <maintainers@github.com/neang-mengseang/Aether>")
+set(CMAKE_PROJECT_VENDOR "Rimora Studio")
+set(CMAKE_PROJECT_COPYRIGHT "(C) 2025 - 2026 ${CMAKE_PROJECT_VENDOR}")
+set(CMAKE_PROJECT_CONTACT "Xeleste <maintainers@github.com/neang-mengseang/Aether>")
 set(CMAKE_PROJECT_REV_FQDN "org.aether.aether")
 
 #Unset the vars used in the project call

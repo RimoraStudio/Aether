@@ -1,6 +1,6 @@
 /*
  * Aether -- mouse and keyboard sharing utility
- * SPDX-FileCopyrightText: (C) 2025 Aether Devs
+ * SPDX-FileCopyrightText: (C) 2025 Rimora Studio
  * SPDX-FileCopyrightText: (C) 2024 - 2026 Chris Rizzitello <sithord48@gmail.com>
  * SPDX-FileCopyrightText: (C) 2012 - 2024 Synergy App Ltd
  * SPDX-FileCopyrightText: (C) 2008 Volker Lanz <vl@fidra.de>

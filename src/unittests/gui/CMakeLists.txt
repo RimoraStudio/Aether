@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: (C) 2025 Aether Devs
+# SPDX-FileCopyrightText: (C) 2025 Rimora Studio
 # SPDX-License-Identifier: MIT
 
 add_subdirectory(config)

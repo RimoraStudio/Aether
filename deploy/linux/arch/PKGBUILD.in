@@ -1,6 +1,6 @@
-# SPDX-FileCopyrightText: (C) 2024 Aether Devs
+# SPDX-FileCopyrightText: (C) 2024 Rimora Studio
 # SPDX-License-Identifier: MIT
-# Maintainer: Aether Devs
+# Maintainer: Rimora Studio
 
 _basename=@CMAKE_PROJECT_NAME@
 pkgname=${_basename}-git
