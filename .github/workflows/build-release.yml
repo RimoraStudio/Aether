@@ -346,19 +346,22 @@ jobs:
         env:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
-          BUILD_RESULT: ${{ needs.build-windows.result }}
+          WIN_RESULT: ${{ needs.build-windows.result }}
           LINUX_RESULT: ${{ needs.build-linux.result }}
           RELEASE_TAG: ${{ github.ref_name }}
           REPO_URL: ${{ github.repository }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          RUN_STARTED_AT: ${{ github.event.repository.pushed_at }}
+          JOB_STARTED_AT: ${{ github.run_started_at }}
         run: |
           if [ -z "$TG_BOT_TOKEN" ] || [ -z "$TG_CHAT_ID" ]; then
             echo "Telegram secrets not set, skipping notification"
             exit 0
           fi
 
+          # Status labels
           WIN_STATUS="unknown"
-          case "$BUILD_RESULT" in
+          case "$WIN_RESULT" in
             success) WIN_STATUS="OK" ;;
             failure) WIN_STATUS="FAILED" ;;
             skipped) WIN_STATUS="skipped" ;;
@@ -373,7 +376,8 @@ jobs:
             cancelled) LINUX_STATUS="cancelled" ;;
           esac
 
-          if [ "$BUILD_RESULT" = "success" ] && [ "$LINUX_RESULT" = "success" ]; then
+          # Overall
+          if [ "$WIN_RESULT" = "success" ] && [ "$LINUX_RESULT" = "success" ]; then
             OVERALL="SUCCESS"
             EMOJI="OK"
           else
@@ -381,19 +385,42 @@ jobs:
             EMOJI="FAIL"
           fi
 
-          IS_TAG=""
+          # Trigger type
           if [[ "$RELEASE_TAG" == v* ]]; then
-            IS_TAG="Release tag: $RELEASE_TAG"
+            TRIGGER="Release tag: $RELEASE_TAG"
           else
-            IS_TAG="Branch push: $RELEASE_TAG"
+            TRIGGER="Branch: $RELEASE_TAG"
           fi
 
-          MESSAGE="Aether Build $EMOJI
-          Status: $OVERALL
-          $IS_TAG
-          Windows: $WIN_STATUS
-          Linux: $LINUX_STATUS
-          Run: $RUN_URL"
+          # Timestamps
+          START_TIME=$(date -u -d "$JOB_STARTED_AT" "+%Y-%m-%d %H:%M:%S UTC" 2>/dev/null || echo "$JOB_STARTED_AT")
+          END_TIME=$(date -u "+%Y-%m-%d %H:%M:%S UTC")
+          DURATION_SEC=$(( $(date -u +%s) - $(date -u -d "$JOB_STARTED_AT" +%s 2>/dev/null || echo 0) ))
+          DURATION_MIN=$(( DURATION_SEC / 60 ))
+          DURATION_REM=$(( DURATION_SEC % 60 ))
+          DURATION="${DURATION_MIN}m ${DURATION_REM}s"
+
+          # Commit info
+          COMMIT_SHA="${GITHUB_SHA:0:7}"
+          COMMIT_URL="${{ github.server_url }}/${{ github.repository }}/commit/${GITHUB_SHA}"
+          COMMIT_MSG=$(git log -1 --pretty=format:'%s' 2>/dev/null || echo "unknown")
+
+          # Build single message
+          read -r -d '' MESSAGE <<EOF
+Aether Build $EMOJI
+
+Status: $OVERALL
+$TRIGGER
+Commit: $COMMIT_SHA - $COMMIT_MSG
+Windows: $WIN_STATUS
+Linux: $LINUX_STATUS
+Started: $START_TIME
+Completed: $END_TIME
+Duration: $DURATION
+
+Run: $RUN_URL
+Commit: $COMMIT_URL
+EOF
 
           curl -s -X POST "https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage" \
             -d "chat_id=${TG_CHAT_ID}" \
