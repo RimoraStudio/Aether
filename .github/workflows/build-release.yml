@@ -132,7 +132,6 @@ jobs:
             libdbus-1-dev \
             libglib2.0-dev \
             libportal-dev \
-            libportal-qt-dev \
             libei-dev \
             pkg-config
 
