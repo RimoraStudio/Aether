@@ -84,7 +84,7 @@
 
       <div class="dl-platform card reveal">
         <div class="dl-platform-header">
-          <div class="dl-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M12.504 0c-.155 0-.315.008-.48.021-4.226.333-3.105 4.783-3.17 6.298-.076 1.092-.3 1.953-1.05 3.02-.885 1.051-2.127 2.75-2.716 4.521-.278.832-.41 1.684-.287 2.489a.424.424 0 00-.11.135c-.26.268-.45.6-.663.839-.199.199-.485.267-.797.4-.313.136-.658.269-.864.68-.09.189-.136.394-.132.602 0 .199.027.4.055.536.058.399.116.728.04.97-.249.68-.28 1.145-.106 1.484.174.334.535.47.94.601.81.2 1.91.135 2.774.6.926.466 1.862.67 2.603.47.526-.116 1.001-.451 1.238-.93.366-.004.765-.17 1.405-.336.435-.13.965-.244 1.564-.244 1.567 0 2.45.5 3.346.93.893.43 1.78.775 2.97.775.4 0 .78-.04 1.13-.12.527-.12 1.001-.45 1.238-.93.527-.12 1.001-.45 1.238-.93.366-.004.765-.17 1.405-.336.435-.13.965-.244 1.564-.244 1.567 0 2.45.5 3.346.93.893.43 1.78.775 2.97.775.4 0 .78-.04 1.13-.12.527-.12.527-.12 1.238-.93.366-.004.765-.17 1.405-.336.435-.13.965-.244 1.564-.244 1.567 0 2.45.5 3.346.93.893.43 1.78.775 2.97.775.4 0 .78-.04 1.13-.12.527-.12 1.001-.45 1.238-.93.366-.004.765-.17 1.405-.336.435-.13.965-.244 1.564-.244z"/></svg></div>
+          <div class="dl-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c-2 0-3.5 1.8-3.5 4 0 1.2.4 2 1 2.8-1.5 1-2.5 2.5-2.5 4.7 0 1.8.5 3 1.2 4.2-.8.3-1.2.8-1.2 1.3 0 .8.8 1.5 2 1.8-.3.4-.5.8-.5 1.2 0 1 1.5 1.5 3.5 1.5s3.5-.5 3.5-1.5c0-.4-.2-.8-.5-1.2 1.2-.3 2-1 2-1.8 0-.5-.4-1-1.2-1.3.7-1.2 1.2-2.4 1.2-4.2 0-2.2-1-3.7-2.5-4.7.6-.8 1-1.6 1-2.8 0-2.2-1.5-4-3.5-4z" fill="currentColor" stroke="none"/><circle cx="10.5" cy="7" r="0.8" fill="var(--bg)" stroke="none"/><circle cx="13.5" cy="7" r="0.8" fill="var(--bg)" stroke="none"/></svg></div>
           <div>
             <h3>Linux</h3>
             <p class="dl-platform-sub">X11 or Wayland, x64</p>
@@ -204,14 +204,106 @@ cmake --build build</div>
 
 <section class="section section-alt">
   <div class="container">
-    <div class="grid-2">
-      <div class="card reveal">
-        <h3 style="margin-bottom:8px;">System requirements</h3>
-        <p>Windows 10 or later, or a modern Linux distribution with X11 or Wayland. Network connectivity between all machines on the same LAN.</p>
+    <h2 class="section-title reveal">System requirements</h2>
+    <p class="section-sub reveal">Make sure your machines meet these requirements before installing.</p>
+    <div class="grid-3 reveal">
+      <div class="card req-card">
+        <div class="req-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h3>Operating system</h3>
+        <ul class="req-list">
+          <li><strong>Windows</strong> 10 or later (x64)</li>
+          <li><strong>Linux</strong> with X11 or Wayland (x64)</li>
+          <li>Ubuntu 24.04+, Fedora 40+, or equivalent</li>
+        </ul>
       </div>
-      <div class="card reveal">
-        <h3 style="margin-bottom:8px;">Package formats</h3>
-        <p>Windows: MSI installer, EXE bootstrapper, and 7Z portable archive. Linux: DEB, RPM, and tar.gz. Each release also includes SHA-256 checksums for verification.</p>
+      <div class="card req-card">
+        <div class="req-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+        </div>
+        <h3>Network</h3>
+        <ul class="req-list">
+          <li>All machines on the same LAN</li>
+          <li>Port 24800 accessible (TCP)</li>
+          <li>Firewall configured to allow Aether</li>
+        </ul>
+      </div>
+      <div class="card req-card">
+        <div class="req-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+        </div>
+        <h3>Runtime libraries</h3>
+        <ul class="req-list">
+          <li><strong>Qt 6.7+</strong> (bundled in packages)</li>
+          <li><strong>OpenSSL 3.0+</strong> (bundled in packages)</li>
+          <li>Linux: libei, libportal, X11 or Wayland</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title reveal">Package formats</h2>
+    <p class="section-sub reveal">Choose the format that fits your platform and workflow.</p>
+    <div class="grid-2 reveal">
+      <div class="card pkg-card">
+        <h3>Windows</h3>
+        <div class="pkg-item">
+          <div class="pkg-badge pkg-msi">MSI</div>
+          <div>
+            <strong>MSI Installer</strong>
+            <p>Recommended. Includes firewall rules and service registration. Installs to Program Files. Supports enterprise deployment via Group Policy.</p>
+          </div>
+        </div>
+        <div class="pkg-item">
+          <div class="pkg-badge pkg-exe">EXE</div>
+          <div>
+            <strong>EXE Bootstrapper</strong>
+            <p>Lightweight wrapper around the MSI. Same contents, smaller initial download. Good for users who prefer .exe installers.</p>
+          </div>
+        </div>
+        <div class="pkg-item">
+          <div class="pkg-badge pkg-7z">7Z</div>
+          <div>
+            <strong>Portable Archive</strong>
+            <p>No installation required. Extract and run. You must configure firewall rules manually. Ideal for USB drives or restricted environments.</p>
+          </div>
+        </div>
+      </div>
+      <div class="card pkg-card">
+        <h3>Linux</h3>
+        <div class="pkg-item">
+          <div class="pkg-badge pkg-deb">DEB</div>
+          <div>
+            <strong>DEB Package</strong>
+            <p>For Debian, Ubuntu, Mint, and derivatives. Install with <code>sudo apt install ./aether-*.deb</code>. Dependencies are resolved automatically.</p>
+          </div>
+        </div>
+        <div class="pkg-item">
+          <div class="pkg-badge pkg-rpm">RPM</div>
+          <div>
+            <strong>RPM Package</strong>
+            <p>For Fedora, openSUSE, RHEL, and derivatives. Install with <code>sudo dnf install aether-*.rpm</code> or <code>sudo zypper install aether-*.rpm</code>.</p>
+          </div>
+        </div>
+        <div class="pkg-item">
+          <div class="pkg-badge pkg-tgz">TGZ</div>
+          <div>
+            <strong>tar.gz Archive</strong>
+            <p>Generic binary archive for any Linux distribution. Extract and run. You may need to install Qt 6 and OpenSSL dependencies manually.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card reveal" style="margin-top:24px;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div>
+          <strong>SHA-256 checksums</strong> are included with every release. Verify downloads by comparing the checksum in <code>sums.txt</code> against your file before installing.
+        </div>
       </div>
     </div>
   </div>
