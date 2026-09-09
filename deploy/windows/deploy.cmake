@@ -93,8 +93,7 @@ if (NOT "${WIX_APP}" STREQUAL "")
     VERBATIM
   )
 
-  add_custom_target(aether_exe_bootstrapper ALL
+  add_custom_target(aether_exe_bootstrapper
     DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/${AETHER_EXE_FILE}"
   )
-  add_dependencies(aether_exe_bootstrapper package)
 endif()
