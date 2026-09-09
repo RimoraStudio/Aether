@@ -61,6 +61,7 @@
     <h3>User guides</h3>
     <ul>
       <li><a href="#" data-doc="Configuration.md" class="active">Configuration</a></li>
+      <li><a href="#" data-doc="AutoUpdate.md">Auto-update</a></li>
       <li><a href="#" data-doc="HelpMain.md">Help home</a></li>
       <li><a href="#" data-doc="Security.md">Security</a></li>
       <li><a href="#" data-doc="Issues.md">Issue reporting</a></li>
@@ -108,6 +109,7 @@
       })
       .then(function(md) {
         md = md.replace(/Configuration\.md/g, '#Configuration.md')
+               .replace(/AutoUpdate\.md/g, '#AutoUpdate.md')
                .replace(/HelpMain\.md/g, '#HelpMain.md')
                .replace(/Issues\.md/g, '#Issues.md')
                .replace(/Security\.md/g, '#Security.md')
