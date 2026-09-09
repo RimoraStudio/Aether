@@ -1,27 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-  <meta property="og:image" content="assets/og-image.png">
+  <link rel="canonical" href="https://rimorastudio.github.io/Aether/">
+  <meta property="og:image" content="https://rimorastudio.github.io/Aether/assets/og-image.png">
+  <meta name="twitter:image" content="https://rimorastudio.github.io/Aether/assets/og-image.png">
   <title>Aether: open-source keyboard and mouse sharing</title>
   <meta name="description" content="Aether lets you control multiple computers with one keyboard and mouse across Windows, macOS, and Linux.">
   <meta property="og:title" content="Aether: open-source keyboard and mouse sharing">
   <meta property="og:description" content="Control multiple computers with one keyboard and mouse across Windows, macOS, and Linux.">
   <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:url" content="https://rimorastudio.github.io/Aether/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Aether: open-source keyboard and mouse sharing">
+  <meta name="twitter:description" content="Control multiple computers with one keyboard and mouse across Windows, macOS, and Linux.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Space+Grotesk:wght@700&family=Fira+Code&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/site.css">
-<script>const t=localStorage.getItem("aether-theme");if(t)document.documentElement.setAttribute("data-theme",t);else if(window.matchMedia("(prefers-color-scheme: dark)").matches)document.documentElement.setAttribute("data-theme","dark");</script>
+<script>document.documentElement.classList.remove('no-js');const t=localStorage.getItem("aether-theme");if(t)document.documentElement.setAttribute("data-theme",t);else if(window.matchMedia("(prefers-color-scheme: dark)").matches)document.documentElement.setAttribute("data-theme","dark");</script>
 </head>
 <body>
+<a href="#main" class="skip-link">Skip to content</a>
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="logo"><svg width="28" height="28" viewBox="0 0 64 64" fill="none">
+    <a href="index.html" class="logo" aria-label="Aether home"><svg width="28" height="28" viewBox="0 0 64 64" fill="none" aria-hidden="true">
   <defs>
     <linearGradient id="aether-grad" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#8b5cf6"/>
@@ -34,22 +40,22 @@
 </svg> Aether</a>
     <div class="nav-links">
       <a href="index.html" class="active">Home</a>
-      <a href="download.html" class="">Download</a>
-      <a href="docs.html" class="">Docs</a>
-      <a href="about.html" class="">About</a>
+      <a href="download.html">Download</a>
+      <a href="docs.html">Docs</a>
+      <a href="about.html">About</a>
       <a href="https://github.com/RimoraStudio/Aether" target="_blank" rel="noopener">Source</a>
     </div>
-    <div style="display:flex;align-items:center;gap:8px;">
-      <button class="theme-toggle" aria-label="Toggle theme">
-        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    <div class="nav-actions">
+      <button class="theme-toggle" aria-label="Toggle theme" aria-pressed="false">
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
       </button>
-      <button class="mobile-toggle" aria-label="Menu">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <button class="mobile-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
     </div>
   </div>
-  <div id="mobile-menu">
+  <div id="mobile-menu" class="closed">
     <a href="index.html">Home</a>
       <a href="download.html">Download</a>
       <a href="docs.html">Docs</a>
@@ -57,20 +63,20 @@
     <a href="https://github.com/RimoraStudio/Aether" target="_blank" rel="noopener">Source</a>
   </div>
 </nav>
-<main>
+<main id="main">
 <header class="hero">
   <div class="hero-content">
     <div class="reveal">
-      <p style="font-size:14px;font-weight:500;color:var(--primary);margin-bottom:16px;">Open source, cross-platform input sharing</p>
-      <h1 class="hero-title">One desk.<br>Many computers.</h1>
+      <p class="hero-eyebrow">Open source, cross-platform input sharing</p>
+      <h1 class="hero-title">One desk.<br><span class="gradient-text">Many computers.</span></h1>
       <p class="hero-desc">Aether lets you control multiple computers with a single keyboard and mouse. Move the cursor from one screen to the next, share the clipboard, and keep everything encrypted over the network.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:12px;">
+      <div class="cta-row">
         <a href="download.html" class="btn btn-primary">Download Aether</a>
         <a href="https://github.com/RimoraStudio/Aether" target="_blank" rel="noopener" class="btn btn-secondary">View source</a>
       </div>
     </div>
     <div class="hero-visual reveal">
-      <svg class="hero-svg" viewBox="0 0 420 200" fill="none">
+      <svg class="hero-svg" viewBox="0 0 420 200" fill="none" aria-hidden="true">
         <g>
           <rect x="20" y="20" width="160" height="100" rx="6" fill="var(--surface)" stroke="var(--border)" stroke-width="1.5"/>
           <rect x="28" y="28" width="144" height="84" rx="3" fill="var(--bg)"/>
@@ -113,38 +119,61 @@
   </div>
 </header>
 
+<section class="section section-flush-top">
+  <div class="container">
+    <div class="stats-bar reveal">
+      <div class="stat-item">
+        <div class="stat-number"><span data-count="3">0</span><span class="stat-suffix">+</span></div>
+        <div class="stat-label">Platforms supported</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number"><span data-count="7">0</span></div>
+        <div class="stat-label">UI languages</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number"><span data-count="100">0</span><span class="stat-suffix">%</span></div>
+        <div class="stat-label">Free and open source</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number"><span data-count="0">0</span></div>
+        <div class="stat-label">Cloud accounts needed</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section section-alt">
   <div class="container">
-    <h2 class="section-title reveal">Built for seamless workflows</h2>
+    <h2 class="section-title reveal">Built for <span class="gradient-text">seamless</span> workflows</h2>
     <p class="section-sub reveal">Aether handles the networking so your devices feel like one desktop.</p>
     <div class="grid-3">
-      <div class="card card-hover reveal">
-        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+      <div class="card card-hover magic-card reveal">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
         <h3>Seamless screen crossing</h3>
         <p>Drag the cursor off one screen and onto another without pressing any buttons. Aether tracks edge positions so the transition feels instant and natural.</p>
       </div>
-      <div class="card card-hover reveal">
-        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div>
+      <div class="card card-hover magic-card reveal">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div>
         <h3>Shared clipboard</h3>
         <p>Copy and paste text and images between systems automatically. Your clipboard content travels with the cursor as it crosses screen boundaries.</p>
       </div>
-      <div class="card card-hover reveal">
-        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div class="card card-hover magic-card reveal">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
         <h3>TLS encryption</h3>
         <p>Server and client traffic is encrypted with TLS to keep your input data private. Aether generates and manages certificates for you automatically.</p>
       </div>
-      <div class="card card-hover reveal">
-        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+      <div class="card card-hover magic-card reveal">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
         <h3>Cross-platform</h3>
         <p>Windows, macOS, and Linux. X11 and Wayland are both supported on Linux, so Aether works across mixed-OS setups without compromise.</p>
       </div>
-      <div class="card card-hover reveal">
-        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+      <div class="card card-hover magic-card reveal">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
         <h3>Protocol compatibility</h3>
         <p>Works with the Synergy and Barrier wire protocols for broad interoperability. Connect Aether to existing Synergy or Barrier clients and servers.</p>
       </div>
-      <div class="card card-hover reveal">
-        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 1-14 0"/></svg></div>
+      <div class="card card-hover magic-card reveal">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 1-14 0"/></svg></div>
         <h3>Qt-based GUI</h3>
         <p>Arrange screens visually, set hotkeys, and configure autostart without editing config files. The GUI lives in your system tray for quick access.</p>
       </div>
@@ -152,44 +181,286 @@
   </div>
 </section>
 
-<section class="section">
+<section class="section section-divider">
   <div class="container">
     <h2 class="section-title reveal">How it works</h2>
     <p class="section-sub reveal">Aether runs as a server on your primary machine and as a client on each secondary machine.</p>
     <div class="grid-3">
-      <div class="card reveal">
+      <div class="card step reveal">
         <div class="step-num">1</div>
-        <h3 style="text-align:center;margin-bottom:8px;">Install</h3>
-        <p style="text-align:center;">Download and install Aether on every computer you want to connect.</p>
+        <h3>Install</h3>
+        <p>Download and install Aether on every computer you want to connect.</p>
       </div>
-      <div class="card reveal">
+      <div class="card step reveal">
         <div class="step-num">2</div>
-        <h3 style="text-align:center;margin-bottom:8px;">Configure</h3>
-        <p style="text-align:center;">Set one machine as server, arrange screens in the GUI, and add clients by hostname.</p>
+        <h3>Configure</h3>
+        <p>Set one machine as server, arrange screens in the GUI, and add clients by hostname.</p>
       </div>
-      <div class="card reveal">
+      <div class="card step reveal">
         <div class="step-num">3</div>
-        <h3 style="text-align:center;margin-bottom:8px;">Share</h3>
-        <p style="text-align:center;">Move your cursor across screen edges. One keyboard and mouse, many computers.</p>
+        <h3>Share</h3>
+        <p>Move your cursor across screen edges. One keyboard and mouse, many computers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-divider">
+  <div class="container">
+    <h2 class="section-title reveal">See it in action</h2>
+    <p class="section-sub reveal">Click a hotspot to watch how Aether moves your cursor, clipboard, and input between machines.</p>
+    <div class="demo-container reveal">
+      <div class="demo-stage">
+        <div class="demo-screens" id="demo-screens">
+          <div class="demo-screen active" data-screen="server">
+            <div class="demo-screen-bar"><span></span><span></span><span></span></div>
+            <div class="demo-screen-body">
+              <div class="demo-text" id="demo-text-server">$ aether --server<br>Listening on :24800<br><span class="typed">Client connected.</span></div>
+            </div>
+            <div class="demo-screen-label">Workstation</div>
+            <div class="demo-screen-role">Server</div>
+          </div>
+          <div class="demo-beam">
+            <div class="demo-beam-pulse"></div>
+          </div>
+          <div class="demo-screen" data-screen="client">
+            <div class="demo-screen-bar"><span></span><span></span><span></span></div>
+            <div class="demo-screen-body">
+              <div class="demo-text" id="demo-text-client">$ aether --client<br>Connecting to server...<br><span class="typed">Connected.</span></div>
+            </div>
+            <div class="demo-screen-label">Laptop</div>
+            <div class="demo-screen-role">Client</div>
+          </div>
+          <div class="demo-cursor" id="demo-cursor">
+            <svg viewBox="0 0 12 18" fill="none" aria-hidden="true"><path d="M0 0 L0 14 L3.5 10.5 L6 16 L8 15 L5.5 9.5 L10 9.5 Z" fill="var(--primary)" stroke="var(--bg)" stroke-width="1"/></svg>
+          </div>
+        </div>
+        <div class="demo-hotspots">
+          <button class="demo-hotspot active" data-demo="cursor">
+            <span class="demo-hotspot-dot"></span>
+            Cursor crossing
+          </button>
+          <button class="demo-hotspot" data-demo="clipboard">
+            <span class="demo-hotspot-dot"></span>
+            Clipboard sharing
+          </button>
+          <button class="demo-hotspot" data-demo="encrypt">
+            <span class="demo-hotspot-dot"></span>
+            TLS encryption
+          </button>
+        </div>
+        <div class="demo-info">
+          <p class="demo-info-text" id="demo-info">Move your cursor to the edge of the server screen and it <strong>seamlessly appears</strong> on the client. No buttons, no shortcuts.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-divider">
+  <div class="container">
+    <h2 class="section-title reveal">Available on your <span class="gradient-text">platform</span></h2>
+    <p class="section-sub reveal">Native packages for every major desktop OS. Hover to pause and explore.</p>
+    <div class="platform-marquee reveal">
+      <div class="platform-marquee-track">
+        <div class="platform-card">
+          <div class="platform-card-header">
+            <div class="platform-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.1L9.5 4.2v6.9H3V5.1zM10.5 4.1L21 2.8v8.3H10.5V4.1zM3 12.9h6.5v6.9L3 18.9v-6zM10.5 12.9H21v8.3l-10.5-1.3v-7z"/></svg></div>
+            <div>
+              <h3>Windows</h3>
+              <p class="platform-card-sub">10 or later (x64)</p>
+            </div>
+          </div>
+          <ul class="platform-features">
+            <li>MSI installer</li>
+            <li>EXE bootstrapper</li>
+            <li>Portable 7z archive</li>
+          </ul>
+        </div>
+        <div class="platform-card">
+          <div class="platform-card-header">
+            <div class="platform-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8 2 5.5 4 5.5 7c0 1.2.4 2.2 1 3-1.5 0-3 1-3 3 0 3 3 5 8.5 5s8.5-2 8.5-5c0-2-1.5-3-3-3 .6-.8 1-1.8 1-3 0-3-2.5-5-6.5-5zm-2 4.5c.8 0 1.5.9 1.5 2s-.7 2-1.5 2-1.5-.9-1.5-2 .7-2 1.5-2zm4 0c.8 0 1.5.9 1.5 2s-.7 2-1.5 2-1.5-.9-1.5-2 .7-2 1.5-2zM12 12c2.5 0 4 1 4 2.5S14.5 17 12 17s-4-1-4-2.5S9.5 12 12 12z"/></svg></div>
+            <div>
+              <h3>Linux</h3>
+              <p class="platform-card-sub">X11 and Wayland</p>
+            </div>
+          </div>
+          <ul class="platform-features">
+            <li>DEB (Debian, Ubuntu)</li>
+            <li>RPM (Fedora, openSUSE)</li>
+            <li>Tar.gz (any distro)</li>
+          </ul>
+        </div>
+        <div class="platform-card">
+          <div class="platform-card-header">
+            <div class="platform-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8 2 5.5 4 5.5 7c0 1.2.4 2.2 1 3-1.5 0-3 1-3 3 0 3 3 5 8.5 5s8.5-2 8.5-5c0-2-1.5-3-3-3 .6-.8 1-1.8 1-3 0-3-2.5-5-6.5-5zm-2 4.5c.8 0 1.5.9 1.5 2s-.7 2-1.5 2-1.5-.9-1.5-2 .7-2 1.5-2zm4 0c.8 0 1.5.9 1.5 2s-.7 2-1.5 2-1.5-.9-1.5-2 .7-2 1.5-2zM12 12c2.5 0 4 1 4 2.5S14.5 17 12 17s-4-1-4-2.5S9.5 12 12 12z"/></svg></div>
+            <div>
+              <h3>Synergy compat</h3>
+              <p class="platform-card-sub">Protocol interoperable</p>
+            </div>
+          </div>
+          <ul class="platform-features">
+            <li>Connect to Synergy peers</li>
+            <li>Connect to Barrier peers</li>
+            <li>Mixed client/server setups</li>
+          </ul>
+        </div>
+        <div class="platform-card">
+          <div class="platform-card-header">
+            <div class="platform-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+            <div>
+              <h3>Multi-language</h3>
+              <p class="platform-card-sub">7 UI languages</p>
+            </div>
+          </div>
+          <ul class="platform-features">
+            <li>English, Italian, Spanish</li>
+            <li>Japanese, Korean, Russian</li>
+            <li>Chinese</li>
+          </ul>
+        </div>
+      </div>
+      <div class="platform-marquee-track" aria-hidden="true">
+        <div class="platform-card">
+          <div class="platform-card-header">
+            <div class="platform-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.1L9.5 4.2v6.9H3V5.1zM10.5 4.1L21 2.8v8.3H10.5V4.1zM3 12.9h6.5v6.9L3 18.9v-6zM10.5 12.9H21v8.3l-10.5-1.3v-7z"/></svg></div>
+            <div>
+              <h3>Windows</h3>
+              <p class="platform-card-sub">10 or later (x64)</p>
+            </div>
+          </div>
+          <ul class="platform-features">
+            <li>MSI installer</li>
+            <li>EXE bootstrapper</li>
+            <li>Portable 7z archive</li>
+          </ul>
+        </div>
+        <div class="platform-card">
+          <div class="platform-card-header">
+            <div class="platform-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8 2 5.5 4 5.5 7c0 1.2.4 2.2 1 3-1.5 0-3 1-3 3 0 3 3 5 8.5 5s8.5-2 8.5-5c0-2-1.5-3-3-3 .6-.8 1-1.8 1-3 0-3-2.5-5-6.5-5zm-2 4.5c.8 0 1.5.9 1.5 2s-.7 2-1.5 2-1.5-.9-1.5-2 .7-2 1.5-2zm4 0c.8 0 1.5.9 1.5 2s-.7 2-1.5 2-1.5-.9-1.5-2 .7-2 1.5-2zM12 12c2.5 0 4 1 4 2.5S14.5 17 12 17s-4-1-4-2.5S9.5 12 12 12z"/></svg></div>
+            <div>
+              <h3>Linux</h3>
+              <p class="platform-card-sub">X11 and Wayland</p>
+            </div>
+          </div>
+          <ul class="platform-features">
+            <li>DEB (Debian, Ubuntu)</li>
+            <li>RPM (Fedora, openSUSE)</li>
+            <li>Tar.gz (any distro)</li>
+          </ul>
+        </div>
+        <div class="platform-card">
+          <div class="platform-card-header">
+            <div class="platform-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8 2 5.5 4 5.5 7c0 1.2.4 2.2 1 3-1.5 0-3 1-3 3 0 3 3 5 8.5 5s8.5-2 8.5-5c0-2-1.5-3-3-3 .6-.8 1-1.8 1-3 0-3-2.5-5-6.5-5zm-2 4.5c.8 0 1.5.9 1.5 2s-.7 2-1.5 2-1.5-.9-1.5-2 .7-2 1.5-2zm4 0c.8 0 1.5.9 1.5 2s-.7 2-1.5 2-1.5-.9-1.5-2 .7-2 1.5-2zM12 12c2.5 0 4 1 4 2.5S14.5 17 12 17s-4-1-4-2.5S9.5 12 12 12z"/></svg></div>
+            <div>
+              <h3>Synergy compat</h3>
+              <p class="platform-card-sub">Protocol interoperable</p>
+            </div>
+          </div>
+          <ul class="platform-features">
+            <li>Connect to Synergy peers</li>
+            <li>Connect to Barrier peers</li>
+            <li>Mixed client/server setups</li>
+          </ul>
+        </div>
+        <div class="platform-card">
+          <div class="platform-card-header">
+            <div class="platform-card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+            <div>
+              <h3>Multi-language</h3>
+              <p class="platform-card-sub">7 UI languages</p>
+            </div>
+          </div>
+          <ul class="platform-features">
+            <li>English, Italian, Spanish</li>
+            <li>Japanese, Korean, Russian</li>
+            <li>Chinese</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-divider">
+  <div class="container">
+    <h2 class="section-title reveal">Frequently asked questions</h2>
+    <p class="section-sub reveal">Everything you need to know before getting started.</p>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Is Aether really free?
+          <span class="faq-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Yes. Aether is 100% free and open source under GPL-2.0 with an OpenSSL exception. No subscriptions, no paid tiers, no feature locks. The source code is available on GitHub for anyone to audit, modify, and contribute to.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Do I need any hardware or a KVM switch?
+          <span class="faq-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">No hardware needed. Aether is software-only and works over your existing local network. Just install it on each machine, connect them, and you're ready. No KVM switch, no extra cables, no cloud account.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Is my input data secure?
+          <span class="faq-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">All traffic between Aether server and clients is encrypted with TLS. Aether generates and manages certificates automatically, and supports fingerprint-based peer verification so you can confirm you're connecting to the right machine. Nothing leaves your local network.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Can I use Aether with my existing Synergy or Barrier setup?
+          <span class="faq-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Yes. Aether is built on the Synergy codebase and uses the same wire protocol. It works with existing Synergy and Barrier clients and servers, so you can mix Aether into your current setup without replacing everything at once.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Does it work on Wayland?
+          <span class="faq-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Yes. On Linux, Aether supports both X11 and Wayland. The correct backend is selected automatically based on your session type, so it works regardless of which display server you're running.</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          How many computers can I connect?
+          <span class="faq-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">There's no hard limit. One machine acts as the server (with the shared keyboard and mouse), and you can connect as many client machines as your network can handle. Arrange them in the GUI grid to match your physical desk layout.</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <section class="section section-alt">
-  <div class="container" style="text-align:center;">
-    <h2 class="section-title reveal">Get Aether now</h2>
-    <p class="section-sub reveal">Download the latest release or build from source in minutes.</p>
-    <div class="reveal" style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;">
-      <a href="download.html" class="btn btn-primary">Go to downloads</a>
-      <a href="docs.html" class="btn btn-secondary">Read the docs</a>
+  <div class="container section-center">
+    <div class="cta-card border-beam reveal">
+      <h2 class="section-title">Get Aether now</h2>
+      <p class="section-sub">Download the latest release or build from source in minutes.</p>
+      <div class="cta-row-center">
+        <a href="download.html" class="btn btn-primary">Go to downloads</a>
+        <a href="docs.html" class="btn btn-secondary">Read the docs</a>
+      </div>
     </div>
   </div>
 </section>
 </main>
 <footer class="reveal">
   <div class="footer-inner">
-    <p>&copy; Rimora Studio. Open source under GPL-2.0 with OpenSSL exception.</p>
+    <p>&copy; <span id="footer-year">2026</span> Rimora Studio. Open source under GPL-2.0 with OpenSSL exception.</p>
     <div class="footer-links">
       <a href="docs.html">Docs</a>
       <a href="download.html">Download</a>
@@ -198,8 +469,9 @@
   </div>
 </footer>
 <button class="scroll-top" aria-label="Scroll to top">
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
 </button>
+<noscript><style>.reveal{opacity:1;transform:none;}</style></noscript>
 <script src="assets/site.js"></script>
 </body>
 </html>

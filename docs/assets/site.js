@@ -12,12 +12,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (href && href.split('/').pop() === path) a.classList.add('active');
   });
 
-  // Mobile menu
+  // Mobile menu — class-based with ARIA state
   const toggle = document.querySelector('.mobile-toggle');
   const menu = document.getElementById('mobile-menu');
   if (toggle && menu) {
     toggle.addEventListener('click', () => {
-      menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+      const isOpen = menu.classList.contains('open');
+      menu.classList.toggle('open', !isOpen);
+      menu.classList.toggle('closed', isOpen);
+      toggle.setAttribute('aria-expanded', String(!isOpen));
     });
   }
 
@@ -37,9 +40,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Theme toggle
+  // Theme toggle — with aria-pressed state
   const themeToggle = document.querySelector('.theme-toggle');
   if (themeToggle) {
+    const syncPressed = () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const isDark = current === 'dark' ||
+        (!current && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      themeToggle.setAttribute('aria-pressed', String(isDark));
+    };
+    syncPressed();
     themeToggle.addEventListener('click', () => {
       const current = document.documentElement.getAttribute('data-theme');
       const isDark = current === 'dark' ||
@@ -47,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const next = isDark ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', next);
       localStorage.setItem('aether-theme', next);
+      syncPressed();
     });
   }
 
@@ -106,66 +117,148 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     pre.appendChild(btn);
   });
-});
 
-// Download page: fetch latest release
-async function loadLatestRelease() {
-  const status = document.getElementById('release-status');
-  if (!status) return;
-  try {
-    const res = await fetch('https://api.github.com/repos/RimoraStudio/Aether/releases?per_page=10');
-    if (!res.ok) throw new Error('no releases');
-    const releases = await res.json();
-    if (!releases.length) throw new Error('empty');
+  // ═══ Number Ticker — count-up animation ═══
+  const counters = document.querySelectorAll('[data-count]');
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = parseInt(el.dataset.count, 10);
+      const duration = 1500;
+      const start = performance.now();
+      const animate = (now) => {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(target * eased);
+        if (progress < 1) requestAnimationFrame(animate);
+      };
+      requestAnimationFrame(animate);
+      counterObserver.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(c => counterObserver.observe(c));
 
-    const latest = releases[0];
-    const date = new Date(latest.published_at).toLocaleDateString();
-    status.innerHTML = '<h2 style="font-size:24px;margin-bottom:4px;">' + (latest.name || 'Latest Release') + '</h2><p style="color:var(--text-muted);">Published ' + date + '</p>';
+  // ═══ Magic Card — spotlight mouse tracking ═══
+  document.querySelectorAll('.magic-card').forEach(card => {
+    card.addEventListener('pointermove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mx', x + 'px');
+      card.style.setProperty('--my', y + 'px');
+    });
+  });
 
-    const findAsset = (release, predicate) => (release.assets || []).find(predicate);
-    const winMsi = findAsset(latest, a => a.name.toLowerCase().endsWith('.msi'));
-    const winExe = findAsset(latest, a => a.name.toLowerCase().endsWith('.exe'));
-    const win7z = findAsset(latest, a => a.name.toLowerCase().endsWith('.7z') && a.name.toLowerCase().includes('win'));
-    const linDeb = findAsset(latest, a => a.name.toLowerCase().endsWith('.deb'));
-    const linRpm = findAsset(latest, a => a.name.toLowerCase().endsWith('.rpm'));
-    const linTgz = findAsset(latest, a => a.name.toLowerCase().endsWith('.tar.gz'));
+  // ═══ FAQ Accordion ═══
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const question = item.querySelector('.faq-question');
+    const answer = item.querySelector('.faq-answer');
+    if (!question || !answer) return;
+    question.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      // Close all other items
+      document.querySelectorAll('.faq-item.open').forEach(other => {
+        if (other !== item) {
+          other.classList.remove('open');
+          other.querySelector('.faq-answer').style.maxHeight = '0';
+          other.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        }
+      });
+      // Toggle current
+      item.classList.toggle('open', !isOpen);
+      question.setAttribute('aria-expanded', String(!isOpen));
+      answer.style.maxHeight = isOpen ? '0' : answer.scrollHeight + 'px';
+    });
+  });
 
-    const setLink = (id, asset) => { const el = document.getElementById(id); if (el && asset) { el.href = asset.browser_download_url; } };
-    setLink('win-msi-link', winMsi);
-    setLink('win-exe-link', winExe);
-    setLink('win-7z-link', win7z);
-    setLink('linux-deb-link', linDeb);
-    setLink('linux-rpm-link', linRpm);
-    setLink('linux-tgz-link', linTgz);
+  // ═══ Interactive Demo — hotspot switching ═══
+  const demoHotspots = document.querySelectorAll('.demo-hotspot');
+  const demoScreens = document.querySelectorAll('.demo-screen');
+  const demoCursor = document.getElementById('demo-cursor');
+  const demoInfo = document.getElementById('demo-info');
+  const demoTextServer = document.getElementById('demo-text-server');
+  const demoTextClient = document.getElementById('demo-text-client');
 
-    // Previous versions table
-    const tbody = document.getElementById('prev-releases');
-    if (tbody) {
-      if (releases.length <= 1) {
-        tbody.innerHTML = '<tr class="dl-table-loading"><td colspan="5">No previous versions yet.</td></tr>';
-      } else {
-        const prev = releases.slice(1);
-        tbody.innerHTML = prev.map(r => {
-          const d = new Date(r.published_at).toLocaleDateString();
-          const assets = r.assets || [];
-          const win = assets.find(a => a.name.toLowerCase().endsWith('.msi') || a.name.toLowerCase().endsWith('.exe'));
-          const lin = assets.find(a => a.name.toLowerCase().endsWith('.deb') || a.name.toLowerCase().endsWith('.rpm'));
-          const winCell = win ? '<a class="dl-link" href="' + win.browser_download_url + '" target="_blank" rel="noopener">Download</a>' : '<span class="dl-link-muted">N/A</span>';
-          const linCell = lin ? '<a class="dl-link" href="' + lin.browser_download_url + '" target="_blank" rel="noopener">Download</a>' : '<span class="dl-link-muted">N/A</span>';
-          return '<tr>' +
-            '<td><span class="dl-tag">' + (r.tag_name || r.name) + '</span></td>' +
-            '<td>' + d + '</td>' +
-            '<td>' + winCell + '</td>' +
-            '<td>' + linCell + '</td>' +
-            '<td><a class="dl-link" href="' + r.html_url + '" target="_blank" rel="noopener">View</a></td>' +
-          '</tr>';
-        }).join('');
-      }
+  const demoStates = {
+    cursor: {
+      info: 'Move your cursor to the edge of the server screen and it <strong>seamlessly appears</strong> on the client. No buttons, no shortcuts.',
+      server: '$ aether --server<br>Listening on :24800<br><span class="typed">Cursor crossed to client.</span>',
+      client: '$ aether --client<br>Connected to server<br><span class="typed">Receiving input...</span>',
+      activeScreen: 'client',
+      cursorTarget: { x: 320, y: 60 }
+    },
+    clipboard: {
+      info: 'Copy text on one machine, paste on another. The <strong>clipboard syncs automatically</strong> as the cursor crosses screen boundaries.',
+      server: '$ aether --server<br>Listening on :24800<br><span class="typed">Clipboard sent to client.</span>',
+      client: '$ aether --client<br>Connected to server<br><span class="typed">Clipboard received.</span>',
+      activeScreen: 'client',
+      cursorTarget: { x: 320, y: 60 }
+    },
+    encrypt: {
+      info: 'All traffic between server and client is <strong>encrypted with TLS</strong>. Certificates are generated and managed automatically.',
+      server: '$ aether --server<br>TLS handshake complete<br><span class="typed">Channel encrypted.</span>',
+      client: '$ aether --client<br>Verifying fingerprint...<br><span class="typed">TLS established.</span>',
+      activeScreen: 'server',
+      cursorTarget: { x: 100, y: 60 }
     }
-  } catch (e) {
-    status.innerHTML = '<p style="color:var(--text-muted);margin-bottom:16px;">No releases published yet.</p><a class="btn btn-secondary" href="download.html#source">Build from source</a>';
-    const tbody = document.getElementById('prev-releases');
-    if (tbody) tbody.innerHTML = '<tr class="dl-table-loading"><td colspan="5">No releases available yet.</td></tr>';
+  };
+
+  function switchDemo(state) {
+    const data = demoStates[state];
+    if (!data) return;
+
+    demoHotspots.forEach(h => h.classList.toggle('active', h.dataset.demo === state));
+    demoScreens.forEach(s => s.classList.toggle('active', s.dataset.screen === data.activeScreen));
+
+    if (demoInfo) demoInfo.innerHTML = data.info;
+    if (demoTextServer) demoTextServer.innerHTML = data.server;
+    if (demoTextClient) demoTextClient.innerHTML = data.client;
+
+    if (demoCursor && data.cursorTarget) {
+      demoCursor.style.transform = `translate(${data.cursorTarget.x}px, ${data.cursorTarget.y}px)`;
+    }
   }
-}
-loadLatestRelease();
+
+  demoHotspots.forEach(hotspot => {
+    hotspot.addEventListener('click', () => switchDemo(hotspot.dataset.demo));
+  });
+
+  // Auto-rotate demo states
+  let demoIndex = 0;
+  const demoKeys = Object.keys(demoStates);
+  let demoInterval = null;
+
+  function startDemoRotation() {
+    if (demoInterval) clearInterval(demoInterval);
+    demoInterval = setInterval(() => {
+      demoIndex = (demoIndex + 1) % demoKeys.length;
+      switchDemo(demoKeys[demoIndex]);
+    }, 5000);
+  }
+
+  function stopDemoRotation() {
+    if (demoInterval) { clearInterval(demoInterval); demoInterval = null; }
+  }
+
+  if (demoHotspots.length > 0) {
+    const demoContainer = document.querySelector('.demo-container');
+    if (demoContainer) {
+      const demoObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) startDemoRotation();
+          else stopDemoRotation();
+        });
+      }, { threshold: 0.3 });
+      demoObs.observe(demoContainer);
+
+      demoContainer.addEventListener('pointerenter', stopDemoRotation);
+      demoContainer.addEventListener('pointerleave', startDemoRotation);
+    }
+  }
+
+  // ═══ Footer year ═══
+  const yearEl = document.getElementById('footer-year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+});
