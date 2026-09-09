@@ -408,22 +408,21 @@ jobs:
           COMMIT_MSG=$(git log -1 --pretty=format:'%s' 2>/dev/null || echo "unknown")
 
           # Build HTML message
-          read -r -d '' MESSAGE <<EOF
-<b>Aether Build</b> :$HEADER_EMOJI:
-
-<b>Status:</b> $OVERALL
-<b>$TRIGGER:</b> $TRIGGER_VAL
-<b>Commit:</b> <a href="$COMMIT_URL">$COMMIT_SHA</a> - $COMMIT_MSG
-
-<b>Windows:</b> $WIN_STATUS
-<b>Linux:</b> $LINUX_STATUS
-
-<b>Started:</b> $START_TIME
-<b>Completed:</b> $END_TIME
-<b>Duration:</b> $DURATION
-
-<a href="$RUN_URL">View run</a>
-EOF
+          MESSAGE=$(printf '%s\n' \
+            "<b>Aether Build</b> :$HEADER_EMOJI:" \
+            "" \
+            "<b>Status:</b> $OVERALL" \
+            "<b>$TRIGGER:</b> $TRIGGER_VAL" \
+            "<b>Commit:</b> <a href=\"$COMMIT_URL\">$COMMIT_SHA</a> - $COMMIT_MSG" \
+            "" \
+            "<b>Windows:</b> $WIN_STATUS" \
+            "<b>Linux:</b> $LINUX_STATUS" \
+            "" \
+            "<b>Started:</b> $START_TIME" \
+            "<b>Completed:</b> $END_TIME" \
+            "<b>Duration:</b> $DURATION" \
+            "" \
+            "<a href=\"$RUN_URL\">View run</a>")
 
           curl -s -X POST "https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage" \
             -d "chat_id=${TG_CHAT_ID}" \
