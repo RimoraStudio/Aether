@@ -4,11 +4,19 @@
 # SPDX-License-Identifier: MIT
 
 if(UNIX AND NOT APPLE)
-  pkg_check_modules(LIBEI REQUIRED QUIET "libei-1.0 >= ${REQUIRED_LIBEI_VERSION}")
-  message(STATUS "libei version: ${LIBEI_VERSION}")
+  pkg_check_modules(LIBEI QUIET "libei-1.0 >= ${REQUIRED_LIBEI_VERSION}")
+  if(LIBEI_FOUND)
+    message(STATUS "libei version: ${LIBEI_VERSION}")
+  else()
+    message(STATUS "libei not found (>= ${REQUIRED_LIBEI_VERSION}), building without Wayland input capture support")
+  endif()
 
-  pkg_check_modules(LIBPORTAL REQUIRED QUIET "libportal >= ${REQUIRED_LIBPORTAL_VERSION}")
-  message(STATUS "libportal version: ${LIBPORTAL_VERSION}")
+  pkg_check_modules(LIBPORTAL QUIET "libportal >= ${REQUIRED_LIBPORTAL_VERSION}")
+  if(LIBPORTAL_FOUND)
+    message(STATUS "libportal version: ${LIBPORTAL_VERSION}")
+  else()
+    message(STATUS "libportal not found (>= ${REQUIRED_LIBPORTAL_VERSION}), building without portal support")
+  endif()
 
   # Check if we have the restore ability in the IC portal
   include(CMakePushCheckState)
