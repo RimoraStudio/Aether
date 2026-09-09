@@ -115,25 +115,59 @@ async function loadLatestRelease() {
   const status = document.getElementById('release-status');
   if (!status) return;
   try {
-    const res = await fetch('https://api.github.com/repos/RimoraStudio/Aether/releases/latest');
-    if (!res.ok) throw new Error('no release');
-    const data = await res.json();
-    const date = new Date(data.published_at).toLocaleDateString();
-    status.innerHTML = '<h2 style="font-size:24px;margin-bottom:4px;">' + (data.name || 'Latest Release') + '</h2><p style="color:var(--text-muted);">Published ' + date + '</p>';
+    const res = await fetch('https://api.github.com/repos/RimoraStudio/Aether/releases?per_page=10');
+    if (!res.ok) throw new Error('no releases');
+    const releases = await res.json();
+    if (!releases.length) throw new Error('empty');
 
-    const setLink = (id, url) => { const el = document.getElementById(id); if (el) { el.href = url; el.target = '_blank'; el.rel = 'noopener'; } };
-    const assets = data.assets || [];
-    let win = 'https://github.com/RimoraStudio/Aether/releases', lin = 'https://github.com/RimoraStudio/Aether/releases';
-    assets.forEach(a => {
-      const n = a.name.toLowerCase();
-      const u = a.browser_download_url;
-      if (n.endsWith('.msi') || n.endsWith('.exe')) win = u;
-      else if (n.endsWith('.deb') || n.endsWith('.rpm') || n.endsWith('.flatpak')) lin = u;
-    });
-    setLink('win-link', win);
-    setLink('linux-link', lin);
+    const latest = releases[0];
+    const date = new Date(latest.published_at).toLocaleDateString();
+    status.innerHTML = '<h2 style="font-size:24px;margin-bottom:4px;">' + (latest.name || 'Latest Release') + '</h2><p style="color:var(--text-muted);">Published ' + date + '</p>';
+
+    const findAsset = (release, predicate) => (release.assets || []).find(predicate);
+    const winMsi = findAsset(latest, a => a.name.toLowerCase().endsWith('.msi'));
+    const winExe = findAsset(latest, a => a.name.toLowerCase().endsWith('.exe'));
+    const win7z = findAsset(latest, a => a.name.toLowerCase().endsWith('.7z') && a.name.toLowerCase().includes('win'));
+    const linDeb = findAsset(latest, a => a.name.toLowerCase().endsWith('.deb'));
+    const linRpm = findAsset(latest, a => a.name.toLowerCase().endsWith('.rpm'));
+    const linTgz = findAsset(latest, a => a.name.toLowerCase().endsWith('.tar.gz'));
+
+    const setLink = (id, asset) => { const el = document.getElementById(id); if (el && asset) { el.href = asset.browser_download_url; } };
+    setLink('win-msi-link', winMsi);
+    setLink('win-exe-link', winExe);
+    setLink('win-7z-link', win7z);
+    setLink('linux-deb-link', linDeb);
+    setLink('linux-rpm-link', linRpm);
+    setLink('linux-tgz-link', linTgz);
+
+    // Previous versions table
+    const tbody = document.getElementById('prev-releases');
+    if (tbody) {
+      if (releases.length <= 1) {
+        tbody.innerHTML = '<tr class="dl-table-loading"><td colspan="5">No previous versions yet.</td></tr>';
+      } else {
+        const prev = releases.slice(1);
+        tbody.innerHTML = prev.map(r => {
+          const d = new Date(r.published_at).toLocaleDateString();
+          const assets = r.assets || [];
+          const win = assets.find(a => a.name.toLowerCase().endsWith('.msi') || a.name.toLowerCase().endsWith('.exe'));
+          const lin = assets.find(a => a.name.toLowerCase().endsWith('.deb') || a.name.toLowerCase().endsWith('.rpm'));
+          const winCell = win ? '<a class="dl-link" href="' + win.browser_download_url + '" target="_blank" rel="noopener">Download</a>' : '<span class="dl-link-muted">N/A</span>';
+          const linCell = lin ? '<a class="dl-link" href="' + lin.browser_download_url + '" target="_blank" rel="noopener">Download</a>' : '<span class="dl-link-muted">N/A</span>';
+          return '<tr>' +
+            '<td><span class="dl-tag">' + (r.tag_name || r.name) + '</span></td>' +
+            '<td>' + d + '</td>' +
+            '<td>' + winCell + '</td>' +
+            '<td>' + linCell + '</td>' +
+            '<td><a class="dl-link" href="' + r.html_url + '" target="_blank" rel="noopener">View</a></td>' +
+          '</tr>';
+        }).join('');
+      }
+    }
   } catch (e) {
     status.innerHTML = '<p style="color:var(--text-muted);margin-bottom:16px;">No releases published yet.</p><a class="btn btn-secondary" href="download.html#source">Build from source</a>';
+    const tbody = document.getElementById('prev-releases');
+    if (tbody) tbody.innerHTML = '<tr class="dl-table-loading"><td colspan="5">No releases available yet.</td></tr>';
   }
 }
 loadLatestRelease();

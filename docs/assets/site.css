@@ -376,6 +376,125 @@ nav {
 .dl-disabled .dl-icon { background: var(--surface-2); color: var(--text-muted); }
 .dl-disabled .dl-action-disabled { background: var(--surface-2); color: var(--text-muted); cursor: not-allowed; }
 
+/* ─── Download page: platform cards ─── */
+.dl-platforms {
+  display: grid;
+  gap: var(--sp-6);
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+.dl-platform {
+  padding: var(--sp-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+.dl-platform-header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+}
+.dl-platform-header .dl-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+.dl-platform h3 {
+  font-size: 20px;
+  margin-bottom: 2px;
+}
+.dl-platform-sub {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin: 0;
+}
+.dl-formats {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+.dl-format-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--sp-3) var(--sp-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 200ms, background 200ms;
+}
+.dl-format-btn:hover {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+.dl-format-btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+.dl-format-label {
+  font-size: 15px;
+  font-weight: 600;
+}
+.dl-format-hint {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.dl-format-secondary .dl-format-label { font-weight: 500; }
+.dl-format-cta {
+  border-style: dashed;
+  cursor: pointer;
+}
+
+/* ─── Download page: previous versions table ─── */
+.dl-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+.dl-table th,
+.dl-table td {
+  padding: var(--sp-3) var(--sp-4);
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.dl-table th {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: var(--surface);
+}
+.dl-table tbody tr:hover { background: var(--surface); }
+.dl-table-loading td {
+  text-align: center;
+  color: var(--text-muted);
+  padding: var(--sp-6);
+}
+.dl-table .dl-tag {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: var(--radius-xs);
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--primary-light);
+  color: var(--primary);
+}
+.dl-table .dl-link {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+.dl-table .dl-link:hover { text-decoration: underline; }
+.dl-table .dl-link-muted {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+}
+.dl-table .dl-link-muted:hover { color: var(--text); }
+
 /* ─── Tabs ─── */
 .tabs {
   display: flex;
