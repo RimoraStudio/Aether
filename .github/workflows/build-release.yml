@@ -146,14 +146,29 @@ jobs:
           test -n "$(ls build/aether-*.msi 2>/dev/null)" && echo "MSI: OK" || echo "MSI: MISSING"
           test -n "$(ls build/aether-*.7z 2>/dev/null)" && echo "7z: OK" || echo "7z: MISSING"
 
-      - name: Upload artifact
+      - name: Upload MSI
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: aether-windows-x64
-          path: |
-            ${{ github.workspace }}/build/aether-*.msi
-            ${{ github.workspace }}/build/aether-*.exe
-            ${{ github.workspace }}/build/aether-*.7z
+          name: aether-win-x64-msi
+          path: ${{ github.workspace }}/build/aether-*.msi
+          if-no-files-found: warn
+
+      - name: Upload EXE
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: aether-win-x64-exe
+          path: ${{ github.workspace }}/build/aether-*.exe
+          if-no-files-found: warn
+
+      - name: Upload portable 7Z
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: aether-win-x64-portable
+          path: ${{ github.workspace }}/build/aether-*.7z
+          if-no-files-found: warn
 
   build-linux:
     name: Linux x64
@@ -255,15 +270,37 @@ jobs:
           test -n "$(ls build/aether-*.deb 2>/dev/null)" && echo "DEB: OK" || echo "DEB: MISSING"
           test -n "$(ls build/aether-*.7z 2>/dev/null)" && echo "7z: OK" || echo "7z: MISSING"
 
-      - name: Upload artifact
+      - name: Upload DEB
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: aether-linux-x64
-          path: |
-            ${{ github.workspace }}/build/aether-*.deb
-            ${{ github.workspace }}/build/aether-*.rpm
-            ${{ github.workspace }}/build/aether-*.tar.gz
-            ${{ github.workspace }}/build/aether-*.7z
+          name: aether-linux-x64-deb
+          path: ${{ github.workspace }}/build/aether-*.deb
+          if-no-files-found: warn
+
+      - name: Upload RPM
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: aether-linux-x64-rpm
+          path: ${{ github.workspace }}/build/aether-*.rpm
+          if-no-files-found: warn
+
+      - name: Upload tar.gz
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: aether-linux-x64-targz
+          path: ${{ github.workspace }}/build/aether-*.tar.gz
+          if-no-files-found: warn
+
+      - name: Upload 7Z
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: aether-linux-x64-7z
+          path: ${{ github.workspace }}/build/aether-*.7z
+          if-no-files-found: warn
 
   release:
     name: Release
@@ -284,17 +321,12 @@ jobs:
         run: |
           echo "PACKAGE_VERSION=$(echo $GITHUB_REF | sed 's,refs/tags/v,,g')" >> $GITHUB_ENV
 
-      - name: Download Windows artifacts
+      - name: Download all artifacts
         uses: actions/download-artifact@v4
         with:
-          name: aether-windows-x64
           path: artifacts
-
-      - name: Download Linux artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: aether-linux-x64
-          path: artifacts
+          pattern: aether-*
+          merge-multiple: true
 
       - name: Verify all artifacts present
         shell: bash
