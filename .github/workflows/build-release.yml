@@ -2,10 +2,11 @@ name: Build and Release
 
 on:
   push:
-    branches: [main]
     tags:
       - "v*"
   pull_request:
+    branches:
+      - main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -68,11 +69,7 @@ jobs:
         id: version
         shell: bash
         run: |
-          if [[ "$GITHUB_REF" == *"tags/v"* ]]; then
-            echo "PACKAGE_VERSION=$(echo $GITHUB_REF | sed 's,refs/tags/v,,g')" >> $GITHUB_ENV
-          else
-            echo "PACKAGE_VERSION=continuous" >> $GITHUB_ENV
-          fi
+          echo "PACKAGE_VERSION=$(echo $GITHUB_REF | sed 's,refs/tags/v,,g')" >> $GITHUB_ENV
 
       - name: Configure
         run: ${{ env.CMAKE_CONFIGURE }} -G Ninja ${{ steps.vcpkg.outputs.vcpkg-cmake-config }} -DPACKAGE_VERSION_LABEL="${{ env.PACKAGE_VERSION }}"
@@ -88,7 +85,7 @@ jobs:
 
   release:
     needs: build-windows
-    if: (github.ref == 'refs/heads/main') || (contains(github.ref, '/tags/v'))
+    if: contains(github.ref, '/tags/v')
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -103,11 +100,7 @@ jobs:
         id: version
         shell: bash
         run: |
-          if [[ "$GITHUB_REF" == *"tags/v"* ]]; then
-            echo "PACKAGE_VERSION=$(echo $GITHUB_REF | sed 's,refs/tags/v,,g')" >> $GITHUB_ENV
-          else
-            echo "PACKAGE_VERSION=continuous" >> $GITHUB_ENV
-          fi
+          echo "PACKAGE_VERSION=$(echo $GITHUB_REF | sed 's,refs/tags/v,,g')" >> $GITHUB_ENV
 
       - name: Download artifacts
         uses: actions/download-artifact@v4
@@ -122,21 +115,7 @@ jobs:
           sha256sum AETHER-* > sums.txt
           cat sums.txt
 
-      - name: Deploy continuous
-        if: (github.ref == 'refs/heads/main') && !(contains(github.ref, '/tags/v'))
-        uses: softprops/action-gh-release@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          tag_name: "continuous"
-          name: "Continuous Build"
-          prerelease: true
-          generate_release_notes: false
-          files: |
-            artifacts/AETHER-*
-            artifacts/sums.txt
-
       - name: Deploy release
-        if: contains(github.ref, '/tags/v')
         uses: softprops/action-gh-release@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
