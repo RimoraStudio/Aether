@@ -351,7 +351,6 @@ jobs:
           RELEASE_TAG: ${{ github.ref_name }}
           REPO_URL: ${{ github.repository }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          RUN_STARTED_AT: ${{ github.event.repository.pushed_at }}
           JOB_STARTED_AT: ${{ github.run_started_at }}
         run: |
           if [ -z "$TG_BOT_TOKEN" ] || [ -z "$TG_CHAT_ID" ]; then
@@ -362,34 +361,36 @@ jobs:
           # Status labels
           WIN_STATUS="unknown"
           case "$WIN_RESULT" in
-            success) WIN_STATUS="OK" ;;
-            failure) WIN_STATUS="FAILED" ;;
+            success) WIN_STATUS="passed" ;;
+            failure) WIN_STATUS="failed" ;;
             skipped) WIN_STATUS="skipped" ;;
             cancelled) WIN_STATUS="cancelled" ;;
           esac
 
           LINUX_STATUS="unknown"
           case "$LINUX_RESULT" in
-            success) LINUX_STATUS="OK" ;;
-            failure) LINUX_STATUS="FAILED" ;;
+            success) LINUX_STATUS="passed" ;;
+            failure) LINUX_STATUS="failed" ;;
             skipped) LINUX_STATUS="skipped" ;;
             cancelled) LINUX_STATUS="cancelled" ;;
           esac
 
-          # Overall
+          # Overall status
           if [ "$WIN_RESULT" = "success" ] && [ "$LINUX_RESULT" = "success" ]; then
-            OVERALL="SUCCESS"
-            EMOJI="OK"
+            OVERALL="PASSED"
+            HEADER_EMOJI="white_check_mark"
           else
             OVERALL="FAILED"
-            EMOJI="FAIL"
+            HEADER_EMOJI="x"
           fi
 
           # Trigger type
           if [[ "$RELEASE_TAG" == v* ]]; then
-            TRIGGER="Release tag: $RELEASE_TAG"
+            TRIGGER="Release"
+            TRIGGER_VAL="<b>$RELEASE_TAG</b>"
           else
-            TRIGGER="Branch: $RELEASE_TAG"
+            TRIGGER="Branch"
+            TRIGGER_VAL="<code>$RELEASE_TAG</code>"
           fi
 
           # Timestamps
@@ -405,21 +406,22 @@ jobs:
           COMMIT_URL="${{ github.server_url }}/${{ github.repository }}/commit/${GITHUB_SHA}"
           COMMIT_MSG=$(git log -1 --pretty=format:'%s' 2>/dev/null || echo "unknown")
 
-          # Build single message
+          # Build HTML message
           read -r -d '' MESSAGE <<EOF
-Aether Build $EMOJI
+<b>Aether Build</b> :$HEADER_EMOJI:
 
-Status: $OVERALL
-$TRIGGER
-Commit: $COMMIT_SHA - $COMMIT_MSG
-Windows: $WIN_STATUS
-Linux: $LINUX_STATUS
-Started: $START_TIME
-Completed: $END_TIME
-Duration: $DURATION
+<b>Status:</b> $OVERALL
+<b>$TRIGGER:</b> $TRIGGER_VAL
+<b>Commit:</b> <a href="$COMMIT_URL">$COMMIT_SHA</a> - $COMMIT_MSG
 
-Run: $RUN_URL
-Commit: $COMMIT_URL
+<b>Windows:</b> $WIN_STATUS
+<b>Linux:</b> $LINUX_STATUS
+
+<b>Started:</b> $START_TIME
+<b>Completed:</b> $END_TIME
+<b>Duration:</b> $DURATION
+
+<a href="$RUN_URL">View run</a>
 EOF
 
           curl -s -X POST "https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage" \
