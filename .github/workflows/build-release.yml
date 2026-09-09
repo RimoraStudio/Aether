@@ -80,8 +80,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: AETHER-windows-x64
-          path: ${{ github.workspace }}/build/AETHER[-_]*.*
+          name: aether-windows-x64
+          path: ${{ github.workspace }}/build/aether-*
 
   release:
     needs: build-windows
@@ -105,14 +105,14 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          name: AETHER-windows-x64
+          name: aether-windows-x64
           path: artifacts
 
       - name: Generate checksums
         shell: bash
         run: |
           cd artifacts
-          sha256sum AETHER-* > sums.txt
+          sha256sum aether-* > sums.txt
           cat sums.txt
 
       - name: Deploy release
@@ -125,5 +125,5 @@ jobs:
           make_latest: true
           prerelease: false
           files: |
-            artifacts/AETHER-*
+            artifacts/aether-*
             artifacts/sums.txt
