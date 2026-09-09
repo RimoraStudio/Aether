@@ -2,8 +2,8 @@
 
 ## Introduction
 
-- [Homepage](https://neang-mengseang.github.io/Aether) - Project home page
-- [Code](https://github.com/neang-mengseang/Aether) - Read the code
+- [Homepage](https://RimoraStudio.github.io/Aether) - Project home page
+- [Code](https://github.com/RimoraStudio/Aether) - Read the code
 
 Aether is an open-source keyboard and mouse sharing utility for Windows, macOS, and Linux.
 
@@ -16,5 +16,5 @@ Aether is an open-source keyboard and mouse sharing utility for Windows, macOS, 
 
 ## Getting help online
 
-- View the [Wiki](https://github.com/neang-mengseang/Aether/wiki) for online user guides.
-- Start a [new discussion](https://github.com/neang-mengseang/Aether/discussions) on the upstream GitHub project.
+- View the [Wiki](https://github.com/RimoraStudio/Aether/wiki) for online user guides.
+- Start a [new discussion](https://github.com/RimoraStudio/Aether/discussions) on the upstream GitHub project.

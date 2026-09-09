@@ -521,7 +521,8 @@ nav {
 
 @media (max-width: 768px) {
   .docs-layout { grid-template-columns: 1fr; }
-  .docs-sidebar { display: none; }
+  .docs-sidebar { display: block; position: fixed; top: 57px; left: 0; width: 260px; height: calc(100vh - 57px); z-index: 40; transform: translateX(-100%); transition: transform 200ms ease; box-shadow: var(--shadow-lg); overflow-y: auto; }
+  .docs-sidebar.open { transform: translateX(0); }
   .docs-content { padding: var(--sp-4); }
 }
 
@@ -710,6 +711,14 @@ footer {
 [data-theme="dark"] .code-block,
 [data-theme="dark"] .docs-content pre { background: #020617; border-color: #1e293b; }
 [data-theme="dark"] .docs-content code { background: var(--surface-2); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) nav,
+  :root:not([data-theme="light"]) footer { background: rgba(15, 23, 42, 0.85); }
+  :root:not([data-theme="light"]) .docs-sidebar { background: var(--surface); }
+  :root:not([data-theme="light"]) .code-block,
+  :root:not([data-theme="light"]) .docs-content pre { background: #020617; border-color: #1e293b; }
+  :root:not([data-theme="light"]) .docs-content code { background: var(--surface-2); }
+}
 
 /* ─── Theme toggle button ─── */
 .theme-toggle {
@@ -785,18 +794,6 @@ pre:hover .code-copy { opacity: 1; }
 }
 @media (max-width: 768px) {
   .docs-mobile-toggle { display: flex; }
-  .docs-sidebar {
-    position: fixed;
-    top: 57px;
-    left: 0;
-    width: 260px;
-    height: calc(100vh - 57px);
-    z-index: 40;
-    transform: translateX(-100%);
-    transition: transform 200ms ease;
-    box-shadow: var(--shadow-lg);
-  }
-  .docs-sidebar.open { transform: translateX(0); }
   .docs-overlay {
     display: none;
     position: fixed;

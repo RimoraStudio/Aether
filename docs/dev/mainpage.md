@@ -50,6 +50,6 @@ Aether is built with a modular, cross-platform architecture:
 
 ### More info
 
-For more info, see our [Wiki](https://github.com/neang-mengseang/Aether/wiki).
+For more info, see our [Wiki](https://github.com/RimoraStudio/Aether/wiki).
 
 Check out our [Building guide](build.md). We also have a detailed [Protocol Reference](protocol_reference.md).

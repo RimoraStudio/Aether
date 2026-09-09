@@ -114,7 +114,7 @@ async function loadLatestRelease() {
   const status = document.getElementById('release-status');
   if (!status) return;
   try {
-    const res = await fetch('https://api.github.com/repos/neang-mengseang/Aether/releases/latest');
+    const res = await fetch('https://api.github.com/repos/RimoraStudio/Aether/releases/latest');
     if (!res.ok) throw new Error('no release');
     const data = await res.json();
     const date = new Date(data.published_at).toLocaleDateString();
@@ -122,7 +122,7 @@ async function loadLatestRelease() {
 
     const setLink = (id, url) => { const el = document.getElementById(id); if (el) { el.href = url; el.target = '_blank'; el.rel = 'noopener'; } };
     const assets = data.assets || [];
-    let win = 'https://github.com/neang-mengseang/Aether/releases', mac = 'https://github.com/neang-mengseang/Aether/releases', lin = 'https://github.com/neang-mengseang/Aether/releases';
+    let win = 'https://github.com/RimoraStudio/Aether/releases', mac = 'https://github.com/RimoraStudio/Aether/releases', lin = 'https://github.com/RimoraStudio/Aether/releases';
     assets.forEach(a => {
       const n = a.name.toLowerCase();
       const u = a.browser_download_url;
