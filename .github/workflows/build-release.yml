@@ -335,3 +335,70 @@ jobs:
           files: |
             artifacts/aether-*
             artifacts/sums.txt
+
+  notify:
+    name: Notify Telegram
+    needs: [build-windows, build-linux]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+
+    steps:
+      - name: Send Telegram notification
+        env:
+          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+          BUILD_RESULT: ${{ needs.build-windows.result }}
+          LINUX_RESULT: ${{ needs.build-linux.result }}
+          RELEASE_TAG: ${{ github.ref_name }}
+          REPO_URL: ${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          if [ -z "$TG_BOT_TOKEN" ] || [ -z "$TG_CHAT_ID" ]; then
+            echo "Telegram secrets not set, skipping notification"
+            exit 0
+          fi
+
+          WIN_STATUS="unknown"
+          case "$BUILD_RESULT" in
+            success) WIN_STATUS="OK" ;;
+            failure) WIN_STATUS="FAILED" ;;
+            skipped) WIN_STATUS="skipped" ;;
+            cancelled) WIN_STATUS="cancelled" ;;
+          esac
+
+          LINUX_STATUS="unknown"
+          case "$LINUX_RESULT" in
+            success) LINUX_STATUS="OK" ;;
+            failure) LINUX_STATUS="FAILED" ;;
+            skipped) LINUX_STATUS="skipped" ;;
+            cancelled) LINUX_STATUS="cancelled" ;;
+          esac
+
+          if [ "$BUILD_RESULT" = "success" ] && [ "$LINUX_RESULT" = "success" ]; then
+            OVERALL="SUCCESS"
+            EMOJI="OK"
+          else
+            OVERALL="FAILED"
+            EMOJI="FAIL"
+          fi
+
+          IS_TAG=""
+          if [[ "$RELEASE_TAG" == v* ]]; then
+            IS_TAG="Release tag: $RELEASE_TAG"
+          else
+            IS_TAG="Branch push: $RELEASE_TAG"
+          fi
+
+          MESSAGE="Aether Build $EMOJI
+          Status: $OVERALL
+          $IS_TAG
+          Windows: $WIN_STATUS
+          Linux: $LINUX_STATUS
+          Run: $RUN_URL"
+
+          curl -s -X POST "https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage" \
+            -d "chat_id=${TG_CHAT_ID}" \
+            -d "text=${MESSAGE}" \
+            -d "parse_mode=HTML" \
+            -d "disable_web_page_preview=true"
