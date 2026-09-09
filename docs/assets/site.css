@@ -405,12 +405,12 @@ nav {
   object-fit: contain;
   transition: filter 200ms;
 }
-.dl-platform:hover .dl-icon img { filter: invert(20%) sepia(78%) saturate(2000%) hue-rotate(230deg); }
+.dl-platform:hover .dl-icon img { filter: invert(20%) sepia(78%) saturate(2000%) hue-rotate(255deg); }
 [data-theme="dark"] .dl-platform-header .dl-icon img { filter: invert(1); }
-[data-theme="dark"] .dl-platform:hover .dl-icon img { filter: invert(1) sepia(78%) saturate(2000%) hue-rotate(230deg) brightness(0.9); }
+[data-theme="dark"] .dl-platform:hover .dl-icon img { filter: invert(1) sepia(78%) saturate(2000%) hue-rotate(255deg) brightness(0.9); }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .dl-platform-header .dl-icon img { filter: invert(1); }
-  :root:not([data-theme="light"]) .dl-platform:hover .dl-icon img { filter: invert(1) sepia(78%) saturate(2000%) hue-rotate(230deg) brightness(0.9); }
+  :root:not([data-theme="light"]) .dl-platform:hover .dl-icon img { filter: invert(1) sepia(78%) saturate(2000%) hue-rotate(255deg) brightness(0.9); }
 }
 .dl-platform h3 {
   font-size: 20px;
@@ -807,17 +807,17 @@ footer {
     --text: #f1f5f9;
     --text-secondary: #cbd5e1;
     --text-muted: #94a3b8;
-    --primary: #818cf8;
-    --primary-hover: #6366f1;
-    --primary-active: #4f46e5;
-    --primary-light: #312e81;
-    --primary-glow: rgba(129, 140, 248, 0.15);
+    --primary: #a78bfa;
+    --primary-hover: #8b5cf6;
+    --primary-active: #7c3aed;
+    --primary-light: #2e1065;
+    --primary-glow: rgba(167, 139, 250, 0.15);
     --success: #4ade80;
     --success-light: #14532d;
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
     --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.4);
-    --shadow-primary: 0 8px 24px rgba(129, 140, 248, 0.2);
+    --shadow-primary: 0 8px 24px rgba(167, 139, 250, 0.2);
   }
 }
 
@@ -831,17 +831,17 @@ footer {
   --text: #f1f5f9;
   --text-secondary: #cbd5e1;
   --text-muted: #94a3b8;
-  --primary: #818cf8;
-  --primary-hover: #6366f1;
-  --primary-active: #4f46e5;
-  --primary-light: #312e81;
-  --primary-glow: rgba(129, 140, 248, 0.15);
+  --primary: #a78bfa;
+  --primary-hover: #8b5cf6;
+  --primary-active: #7c3aed;
+  --primary-light: #2e1065;
+  --primary-glow: rgba(167, 139, 250, 0.15);
   --success: #4ade80;
   --success-light: #14532d;
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
   --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.4);
-  --shadow-primary: 0 8px 24px rgba(129, 140, 248, 0.2);
+  --shadow-primary: 0 8px 24px rgba(167, 139, 250, 0.2);
 }
 
 [data-theme="dark"] nav,
@@ -1035,7 +1035,7 @@ pre:hover .code-copy { opacity: 1; }
   letter-spacing: 0.05em;
   color: #fff;
 }
-.pkg-msi { background: #4f46e5; }
+.pkg-msi { background: var(--primary); }
 .pkg-exe { background: #059669; }
 .pkg-7z { background: #64748b; }
 .pkg-deb { background: #dc2626; }
