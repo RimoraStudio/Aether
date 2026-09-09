@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  CMAKE_CONFIGURE: "cmake -Bbuild -DCMAKE_BUILD_TYPE=Release -DSKIP_BUILD_TESTS=ON"
+  CMAKE_CONFIGURE: "cmake -Bbuild -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF"
 
 jobs:
   verify:
@@ -242,7 +242,7 @@ jobs:
       - name: Configure
         run: |
           cmake -Bbuild -DCMAKE_BUILD_TYPE=Release \
-            -DSKIP_BUILD_TESTS=ON \
+            -DBUILD_TESTS=OFF \
             -G Ninja \
             -DPACKAGE_VERSION_LABEL="${{ env.PACKAGE_VERSION }}"
 
