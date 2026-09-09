@@ -56,14 +56,23 @@ jobs:
           triplet: x64-windows-release
           token: ${{ github.token }}
           revision: master
+          cache-key: openssl-x64-windows-release
+
+      - name: Cache WiX
+        uses: actions/cache@v4
+        with:
+          path: ~/.dotnet/tools
+          key: wix-5.0.2
 
       - name: Install WiX
         run: |
-          dotnet tool install --global wix --version 5.0.2
-          wix extension add --global WixToolset.UI.wixext/5.0.2
-          wix extension add --global WixToolset.Util.wixext/5.0.2
-          wix extension add --global WixToolset.Firewall.wixext/5.0.2
-        shell: pwsh
+          if ! command -v wix &>/dev/null; then
+            dotnet tool install --global wix --version 5.0.2
+          fi
+          wix extension add --global WixToolset.UI.wixext/5.0.2 2>/dev/null || true
+          wix extension add --global WixToolset.Util.wixext/5.0.2 2>/dev/null || true
+          wix extension add --global WixToolset.Firewall.wixext/5.0.2 2>/dev/null || true
+        shell: bash
 
       - name: Get version
         id: version
