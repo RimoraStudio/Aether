@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const buttons = tabs.querySelectorAll('.tab');
     buttons.forEach((btn, i) => {
       btn.addEventListener('click', () => {
+        if (btn.classList.contains('tab-disabled') || btn.disabled) return;
         buttons.forEach(b => b.classList.remove('active'));
         panels.forEach(p => p.classList.remove('active'));
         btn.classList.add('active');
@@ -122,16 +123,14 @@ async function loadLatestRelease() {
 
     const setLink = (id, url) => { const el = document.getElementById(id); if (el) { el.href = url; el.target = '_blank'; el.rel = 'noopener'; } };
     const assets = data.assets || [];
-    let win = 'https://github.com/RimoraStudio/Aether/releases', mac = 'https://github.com/RimoraStudio/Aether/releases', lin = 'https://github.com/RimoraStudio/Aether/releases';
+    let win = 'https://github.com/RimoraStudio/Aether/releases', lin = 'https://github.com/RimoraStudio/Aether/releases';
     assets.forEach(a => {
       const n = a.name.toLowerCase();
       const u = a.browser_download_url;
       if (n.endsWith('.msi') || n.endsWith('.exe')) win = u;
-      else if (n.endsWith('.dmg') || n.endsWith('.pkg')) mac = u;
       else if (n.endsWith('.deb') || n.endsWith('.rpm') || n.endsWith('.flatpak')) lin = u;
     });
     setLink('win-link', win);
-    setLink('mac-link', mac);
     setLink('linux-link', lin);
   } catch (e) {
     status.innerHTML = '<p style="color:var(--text-muted);margin-bottom:16px;">No releases published yet.</p><a class="btn btn-secondary" href="download.html#source">Build from source</a>';

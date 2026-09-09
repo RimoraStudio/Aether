@@ -372,6 +372,10 @@ nav {
 }
 .dl-card:hover .dl-action { background: var(--primary); color: #fff; }
 
+.dl-disabled { opacity: 0.5; pointer-events: none; }
+.dl-disabled .dl-icon { background: var(--surface-2); color: var(--text-muted); }
+.dl-disabled .dl-action-disabled { background: var(--surface-2); color: var(--text-muted); cursor: not-allowed; }
+
 /* ─── Tabs ─── */
 .tabs {
   display: flex;
@@ -397,6 +401,8 @@ nav {
 
 .tab:hover { color: var(--text); background: var(--surface); }
 .tab.active { background: var(--primary-light); color: var(--primary); }
+.tab-disabled { opacity: 0.4; cursor: not-allowed; }
+.tab-disabled:hover { color: var(--text-muted); background: none; }
 
 .tab-panel { display: none; }
 .tab-panel.active { display: block; animation: fadeIn 200ms ease; }
