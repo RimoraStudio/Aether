@@ -153,6 +153,60 @@ Main machine (server)              Second machine (client)
 
 ---
 
+## v1.2.1 - Clipboard Improvements
+
+### Goal
+Modernize clipboard sharing to handle real-world copy/paste scenarios.
+
+### Current state
+- Text: works
+- HTML: works
+- BMP images: works (but most apps copy as PNG, not BMP)
+- PNG/JPEG: not supported
+- Files: not supported (drag file from Explorer, paste on other machine)
+- Rich text with embedded images: not supported
+
+### Scope
+
+**PNG support:**
+- Add PNG converter alongside existing BMP converter
+- Windows: register `CF_PNG` or use `RegisterClipboardFormat("PNG")`
+- Linux: add `image/png` atom to XWindowsClipboard
+- Convert PNG <-> BMP internally so both formats work cross-platform
+- Files: `src/lib/platform/MSWindowsClipboardPNGConverter.h/cpp`, `src/lib/platform/XWindowsClipboardPNGConverter.h/cpp`
+
+**JPEG support:**
+- Add JPEG converter (decode to BMP/PNG for internal transfer)
+- Windows: `RegisterClipboardFormat("JFIF")`
+- Linux: `image/jpeg` atom
+- Files: `src/lib/platform/MSWindowsClipboardJPEGConverter.h/cpp`, `src/lib/platform/XWindowsClipboardJPEGConverter.h/cpp`
+
+**File copy/paste:**
+- Detect file clipboard format (Windows: `CF_HDROP`, Linux: `text/uri-list`)
+- Serialize file paths as URI list
+- Transfer file contents over existing TLS connection (chunked)
+- Write to temp dir on receiving machine, set clipboard to local paths
+- Progress indicator for large files
+- Configurable max file size (default 100MB)
+- Files: `src/lib/aether/FileTransfer.h/cpp`, `src/lib/platform/MSWindowsClipboardFileConverter.h/cpp`, `src/lib/platform/XWindowsClipboardFileConverter.h/cpp`
+
+### Files to modify
+```
+src/lib/platform/MSWindowsClipboard.cpp    # Register PNG/JPEG/file converters
+src/lib/platform/XWindowsClipboard.cpp     # Add PNG/JPEG/file atoms
+src/lib/aether/Clipboard.h/cpp              # Add File transfer format
+src/lib/aether/ProtocolTypes.h              # File transfer message types
+```
+
+### Dependencies
+- Qt GUI (QImage for PNG/JPEG decode) - already linked
+- No new external dependencies
+
+### Estimated effort
+1 week
+
+---
+
 ## v1.3.0 - UX Improvements
 
 ### Dark mode
@@ -271,6 +325,7 @@ Not versioned, ongoing improvements:
 1. **Ship v1.0.0** (current - waiting on build)
 2. **v1.1.0 Auto-updater** (quick win, high user value)
 3. **v1.2.0 Virtual Display** (killer feature, differentiator)
-4. **v1.3.0 UX improvements** (dark mode, mDNS, onboarding)
-5. **v1.4.0 Platform expansion** (macOS, Wayland, ARM64, signing)
-6. **v2.0.0 Advanced** (file transfer, audio, mobile)
+4. **v1.2.1 Clipboard improvements** (PNG/JPEG/file transfer)
+5. **v1.3.0 UX improvements** (dark mode, mDNS, onboarding)
+6. **v1.4.0 Platform expansion** (macOS, Wayland, ARM64, signing)
+7. **v2.0.0 Advanced** (file transfer, audio, mobile)
