@@ -4,7 +4,7 @@
 version = 1
 SPDX-PackageName = "aether"
 SPDX-PackageSupplier = "Rimora Studio"
-SPDX-PackageDownloadLocation = "https://github.com/neang-mengseang/Aether"
+SPDX-PackageDownloadLocation = "https://github.com/RimoraStudio/Aether"
 
 [[annotations]]
 path = [

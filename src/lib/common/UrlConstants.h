@@ -11,7 +11,7 @@
 // important: this is used for settings paths on some platforms,
 // and must not be a url. qt automatically converts this to reverse domain
 // notation (rdn), e.g. org.aether
-const auto kOrgDomain = QStringLiteral("github.com/neang-mengseang/Aether");
+const auto kOrgDomain = QStringLiteral("github.com/RimoraStudio/Aether");
 
 const auto kUrlSourceQuery = QStringLiteral("source=gui");
 const auto kUrlApp = QStringLiteral("https://%1").arg(kOrgDomain);

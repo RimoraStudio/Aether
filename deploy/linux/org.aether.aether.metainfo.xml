@@ -22,34 +22,34 @@
 		</p>
 	</description>
 	<launchable type="desktop-id">org.aether.aether.desktop</launchable>
-	<url type="homepage">https://github.com/neang-mengseang/Aether</url>
-	<url type="bugtracker">https://github.com/neang-mengseang/Aether/issues</url>
-	<url type="faq">https://github.com/neang-mengseang/Aether/wiki/Project-FAQ</url>
-	<url type="help">https://github.com/neang-mengseang/Aether/wiki#user-guides</url>
-	<url type="vcs-browser">https://github.com/neang-mengseang/Aether</url>
+	<url type="homepage">https://github.com/RimoraStudio/Aether</url>
+	<url type="bugtracker">https://github.com/RimoraStudio/Aether/issues</url>
+	<url type="faq">https://github.com/RimoraStudio/Aether/wiki/Project-FAQ</url>
+	<url type="help">https://github.com/RimoraStudio/Aether/wiki#user-guides</url>
+	<url type="vcs-browser">https://github.com/RimoraStudio/Aether</url>
 	<screenshots>
 		<screenshot type="default">
-			<image>https://github.com/neang-mengseang/Aether/screenshots/aether-client.png</image>
+			<image>https://github.com/RimoraStudio/Aether/screenshots/aether-client.png</image>
 			<caption>Aether in client mode on KDE</caption>
 		</screenshot>
 		<screenshot>
-			<image>https://github.com/neang-mengseang/Aether/screenshots/aether-server.png</image>
+			<image>https://github.com/RimoraStudio/Aether/screenshots/aether-server.png</image>
 			<caption>Aether in server mode on KDE</caption>
 		</screenshot>
 		<screenshot>
-			<image>https://github.com/neang-mengseang/Aether/screenshots/aether-log.png</image>
+			<image>https://github.com/RimoraStudio/Aether/screenshots/aether-log.png</image>
 			<caption>Aether with the log visible on KDE</caption>
 		</screenshot>
 		<screenshot>
-			<image>https://github.com/neang-mengseang/Aether/screenshots/aether-client-dark.png</image>
+			<image>https://github.com/RimoraStudio/Aether/screenshots/aether-client-dark.png</image>
 			<caption>Aether in client mode on KDE (dark mode)</caption>
 		</screenshot>
 		<screenshot>
-			<image>https://github.com/neang-mengseang/Aether/screenshots/aether-server-dark.png</image>
+			<image>https://github.com/RimoraStudio/Aether/screenshots/aether-server-dark.png</image>
 			<caption>Aether in server mode on KDE (dark mode)</caption>
 		</screenshot>
 		<screenshot>
-			<image>https://github.com/neang-mengseang/Aether/screenshots/aether-log-dark.png</image>
+			<image>https://github.com/RimoraStudio/Aether/screenshots/aether-log-dark.png</image>
 			<caption>Aether with the log visible on KDE (dark mode)</caption>
 		</screenshot>
 	</screenshots>
@@ -84,7 +84,7 @@
 				<li>Qt-based GUI with visual screen arrangement</li>
 			</ul>
 		</description>
-		<url>https://github.com/neang-mengseang/Aether/releases/tag/v1.0.0</url>
+		<url>https://github.com/RimoraStudio/Aether/releases/tag/v1.0.0</url>
 	</release>
 </releases>
 </component>

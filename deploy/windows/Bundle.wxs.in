@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+SPDX-FileCopyrightText: (C) 2025 - 2026 Rimora Studio
+SPDX-License-Identifier: MIT
+-->
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Bundle
+    Name="Aether"
+    Version="@CMAKE_PROJECT_VERSION@"
+    Manufacturer="@CMAKE_PROJECT_VENDOR@"
+    UpgradeCode="8A3C2E1F-5B4D-4E6A-9C8B-7D6E5F4A3B2C"
+    IconSource="@MY_DIR@/aether.ico">
+
+    <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense">
+      <bal:WixStandardBootstrapperApplication
+        xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal"
+        LicenseFile="@CMAKE_SOURCE_DIR@/LICENSE"
+        LogoFile="@MY_DIR@/wix-banner.png" />
+    </BootstrapperApplicationRef>
+
+    <Chain>
+      <MsiPackage
+        SourceFile="@CMAKE_CURRENT_BINARY_DIR@/aether-@PACKAGE_VERSION_LABEL@-@OS_STRING@.msi"
+        Compressed="yes" />
+    </Chain>
+  </Bundle>
+</Wix>

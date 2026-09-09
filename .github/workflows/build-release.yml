@@ -72,6 +72,7 @@ jobs:
           wix extension add --global WixToolset.UI.wixext/5.0.2 2>/dev/null || true
           wix extension add --global WixToolset.Util.wixext/5.0.2 2>/dev/null || true
           wix extension add --global WixToolset.Firewall.wixext/5.0.2 2>/dev/null || true
+          wix extension add --global WixToolset.Bal.wixext/5.0.2 2>/dev/null || true
         shell: bash
 
       - name: Get version
@@ -86,11 +87,18 @@ jobs:
       - name: Build
         run: cmake --build build --config Release -j8 --target package
 
+      - name: Build EXE installer
+        run: cmake --build build --config Release -j8 --target aether_exe_bootstrapper
+        continue-on-error: true
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: aether-windows-x64
-          path: ${{ github.workspace }}/build/aether-*
+          path: |
+            ${{ github.workspace }}/build/aether-*.msi
+            ${{ github.workspace }}/build/aether-*.exe
+            ${{ github.workspace }}/build/aether-*.7z
 
   release:
     needs: build-windows
