@@ -5,13 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-  <meta property="og:image" content="assets/og-image.png">
+  <link rel="canonical" href="https://rimorastudio.github.io/Aether/about.html">
+  <meta property="og:image" content="https://rimorastudio.github.io/Aether/assets/og-image.png">
+  <meta name="twitter:image" content="https://rimorastudio.github.io/Aether/assets/og-image.png">
   <title>About Aether</title>
-  <meta name="description" content="Learn about Aether, its features, license, and technical details.">
+  <meta name="description" content="Learn about Aether, its features, license, and the team behind it at Rimora Studio.">
   <meta property="og:title" content="About Aether">
-  <meta property="og:description" content="Open-source keyboard and mouse sharing for Windows, macOS, and Linux.">
+  <meta property="og:description" content="Open-source keyboard and mouse sharing for Windows, macOS, and Linux. Maintained by Rimora Studio.">
   <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="About Aether">
+  <meta name="twitter:description" content="Open-source keyboard and mouse sharing for Windows, macOS, and Linux. Maintained by Rimora Studio.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Space+Grotesk:wght@700&family=Fira+Code&display=swap" rel="stylesheet">
@@ -21,7 +25,7 @@
 <body>
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="logo"><svg width="28" height="28" viewBox="0 0 64 64" fill="none">
+    <a href="index.html" class="logo" aria-label="Aether home"><svg width="28" height="28" viewBox="0 0 64 64" fill="none" aria-hidden="true">
   <defs>
     <linearGradient id="aether-grad" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#8b5cf6"/>
@@ -33,85 +37,206 @@
   <circle cx="40" cy="32" r="13" fill="#fff" fill-opacity="0.45"/>
 </svg> Aether</a>
     <div class="nav-links">
-      <a href="index.html" class="">Home</a>
-      <a href="download.html" class="">Download</a>
-      <a href="docs.html" class="">Docs</a>
+      <a href="index.html">Home</a>
+      <a href="download.html">Download</a>
+      <a href="docs.html">Docs</a>
       <a href="about.html" class="active">About</a>
       <a href="https://github.com/RimoraStudio/Aether" target="_blank" rel="noopener">Source</a>
     </div>
-    <div style="display:flex;align-items:center;gap:8px;">
-      <button class="theme-toggle" aria-label="Toggle theme">
-        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    <div class="nav-actions">
+      <button class="theme-toggle" aria-label="Toggle theme" aria-pressed="false">
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
       </button>
-      <button class="mobile-toggle" aria-label="Menu">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <button class="mobile-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
     </div>
   </div>
   <div id="mobile-menu">
     <a href="index.html">Home</a>
-      <a href="download.html">Download</a>
-      <a href="docs.html">Docs</a>
-      <a href="about.html">About</a>
+    <a href="download.html">Download</a>
+    <a href="docs.html">Docs</a>
+    <a href="about.html">About</a>
     <a href="https://github.com/RimoraStudio/Aether" target="_blank" rel="noopener">Source</a>
   </div>
 </nav>
 <main>
-<div class="page-header reveal">
-  <h1 class="page-title">About Aether</h1>
-  <p class="page-sub">Open-source keyboard and mouse sharing for Windows, macOS, and Linux.</p>
-</div>
 
-<section class="section section-flush-top">
-  <div class="container">
-    <div class="grid-2">
-      <div class="card reveal">
-        <h3 style="margin-bottom:12px;">What is Aether</h3>
-        <p>Aether lets one keyboard and mouse control multiple computers on the same local network. The cursor moves from one screen to the next as if the machines were a single desktop. Clipboard sharing and TLS encryption are built in, so your input data stays private on the wire.</p>
-        <p style="margin-top:16px;">Aether runs as a server on your primary machine and as a client on each secondary machine, communicating over your existing LAN. No special hardware, no cloud services, no accounts.</p>
+<section class="about-hero">
+  <div class="about-hero-grid">
+    <div class="about-hero-text">
+      <h1 class="about-hero-title">About Aether</h1>
+      <p class="about-hero-sub">One keyboard. One mouse. Every machine on your desk. Open-source, encrypted, and maintained by Rimora Studio.</p>
+      <div class="about-hero-actions">
+        <a href="download.html" class="btn btn-primary">Download Aether</a>
+        <a href="https://github.com/RimoraStudio/Aether" target="_blank" rel="noopener" class="btn btn-secondary">View source</a>
       </div>
-      <div class="card reveal">
-        <h3 style="margin-bottom:12px;">Why use Aether</h3>
-        <p>Hardware KVM switches are expensive and require physical cable switching. Other software alternatives often lack encryption, cross-platform support, or active maintenance.</p>
-        <p style="margin-top:16px;">Aether combines seamless screen crossing, clipboard sharing, TLS encryption, and broad protocol compatibility in a single open-source package. No telemetry, no accounts, no lock-in.</p>
+      <div class="about-hero-tags">
+        <span class="hero-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> Windows</span>
+        <span class="hero-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> macOS</span>
+        <span class="hero-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> Linux</span>
+        <span class="hero-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> TLS encrypted</span>
+        <span class="hero-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg> No telemetry</span>
+      </div>
+    </div>
+    <div class="cursor-demo" aria-hidden="true">
+      <div class="cursor-demo-screen" id="demo-screen-1">
+        <div class="cursor-demo-bar">
+          <div class="cursor-demo-bar-dot"></div>
+          <div class="cursor-demo-bar-dot"></div>
+          <div class="cursor-demo-bar-dot"></div>
+        </div>
+        <div class="cursor-demo-window">
+          <div class="cursor-demo-window-title"></div>
+          <div class="cursor-demo-window-body">
+            <div class="cursor-demo-line"></div>
+            <div class="cursor-demo-line"></div>
+            <div class="cursor-demo-line"></div>
+            <div class="cursor-demo-line"></div>
+            <div class="cursor-demo-line"></div>
+          </div>
+        </div>
+        <div class="cursor-demo-taskbar">
+          <div class="cursor-demo-taskbar-item active"></div>
+          <div class="cursor-demo-taskbar-item"></div>
+          <div class="cursor-demo-taskbar-item"></div>
+        </div>
+      </div>
+      <div class="cursor-demo-screen" id="demo-screen-2">
+        <div class="cursor-demo-bar">
+          <div class="cursor-demo-bar-dot"></div>
+          <div class="cursor-demo-bar-dot"></div>
+          <div class="cursor-demo-bar-dot"></div>
+        </div>
+        <div class="cursor-demo-window">
+          <div class="cursor-demo-window-title"></div>
+          <div class="cursor-demo-window-body">
+            <div class="cursor-demo-line"></div>
+            <div class="cursor-demo-line"></div>
+            <div class="cursor-demo-line"></div>
+            <div class="cursor-demo-line"></div>
+            <div class="cursor-demo-line"></div>
+          </div>
+        </div>
+        <div class="cursor-demo-taskbar">
+          <div class="cursor-demo-taskbar-item"></div>
+          <div class="cursor-demo-taskbar-item active"></div>
+          <div class="cursor-demo-taskbar-item"></div>
+        </div>
+      </div>
+      <div class="cursor-demo-screen" id="demo-screen-3">
+        <div class="cursor-demo-bar">
+          <div class="cursor-demo-bar-dot"></div>
+          <div class="cursor-demo-bar-dot"></div>
+          <div class="cursor-demo-bar-dot"></div>
+        </div>
+        <div class="cursor-demo-window">
+          <div class="cursor-demo-window-title"></div>
+          <div class="cursor-demo-window-body">
+            <div class="cursor-demo-line"></div>
+            <div class="cursor-demo-line"></div>
+            <div class="cursor-demo-line"></div>
+            <div class="cursor-demo-line"></div>
+            <div class="cursor-demo-line"></div>
+          </div>
+        </div>
+        <div class="cursor-demo-taskbar">
+          <div class="cursor-demo-taskbar-item"></div>
+          <div class="cursor-demo-taskbar-item"></div>
+          <div class="cursor-demo-taskbar-item active"></div>
+        </div>
+      </div>
+      <div class="cursor-demo-cursor">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 3.5L19 12l-6.5 1.5L10 20z"/></svg>
+      </div>
+    </div>
+  </div>
+  <a href="#what" class="about-hero-scroll" aria-label="Scroll to content">
+    <span>Scroll</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+  </a>
+</section>
+
+<section class="about-section" id="what">
+  <div class="container">
+    <div class="about-section-header reveal">
+      <div class="about-section-num">01 / What</div>
+      <h2 class="about-section-title">What is Aether</h2>
+      <p class="about-section-sub">One keyboard and mouse, seamless across every machine on your desk.</p>
+    </div>
+    <div class="about-prose reveal">
+      <p>Aether lets one keyboard and mouse control multiple computers on the same local network. The cursor moves from one screen to the next as if the machines were a single desktop. Clipboard sharing and TLS encryption are built in, so your input data stays private on the wire.</p>
+      <p>Aether runs as a server on your primary machine and as a client on each secondary machine, communicating over your existing LAN. No special hardware, no cloud services, no accounts.</p>
+    </div>
+  </div>
+</section>
+
+<section class="about-section">
+  <div class="container">
+    <div class="about-section-header reveal">
+      <div class="about-section-num">02 / Why</div>
+      <h2 class="about-section-title">Why use Aether</h2>
+      <p class="about-section-sub">Better than a hardware KVM, simpler than the alternatives.</p>
+    </div>
+    <div class="compare-grid reveal">
+      <div class="compare-card compare-card-bad">
+        <h4>Hardware KVM &amp; other software</h4>
+        <ul class="compare-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Expensive hardware or cable switching</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Often lacks encryption</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Limited cross-platform support</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg> Inactive maintenance</li>
+        </ul>
+      </div>
+      <div class="compare-card compare-card-good">
+        <h4>Aether</h4>
+        <ul class="compare-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Free, no hardware required</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> TLS encryption built in</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Windows, macOS, and Linux</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Actively maintained by Rimora Studio</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section section-alt">
+<section class="about-section">
   <div class="container">
-    <h2 class="section-title reveal">Key features</h2>
-    <p class="section-sub reveal">Everything you need to share one input across multiple machines.</p>
+    <div class="about-section-header reveal">
+      <div class="about-section-num">03 / Features</div>
+      <h2 class="about-section-title">Key features</h2>
+      <p class="about-section-sub">Everything you need to share one input across multiple machines.</p>
+    </div>
     <div class="grid-3">
-      <div class="card card-hover reveal">
-        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+      <div class="feature-card reveal">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
         <h3>Seamless screen crossing</h3>
         <p>Move the cursor off one screen edge and onto the next without any hotkey or button press.</p>
       </div>
-      <div class="card card-hover reveal">
-        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div>
+      <div class="feature-card reveal">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div>
         <h3>Clipboard sharing</h3>
         <p>Copy on one machine, paste on another. Text and images both work across all platforms.</p>
       </div>
-      <div class="card card-hover reveal">
-        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div class="feature-card reveal">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
         <h3>TLS encryption</h3>
         <p>All client-server traffic is encrypted. Certificates are generated and managed automatically.</p>
       </div>
-      <div class="card card-hover reveal">
-        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+      <div class="feature-card reveal">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
         <h3>Cross-platform</h3>
         <p>Windows, macOS, and Linux. X11 and Wayland are both supported on Linux.</p>
       </div>
-      <div class="card card-hover reveal">
-        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+      <div class="feature-card reveal">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
         <h3>Protocol compatibility</h3>
         <p>Interoperates with Synergy and Barrier clients and servers out of the box.</p>
       </div>
-      <div class="card card-hover reveal">
-        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 1-14 0"/></svg></div>
+      <div class="feature-card reveal">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 1-14 0"/></svg></div>
         <h3>Qt-based GUI</h3>
         <p>Visual screen arrangement, hotkey configuration, and system tray integration.</p>
       </div>
@@ -119,56 +244,121 @@
   </div>
 </section>
 
-<section class="section section-divider">
+<section class="about-section">
   <div class="container">
-    <h2 class="section-title reveal">Built with</h2>
-    <p class="section-sub reveal">A modern, battle-tested technology stack.</p>
-    <div class="grid-4">
-      <div class="card reveal" style="text-align:center;">
-        <div class="card-icon" style="margin:0 auto 16px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg></div>
-        <h3 style="font-size:16px;">C++20</h3>
-        <p style="font-size:14px;">Modern C++ standard</p>
+    <div class="about-section-header reveal">
+      <div class="about-section-num">04 / Stack</div>
+      <h2 class="about-section-title">Built with</h2>
+      <p class="about-section-sub">A modern, battle-tested technology stack.</p>
+    </div>
+    <div class="tech-grid reveal">
+      <div class="tech-card">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg></div>
+        <h3 class="tech-name">C++20</h3>
+        <p class="tech-desc">Modern C++ standard</p>
       </div>
-      <div class="card reveal" style="text-align:center;">
-        <div class="card-icon" style="margin:0 auto 16px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg></div>
-        <h3 style="font-size:16px;">Qt 6.7+</h3>
-        <p style="font-size:14px;">Cross-platform GUI</p>
+      <div class="tech-card">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg></div>
+        <h3 class="tech-name">Qt 6.7+</h3>
+        <p class="tech-desc">Cross-platform GUI</p>
       </div>
-      <div class="card reveal" style="text-align:center;">
-        <div class="card-icon" style="margin:0 auto 16px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <h3 style="font-size:16px;">OpenSSL 3.0+</h3>
-        <p style="font-size:14px;">TLS encryption</p>
+      <div class="tech-card">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3 class="tech-name">OpenSSL 3.0+</h3>
+        <p class="tech-desc">TLS encryption</p>
       </div>
-      <div class="card reveal" style="text-align:center;">
-        <div class="card-icon" style="margin:0 auto 16px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg></div>
-        <h3 style="font-size:16px;">CMake 3.24+</h3>
-        <p style="font-size:14px;">Build system</p>
+      <div class="tech-card">
+        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg></div>
+        <h3 class="tech-name">CMake 3.24+</h3>
+        <p class="tech-desc">Build system</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section section-divider">
+<section class="about-section">
   <div class="container">
-    <div class="grid-2">
-      <div class="card reveal">
-        <h3 style="margin-bottom:12px;">License</h3>
+    <div class="about-section-header reveal">
+      <div class="about-section-num">05 / Open source</div>
+      <h2 class="about-section-title">License &amp; community</h2>
+      <p class="about-section-sub">Free software, open to everyone.</p>
+    </div>
+    <div class="grid-2 reveal">
+      <div class="info-card">
+        <h3>License</h3>
         <p>Aether is distributed under GPL-2.0-only with an OpenSSL exception, or as noted per file. See <code>LICENSE</code> and <code>LICENSES/</code> in the repository for full details.</p>
-        <p style="margin-top:16px;">No telemetry, no accounts, no lock-in. The source is yours to read, modify, and redistribute under the license terms.</p>
+        <p>No telemetry, no accounts, no lock-in. The source is yours to read, modify, and redistribute under the license terms.</p>
       </div>
-      <div class="card reveal">
-        <h3 style="margin-bottom:12px;">Source and community</h3>
+      <div class="info-card">
+        <h3>Source &amp; community</h3>
         <p>The source code is available on GitHub at <a href="https://github.com/RimoraStudio/Aether" target="_blank" rel="noopener">RimoraStudio/Aether</a>.</p>
-        <p style="margin-top:16px;">Contributions, bug reports, and feature requests are welcome. See the <a href="docs.html">docs page</a> for guides, or open an <a href="https://github.com/RimoraStudio/Aether/issues" target="_blank" rel="noopener">issue</a> to report a bug.</p>
+        <p>Contributions, bug reports, and feature requests are welcome. See the <a href="docs.html">docs page</a> for guides, or open an <a href="https://github.com/RimoraStudio/Aether/issues" target="_blank" rel="noopener">issue</a> to report a bug.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section section-divider">
+<section class="about-section">
   <div class="container">
-    <h2 class="section-title reveal">Roadmap</h2>
-    <p class="section-sub reveal">What is being built next for Aether.</p>
+    <div class="about-section-header reveal">
+      <div class="about-section-num">06 / Team</div>
+      <h2 class="about-section-title">Rimora Studio</h2>
+      <p class="about-section-sub">The team behind Aether.</p>
+    </div>
+    <div class="studio-card reveal">
+      <div class="studio-header">
+        <div class="studio-logo">
+          <svg width="40" height="40" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="studio-grad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#8b5cf6"/>
+                <stop offset="100%" stop-color="#7c3aed"/>
+              </linearGradient>
+            </defs>
+            <rect width="64" height="64" rx="14" fill="url(#studio-grad)"/>
+            <circle cx="24" cy="32" r="13" fill="#fff"/>
+            <circle cx="40" cy="32" r="13" fill="#fff" fill-opacity="0.45"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="studio-name">Rimora Studio</h3>
+          <p class="studio-tagline">Open-source software, maintained with care.</p>
+        </div>
+      </div>
+      <p>Rimora Studio is the maintainer of Aether. We took over the project to keep it actively developed, properly maintained, and freely available under its original open-source license.</p>
+      <p>Our focus is on stability, security, and cross-platform support. We ship regular updates, respond to issues, and work with the community to make Aether better for everyone. No paywalls, no feature gates, no telemetry.</p>
+      <div class="studio-stats">
+        <div class="studio-stat">
+          <div class="studio-stat-num">100%</div>
+          <div class="studio-stat-label">Open source</div>
+        </div>
+        <div class="studio-stat">
+          <div class="studio-stat-num">0</div>
+          <div class="studio-stat-label">Telemetry</div>
+        </div>
+        <div class="studio-stat">
+          <div class="studio-stat-num">Active</div>
+          <div class="studio-stat-label">Maintenance</div>
+        </div>
+      </div>
+      <div class="studio-links">
+        <a href="https://github.com/RimoraStudio" target="_blank" rel="noopener" class="btn btn-secondary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.345.72-4.05-1.605-4.05-1.605-.54-1.395-1.32-1.755-1.32-1.755-1.08-.735.075-.735.075-.735 1.2.075 1.83 1.23 1.83 1.23 1.065 1.815 2.805 1.29 3.495.99.105-.765.42-1.29.765-1.59-2.67-.3-5.475-1.335-5.475-5.94 0-1.32.465-2.4 1.23-3.24-.12-.3-.54-1.53.12-3.18 0 0 1.005-.345 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.575 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.92 1.23 3.24 0 4.635-2.805 5.625-5.475 5.91.435.39.81 1.14.81 2.295 0 1.65-.015 2.985-.015 3.39 0 .315.225.69.825.57C20.565 21.795 24 17.31 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="https://github.com/RimoraStudio/Aether" target="_blank" rel="noopener" class="btn btn-secondary">Aether repo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about-section">
+  <div class="container">
+    <div class="about-section-header reveal">
+      <div class="about-section-num">07 / Roadmap</div>
+      <h2 class="about-section-title">Roadmap</h2>
+      <p class="about-section-sub">What is being built next for Aether.</p>
+    </div>
     <div class="timeline reveal">
       <div class="timeline-item current">
         <div class="timeline-dot"></div>
@@ -195,13 +385,13 @@
         <p>Add display management UI to the Aether GUI. Bundle the VDD driver with the installer. Persist display configuration. Documentation and testing across Windows versions. Production ready release.</p>
       </div>
     </div>
-    <p style="text-align:center;margin-top:32px;" class="reveal">Read the full technical design in the <a href="virtual-display-plan.html">virtual display plan</a>.</p>
+    <p class="reveal text-center mt-6">Read the full technical design in the <a href="virtual-display-plan.html">virtual display plan</a>.</p>
   </div>
 </section>
 </main>
 <footer class="reveal">
   <div class="footer-inner">
-    <p>&copy; Rimora Studio. Open source under GPL-2.0 with OpenSSL exception.</p>
+    <p>&copy; <span id="footer-year">2026</span> Rimora Studio. Open source under GPL-2.0 with OpenSSL exception.</p>
     <div class="footer-links">
       <a href="docs.html">Docs</a>
       <a href="download.html">Download</a>
@@ -210,8 +400,28 @@
   </div>
 </footer>
 <button class="scroll-top" aria-label="Scroll to top">
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
 </button>
 <script src="assets/site.js"></script>
+<script>
+(function() {
+  var screens = document.querySelectorAll('.cursor-demo-screen');
+  var cursor = document.querySelector('.cursor-demo-cursor');
+  if (!screens.length || !cursor) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  function updateActive() {
+    var cursorRect = cursor.getBoundingClientRect();
+    var cx = cursorRect.left + cursorRect.width / 2;
+    screens.forEach(function(screen) {
+      var r = screen.getBoundingClientRect();
+      var inside = cx >= r.left && cx <= r.right;
+      screen.classList.toggle('active', inside);
+    });
+    requestAnimationFrame(updateActive);
+  }
+  requestAnimationFrame(updateActive);
+})();
+</script>
 </body>
 </html>

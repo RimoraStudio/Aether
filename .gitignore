@@ -49,3 +49,7 @@ CMakeFiles/*
 # Ai helperfilers
 **/[cC]laude.[mM][dD]
 **/CLAUDE.[mM][dD]
+
+# Node.js / Tailwind
+docs/node_modules/
+docs/package-lock.json
