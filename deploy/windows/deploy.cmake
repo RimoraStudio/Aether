@@ -73,8 +73,9 @@ target_link_libraries(wix-custom PRIVATE Msi)
 
 # Build EXE bootstrapper (WiX Bundle) alongside MSI
 if (NOT "${WIX_APP}" STREQUAL "")
-  set(AETHER_MSI_FILE "${CMAKE_PROJECT_PROPER_NAME}-${PACKAGE_VERSION_LABEL}-${OS_STRING}.msi")
-  set(AETHER_EXE_FILE "${CMAKE_PROJECT_PROPER_NAME}-${PACKAGE_VERSION_LABEL}-${OS_STRING}.exe")
+  string(TOLOWER "${CMAKE_PROJECT_PROPER_NAME}" AETHER_PKG_NAME)
+  set(AETHER_MSI_FILE "${AETHER_PKG_NAME}-${PACKAGE_VERSION_LABEL}-${OS_STRING}.msi")
+  set(AETHER_EXE_FILE "${AETHER_PKG_NAME}-${PACKAGE_VERSION_LABEL}-${OS_STRING}.exe")
 
   configure_file(
     ${MY_DIR}/Bundle.wxs.in
