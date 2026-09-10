@@ -73,9 +73,9 @@
         <a href="https://github.com/RimoraStudio/Aether" target="_blank" rel="noopener" class="btn btn-secondary">View source</a>
       </div>
       <div class="about-hero-tags">
-        <span class="hero-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> Windows</span>
-        <span class="hero-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> macOS</span>
-        <span class="hero-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> Linux</span>
+        <span class="hero-tag"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.1L9.5 4.2v6.9H3V5.1zM10.5 4.1L21 2.8v8.3H10.5V4.1zM3 12.9h6.5v6.9L3 18.9v-6zM10.5 12.9H21v8.3l-10.5-1.3v-7z"/></svg> Windows</span>
+        <span class="hero-tag"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/></svg> macOS</span>
+        <span class="hero-tag"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8 2 5.5 4 5.5 7c0 1.2.4 2.2 1 3-1.5 0-3 1-3 3 0 3 3 5 8.5 5s8.5-2 8.5-5c0-2-1.5-3-3-3 .6-.8 1-1.8 1-3 0-3-2.5-5-6.5-5zm-2 4.5c.8 0 1.5.9 1.5 2s-.7 2-1.5 2-1.5-.9-1.5-2 .7-2 1.5-2zm4 0c.8 0 1.5.9 1.5 2s-.7 2-1.5 2-1.5-.9-1.5-2 .7-2 1.5-2zM12 12c2.5 0 4 1 4 2.5S14.5 17 12 17s-4-1-4-2.5S9.5 12 12 12z"/></svg> Linux</span>
         <span class="hero-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> TLS encrypted</span>
         <span class="hero-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg> No telemetry</span>
       </div>
@@ -205,41 +205,29 @@
 <section class="about-section">
   <div class="container">
     <div class="about-section-header reveal">
-      <div class="about-section-num">03 / Features</div>
-      <h2 class="about-section-title">Key features</h2>
-      <p class="about-section-sub">Everything you need to share one input across multiple machines.</p>
+      <div class="about-section-num">03 / How it works</div>
+      <h2 class="about-section-title">How it works</h2>
+      <p class="about-section-sub">Server, clients, and your existing LAN. No cloud, no accounts.</p>
     </div>
-    <div class="grid-3">
-      <div class="feature-card reveal">
-        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-        <h3>Seamless screen crossing</h3>
-        <p>Move the cursor off one screen edge and onto the next without any hotkey or button press.</p>
+    <div class="grid-3 reveal">
+      <div class="card card-hover">
+        <div class="step-num">1</div>
+        <h3>Server</h3>
+        <p>Your primary machine runs the Aether server. It captures keyboard and mouse input and forwards it to whichever screen the cursor is currently on.</p>
       </div>
-      <div class="feature-card reveal">
-        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></div>
-        <h3>Clipboard sharing</h3>
-        <p>Copy on one machine, paste on another. Text and images both work across all platforms.</p>
+      <div class="card card-hover">
+        <div class="step-num">2</div>
+        <h3>Clients</h3>
+        <p>Each secondary machine runs an Aether client. Clients connect to the server over your LAN, receive input events, and inject them locally.</p>
       </div>
-      <div class="feature-card reveal">
-        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <h3>TLS encryption</h3>
-        <p>All client-server traffic is encrypted. Certificates are generated and managed automatically.</p>
+      <div class="card card-hover">
+        <div class="step-num">3</div>
+        <h3>TLS channel</h3>
+        <p>All traffic between server and clients is encrypted with TLS. Aether generates and manages certificates automatically on first run.</p>
       </div>
-      <div class="feature-card reveal">
-        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-        <h3>Cross-platform</h3>
-        <p>Windows, macOS, and Linux. X11 and Wayland are both supported on Linux.</p>
-      </div>
-      <div class="feature-card reveal">
-        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
-        <h3>Protocol compatibility</h3>
-        <p>Interoperates with Synergy and Barrier clients and servers out of the box.</p>
-      </div>
-      <div class="feature-card reveal">
-        <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 1-14 0"/></svg></div>
-        <h3>Qt-based GUI</h3>
-        <p>Visual screen arrangement, hotkey configuration, and system tray integration.</p>
-      </div>
+    </div>
+    <div class="about-prose reveal mt-6">
+      <p>The server tracks cursor position across all configured screens. When the cursor crosses an edge, input is redirected to the appropriate client. Clipboard content travels with the cursor. Everything happens over your existing local network, no internet required.</p>
     </div>
   </div>
 </section>
@@ -360,32 +348,49 @@
       <p class="about-section-sub">What is being built next for Aether.</p>
     </div>
     <div class="timeline reveal">
+      <div class="timeline-item done">
+        <div class="timeline-dot"></div>
+        <span class="timeline-status">Shipped - v1.0</span>
+        <h3>Core keyboard and mouse sharing</h3>
+        <p>Keyboard and mouse sharing across Windows and Linux. Clipboard sharing for text, HTML, and BMP images. TLS encrypted network traffic. Synergy and Barrier protocol compatibility. Qt6 GUI with screen layout editor, system tray integration, and version checker. Multi-language UI in 7 languages. MSI, EXE, 7Z, DEB, RPM, and tar.gz installers. GitHub Actions CI/CD with Telegram notifications.</p>
+      </div>
       <div class="timeline-item current">
         <div class="timeline-dot"></div>
-        <span class="timeline-status">In progress</span>
-        <h3>Virtual display driver integration</h3>
-        <p>Detect and integrate the open source IddCx Virtual Display Driver. Create and destroy virtual monitors on demand. Implement DXGI Desktop Duplication screen capture. Proof of concept with raw frame transmission.</p>
+        <span class="timeline-status">In progress - v1.1</span>
+        <h3>Auto-updater</h3>
+        <p>Click the update notification, confirm, and Aether downloads and installs the new version automatically. Downloads the latest installer from GitHub releases, verifies the SHA-256 checksum, runs the MSI or DEB silently, and restarts. Includes a setting to disable update checks and proxy support via HTTPS_PROXY.</p>
       </div>
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <span class="timeline-status">Planned</span>
-        <h3>Video encoding and streaming</h3>
-        <p>Encode captured frames with FFmpeg using H.264 or H.265 with hardware acceleration. Stream encoded frames over the network using the existing TLS socket and chunked transfer. Client-side decoding and fullscreen rendering.</p>
+        <span class="timeline-status">Planned - v1.2</span>
+        <h3>Virtual display streaming</h3>
+        <p>Turn a second machine into a virtual monitor for the main machine, no HDMI cable. The server creates a virtual display via the IddCx Virtual Display Driver, captures it with DXGI Desktop Duplication, encodes with FFmpeg using H.264 or H.265 with hardware acceleration, and streams over the existing TLS socket. The client decodes and renders fullscreen, then forwards input back. Read the full design in the <a href="virtual-display-plan.html">virtual display plan</a>.</p>
       </div>
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <span class="timeline-status">Planned</span>
-        <h3>Input forwarding from display client</h3>
-        <p>Capture mouse and keyboard events on the display client. Forward them back to the server using new protocol messages. Server injects input into the virtual display coordinate space. Full interactive loop working end to end.</p>
+        <span class="timeline-status">Planned - v1.2.1</span>
+        <h3>Clipboard modernization</h3>
+        <p>Add PNG and JPEG clipboard support alongside existing BMP, so copy-paste works with modern apps that use PNG by default. Add file copy and paste: drag a file from Explorer on one machine, paste on another. File contents transfer over the existing TLS connection with a progress indicator and configurable max size.</p>
       </div>
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <span class="timeline-status">Planned</span>
-        <h3>GUI integration and production release</h3>
-        <p>Add display management UI to the Aether GUI. Bundle the VDD driver with the installer. Persist display configuration. Documentation and testing across Windows versions. Production ready release.</p>
+        <span class="timeline-status">Planned - v1.3</span>
+        <h3>Network resilience and UX</h3>
+        <p>Fix WiFi lag caused by TCP head-of-line blocking by adding a UDP transport option for mouse moves while keystrokes stay on TCP. Add input coalescing to reduce bandwidth, a connection quality indicator in the status bar, local input fallback on connection drop, and adaptive timeouts. Add dark mode, a first-run onboarding wizard, mDNS discovery to auto-find machines on LAN, and a status dashboard showing connected clients and latency.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <span class="timeline-status">Planned - v1.4</span>
+        <h3>Platform expansion</h3>
+        <p>Add macOS support with Homebrew Qt6, app bundle, and DMG output. Requires an Apple Developer certificate for notarization. Build libei 1.3+ in CI to enable full Wayland input capture on Linux. Add Windows ARM64 builds using Qt 6.11.2 and MSVC cross-compile. Add code signing for Windows installers to remove the SmartScreen warning.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <span class="timeline-status">Future - v2.0</span>
+        <h3>Advanced features</h3>
+        <p>File drag and drop between machines. Audio streaming to the display client using the Opus codec for low latency, synced with the video stream. Multi-display streaming where one server feeds multiple display clients. A mobile companion app for Android and iOS that uses the phone touchscreen as a trackpad and keyboard. Adaptive bitrate that adjusts video quality based on network conditions.</p>
       </div>
     </div>
-    <p class="reveal text-center mt-6">Read the full technical design in the <a href="virtual-display-plan.html">virtual display plan</a>.</p>
   </div>
 </section>
 </main>
