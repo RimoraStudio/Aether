@@ -4,6 +4,8 @@
 
 Aether lets you share a single keyboard, mouse, or trackpad across multiple computers. Move your cursor off the edge of one screen and it appears on the next. Copy and paste between systems. All traffic encrypted with TLS. No hardware, no KVM switch, no cloud account.
 
+[![Download](https://img.shields.io/github/v/release/RimoraStudio/Aether?label=Download&color=7c3aed)](https://github.com/RimoraStudio/Aether/releases) [![License](https://img.shields.io/github/license/RimoraStudio/Aether?label=License&color=blue)](LICENSE) [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-7c3aed)](https://rimorastudio.github.io/Aether/download.html) [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](https://github.com/RimoraStudio/Aether/pulls)
+
 [Website](https://rimorastudio.github.io/Aether/) | [Download](https://rimorastudio.github.io/Aether/download.html) | [Docs](https://rimorastudio.github.io/Aether/docs.html) | [Releases](https://github.com/RimoraStudio/Aether/releases)
 
 ---
