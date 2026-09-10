@@ -1073,6 +1073,7 @@ nav {
 .dl-hero-dropdown {
   position: relative;
   display: inline-block;
+  margin-top: var(--sp-6);
 }
 .dl-hero-menu {
   position: absolute;

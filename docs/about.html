@@ -345,50 +345,53 @@
     <div class="about-section-header reveal">
       <div class="about-section-num">07 / Roadmap</div>
       <h2 class="about-section-title">Roadmap</h2>
-      <p class="about-section-sub">What is being built next for Aether.</p>
+      <p class="about-section-sub">From input sharing to a unified distributed workspace. One workspace, many computers, distributed by design.</p>
+    </div>
+    <div class="about-prose reveal" style="max-width: 760px; margin: 0 auto var(--sp-8); text-align: center;">
+      <p>Aether is not just another keyboard and mouse sharing app. The long-term vision is a <strong>Unified Distributed Workspace</strong>: multiple computers remain independent systems but cooperate as one user-facing workspace. Each device contributes its own CPU, GPU, memory, storage, display, and input while Aether provides the coordination layer that makes the collection feel coherent. Workload stays distributed. No machine is reduced to a passive display endpoint.</p>
     </div>
     <div class="timeline reveal">
       <div class="timeline-item done">
         <div class="timeline-dot"></div>
         <span class="timeline-status">Shipped - v1.0</span>
-        <h3>Core keyboard and mouse sharing</h3>
-        <p>Keyboard and mouse sharing across Windows and Linux. Clipboard sharing for text, HTML, and BMP images. TLS encrypted network traffic. Synergy and Barrier protocol compatibility. Qt6 GUI with screen layout editor, system tray integration, and version checker. Multi-language UI in 7 languages. MSI, EXE, 7Z, DEB, RPM, and tar.gz installers. GitHub Actions CI/CD with Telegram notifications.</p>
+        <h3>Phase 1: Core foundation</h3>
+        <p>Keyboard and mouse sharing across Windows and Linux. Clipboard sharing for text, HTML, and BMP images. TLS encrypted network traffic. Synergy and Barrier protocol compatibility. Qt6 GUI with screen layout editor, system tray, and version checker. Multi-language UI in 7 languages. MSI, EXE, 7Z, DEB, RPM, and tar.gz installers. GitHub Actions CI/CD with Telegram notifications.</p>
       </div>
       <div class="timeline-item current">
         <div class="timeline-dot"></div>
         <span class="timeline-status">In progress - v1.1</span>
-        <h3>Auto-updater</h3>
+        <h3>Phase 1: Auto-updater</h3>
         <p>Click the update notification, confirm, and Aether downloads and installs the new version automatically. Downloads the latest installer from GitHub releases, verifies the SHA-256 checksum, runs the MSI or DEB silently, and restarts. Includes a setting to disable update checks and proxy support via HTTPS_PROXY.</p>
       </div>
       <div class="timeline-item">
         <div class="timeline-dot"></div>
+        <span class="timeline-status">Planned - v1.2 to v1.4</span>
+        <h3>Phase 1: Strengthen the foundation</h3>
+        <p>Network resilience: UDP transport for mouse moves to fix WiFi lag, input coalescing, connection quality indicator, local input fallback on drop, adaptive timeouts. Clipboard modernization: PNG and JPEG support, file copy and paste with progress and configurable max size. UX: dark mode, first-run onboarding wizard, mDNS discovery to auto-find machines on LAN, status dashboard. Platform expansion: macOS with DMG and notarization, full Wayland input capture via libei 1.3+, Windows ARM64, code signing.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
         <span class="timeline-status">Planned - v1.2</span>
-        <h3>Virtual display streaming</h3>
-        <p>Turn a second machine into a virtual monitor for the main machine, no HDMI cable. The server creates a virtual display via the IddCx Virtual Display Driver, captures it with DXGI Desktop Duplication, encodes with FFmpeg using H.264 or H.265 with hardware acceleration, and streams over the existing TLS socket. The client decodes and renders fullscreen, then forwards input back. Read the full design in the <a href="virtual-display-plan.html">virtual display plan</a>.</p>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <span class="timeline-status">Planned - v1.2.1</span>
-        <h3>Clipboard modernization</h3>
-        <p>Add PNG and JPEG clipboard support alongside existing BMP, so copy-paste works with modern apps that use PNG by default. Add file copy and paste: drag a file from Explorer on one machine, paste on another. File contents transfer over the existing TLS connection with a progress indicator and configurable max size.</p>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <span class="timeline-status">Planned - v1.3</span>
-        <h3>Network resilience and UX</h3>
-        <p>Fix WiFi lag caused by TCP head-of-line blocking by adding a UDP transport option for mouse moves while keystrokes stay on TCP. Add input coalescing to reduce bandwidth, a connection quality indicator in the status bar, local input fallback on connection drop, and adaptive timeouts. Add dark mode, a first-run onboarding wizard, mDNS discovery to auto-find machines on LAN, and a status dashboard showing connected clients and latency.</p>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <span class="timeline-status">Planned - v1.4</span>
-        <h3>Platform expansion</h3>
-        <p>Add macOS support with Homebrew Qt6, app bundle, and DMG output. Requires an Apple Developer certificate for notarization. Build libei 1.3+ in CI to enable full Wayland input capture on Linux. Add Windows ARM64 builds using Qt 6.11.2 and MSVC cross-compile. Add code signing for Windows installers to remove the SmartScreen warning.</p>
+        <h3>Phase 2: Aether Display</h3>
+        <p>Turn a second machine into a true extended desktop, not just a remote-desktop window. The host OS sees a real second display via the IddCx Virtual Display Driver. Windows can be dragged from the host monitor onto the virtual display. DXGI Desktop Duplication captures the display, FFmpeg encodes with H.264 or H.265 hardware acceleration, and frames stream over the existing TLS socket. The child decodes and renders fullscreen at 1080p/60 FPS. Input flows back to the host. Read the full design in the <a href="virtual-display-plan.html">virtual display plan</a>.</p>
       </div>
       <div class="timeline-item">
         <div class="timeline-dot"></div>
         <span class="timeline-status">Future - v2.0</span>
-        <h3>Advanced features</h3>
-        <p>File drag and drop between machines. Audio streaming to the display client using the Opus codec for low latency, synced with the video stream. Multi-display streaming where one server feeds multiple display clients. A mobile companion app for Android and iOS that uses the phone touchscreen as a trackpad and keyboard. Adaptive bitrate that adjusts video quality based on network conditions.</p>
+        <h3>Phase 3: Hybrid Workspace</h3>
+        <p>Combine input sharing and virtual displays into a unified workspace. Display endpoints become independently configurable. Support multiple displays and multiple child devices. Improve workspace topology and pointer transitions. Add file drag and drop between machines, audio streaming to display clients using the Opus codec, and richer clipboard support. Adaptive bitrate adjusts video quality based on network conditions. A mobile companion app for Android and iOS uses the phone touchscreen as a trackpad and keyboard.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <span class="timeline-status">Research</span>
+        <h3>Phase 4: Remote Application Research</h3>
+        <p>Investigate application and process execution on another node. Prototype a controlled remote application launcher. Explore GPU and resource-aware placement: an application can execute on one machine while its window integrates into another machine's workspace. Study window remoting versus full-display streaming. Keep the prototype opt-in and security-isolated. This is a research direction, not a near-term promise.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <span class="timeline-status">Long-term vision</span>
+        <h3>Phase 5: Distributed Workspace</h3>
+        <p>Unified device and resource model. Application placement policies. Resource-aware workload scheduling. Persistent workspace state. Cross-device drag and drop semantics. Advanced remote execution and session migration where technically feasible. The core architectural principle: separate capabilities from machines. Aether does not hard-code that the machine providing input must also provide display, compute, storage, or application execution. Each capability is provided by a node and routed through the workspace.</p>
       </div>
     </div>
   </div>
