@@ -20,6 +20,7 @@ Aether lets you share a single keyboard, mouse, or trackpad across multiple comp
 - [System requirements](#system-requirements)
 - [Build from source](#build-from-source)
 - [Documentation](#documentation)
+- [Changelog](#changelog)
 - [Roadmap](#roadmap)
 - [Security](#security)
 - [License](#license)
@@ -143,6 +144,10 @@ Requirements: CMake 3.24+, Qt 6.7+, OpenSSL 3.0+. Most other dependencies are fe
 - [Security policy](https://rimorastudio.github.io/Aether/security.html)
 - [Issue reporting](https://rimorastudio.github.io/Aether/issues.html)
 - [About](https://rimorastudio.github.io/Aether/about.html)
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for the full version history. Each release is linked to its GitHub tag.
 
 ## Roadmap
 
