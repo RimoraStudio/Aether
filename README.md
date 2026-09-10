@@ -1,49 +1,51 @@
 # Aether
 
-**Share one keyboard and mouse across multiple computers.**
+**One keyboard. One mouse. Every machine on your desk.**
 
-Aether lets you control several machines on your desk with a single keyboard, mouse, or trackpad. Move your cursor off the edge of one screen and it appears on the next. Copy and paste between systems. All traffic is encrypted with TLS. No hardware, no KVM switch, no cloud account.
+Aether lets you share a single keyboard, mouse, or trackpad across multiple computers. Move your cursor off the edge of one screen and it appears on the next. Copy and paste between systems. All traffic encrypted with TLS. No hardware, no KVM switch, no cloud account.
 
-Built on the Synergy codebase, Aether is a rebranded and modernized fork maintained by Rimora Studio. It works with Windows and Linux, and stays compatible with Synergy and Barrier peers.
+[Website](https://rimorastudio.github.io/Aether/) | [Download](https://rimorastudio.github.io/Aether/download.html) | [Docs](https://rimorastudio.github.io/Aether/docs.html) | [Releases](https://github.com/RimoraStudio/Aether/releases)
+
+---
+
+## Table of contents
+
+- [Why Aether](#why-aether)
+- [Quick start](#quick-start)
+- [Download and install](#download-and-install)
+- [Getting started](#getting-started)
+- [Features](#features)
+- [System requirements](#system-requirements)
+- [Build from source](#build-from-source)
+- [Documentation](#documentation)
+- [Roadmap](#roadmap)
+- [Security](#security)
+- [License](#license)
+- [Credits](#credits)
+
+---
 
 ## Why Aether
 
-- **No KVM switch.** Software-only. Just install on each machine and connect over your LAN.
-- **No cloud.** Direct peer-to-peer connection. Nothing leaves your network.
+- **No KVM switch.** Software-only. Install on each machine and connect over your LAN.
+- **No cloud.** Direct peer-to-peer. Nothing leaves your network.
 - **No subscription.** Free and open source under GPL-2.0 with OpenSSL exception.
+- **Compatible.** Works with existing Synergy and Barrier peers.
 
-## Features
+## Quick start
 
-### Input sharing
-- One keyboard, mouse, or trackpad controls all machines
-- Cursor moves seamlessly across screens by dragging to the edge
-- Hotkeys for jumping to a specific screen
-- Configurable screen layout with drag-and-drop grid
+1. Download Aether from the [releases page](https://github.com/RimoraStudio/Aether/releases).
+2. Install on the machine with the keyboard and mouse you want to share. Set it as **Server**.
+3. Install on the other machines. Set them as **Clients**.
+4. On the server, arrange the screen grid to match your physical desk layout.
+5. Start the server. Connect from the clients.
+6. Move your cursor to the edge of the screen. It appears on the next machine.
 
-### Cross-platform
-- Windows 10 or later (x64)
-- Linux with X11 or Wayland (x64)
-- Same protocol works with Synergy and Barrier peers
-
-### Clipboard sharing
-- Copy text between machines
-- Copy images between machines
-- Synchronized clipboard state across all connected systems
-
-### Security
-- TLS encrypted network traffic between server and clients
-- Fingerprint-based peer verification
-- Configurable firewall rules on Windows
-
-### Quality of life
-- System tray integration with quick start/stop
-- Auto-start on login (optional)
-- Version checker with update notification
-- Multi-language UI (English, Italian, Spanish, Japanese, Korean, Russian, Chinese)
+That's it. No accounts, no configuration files, no network setup.
 
 ## Download and install
 
-Prebuilt installers and packages are available on the [releases page](https://github.com/RimoraStudio/Aether/releases).
+Prebuilt installers and packages are available on the [releases page](https://github.com/RimoraStudio/Aether/releases) or from the [download page](https://rimorastudio.github.io/Aether/download.html).
 
 ### Windows
 
@@ -62,11 +64,15 @@ A portable `.7z` archive is also available if you prefer not to install.
 - **Fedora, openSUSE:** download the `.rpm` and run `sudo dnf install aether-*.rpm` or `sudo zypper install aether-*.rpm`
 - **Other distributions:** extract the `.tar.gz` archive and run the binary directly
 
-On Linux, Aether supports both X11 and Wayland. The correct backend is selected automatically based on your session type.
+Aether supports both X11 and Wayland. The correct backend is selected automatically based on your session type.
+
+### macOS
+
+macOS support is planned. See the [roadmap](#roadmap) for details.
 
 ## Getting started
 
-After installing, you need to set up at least two machines:
+After installing, you need at least two machines:
 
 1. Pick one machine as the **server** (the one with the keyboard and mouse you want to share).
 2. Install Aether on the other machines and set them as **clients**.
@@ -75,7 +81,37 @@ After installing, you need to set up at least two machines:
 5. Start the server on the main machine and connect from the clients.
 6. Move your cursor to the edge of the server screen and it appears on the client.
 
-See the [help guide](docs/HelpMain.md) for detailed setup instructions.
+See the [help guide](https://rimorastudio.github.io/Aether/helpmain.html) for detailed setup instructions.
+
+## Features
+
+### Input sharing
+- One keyboard, mouse, or trackpad controls all machines
+- Cursor moves seamlessly across screens by dragging to the edge
+- Hotkeys for jumping to a specific screen
+- Configurable screen layout with drag-and-drop grid
+
+### Cross-platform
+- Windows 10 or later (x64)
+- Linux with X11 or Wayland (x64)
+- macOS support planned
+- Same protocol works with Synergy and Barrier peers
+
+### Clipboard sharing
+- Copy text between machines
+- Copy images between machines
+- Synchronized clipboard state across all connected systems
+
+### Security
+- TLS encrypted network traffic between server and clients
+- Fingerprint-based peer verification
+- Configurable firewall rules on Windows
+
+### Quality of life
+- System tray integration with quick start/stop
+- Auto-start on login (optional)
+- Version checker with update notification
+- Multi-language UI (English, Italian, Spanish, Japanese, Korean, Russian, Chinese)
 
 ## System requirements
 
@@ -86,7 +122,7 @@ See the [help guide](docs/HelpMain.md) for detailed setup instructions.
 
 ## Build from source
 
-See [docs/dev/build.md](docs/dev/build.md) for the complete build guide. Quick start:
+See the [build guide](https://rimorastudio.github.io/Aether/build.html) for the complete instructions. Quick start:
 
 ```bash
 cmake -S . -B build
@@ -97,13 +133,26 @@ Requirements: CMake 3.24+, Qt 6.7+, OpenSSL 3.0+. Most other dependencies are fe
 
 ## Documentation
 
-- [Configuration](docs/Configuration.md)
+- [Configuration](https://rimorastudio.github.io/Aether/configuration.html)
 - [Auto-update](docs/AutoUpdate.md)
-- [Help guide](docs/HelpMain.md)
-- [Build guide](docs/dev/build.md)
-- [Protocol reference](docs/dev/protocol_reference.md)
-- [Security policy](docs/Security.md)
-- [Issue reporting](docs/Issues.md)
+- [Help guide](https://rimorastudio.github.io/Aether/helpmain.html)
+- [Build guide](https://rimorastudio.github.io/Aether/build.html)
+- [Protocol reference](https://rimorastudio.github.io/Aether/protocol-reference.html)
+- [Security policy](https://rimorastudio.github.io/Aether/security.html)
+- [Issue reporting](https://rimorastudio.github.io/Aether/issues.html)
+- [About](https://rimorastudio.github.io/Aether/about.html)
+
+## Roadmap
+
+Aether is evolving from a keyboard and mouse sharing tool into a **Unified Distributed Workspace**: multiple computers cooperating as one workspace, with each device contributing its own CPU, GPU, memory, and display.
+
+- **Phase 1:** Strengthen the foundation (auto-updater, network resilience, clipboard modernization, macOS, dark mode, mDNS discovery)
+- **Phase 2:** Aether Display (virtual display streaming, true extended desktop)
+- **Phase 3:** Hybrid Workspace (multi-display, file drag and drop, audio streaming, mobile companion)
+- **Phase 4:** Remote Application Research (remote execution, resource-aware placement)
+- **Phase 5:** Distributed Workspace (unified resource model, workload scheduling)
+
+See the [full roadmap](https://rimorastudio.github.io/Aether/about.html#roadmap) and the [vision document](docs/dev/vision.md) for details.
 
 ## Security
 
@@ -111,7 +160,7 @@ Security issues should follow the policy in [docs/Security.md](docs/Security.md)
 
 ## License
 
-Aether is distributed under GPL-2.0 with an OpenSSL exception. Source code is licensed under a GPL-2.0-only with OpenSSL exception, or as noted per file. See `LICENSE` and `LICENSES/` for details.
+Aether is distributed under GPL-2.0 with an OpenSSL exception. Source code is licensed under GPL-2.0-only with OpenSSL exception, or as noted per file. See `LICENSE` and `LICENSES/` for details.
 
 ## Credits
 
