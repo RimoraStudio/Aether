@@ -78,17 +78,17 @@ void ClipboardTests::longerText()
   std::string actual = clipboard.marshall();
 
   // 4 asserts here, but that's ok because we're really just asserting 1
-  // thing. the 32-bit size value is split into 4 chars. if the size is 287
-  // (31 more than the 8-bit max size), the last char "rolls over" to 31
+  // thing. the 32-bit size value is split into 4 chars. if the size is 283
+  // (27 more than the 8-bit max size), the last char "rolls over" to 27
   // (this is caused by a bit-wise & on 0xff and 8-bit truncation). each
   // char before the last stores a bit-shifted version of the number, each
   // 1 more power than the last, which is done by bit-shifting [0] by 24,
   // [1] by 16, [2] by 8 ([3] is not bit-shifted).
   qInfo() << actual;
-  QCOMPARE(actual[8], 0);   // 287 >> 24 = 287 / (256^3) = 0
-  QCOMPARE(actual[9], 0);   // 287 >> 16 = 287 / (256^2) = 0
-  QCOMPARE(actual[10], 1);  // 287 >> 8 = 287 / (256^1) = 1(.121)
-  QCOMPARE(actual[11], 31); // 287 - 256 = 31
+  QCOMPARE(actual[8], 0);   // 283 >> 24 = 283 / (256^3) = 0
+  QCOMPARE(actual[9], 0);   // 283 >> 16 = 283 / (256^2) = 0
+  QCOMPARE(actual[10], 1);  // 283 >> 8 = 283 / (256^1) = 1(.105)
+  QCOMPARE(actual[11], 27); // 283 - 256 = 27
 }
 
 void ClipboardTests::htmlText()
@@ -169,10 +169,10 @@ void ClipboardTests::unMarshalLongerText()
   data += (char)0;
   data += (char)0;
   data += (char)IClipboard::Format::Text;
-  data += (char)0;  // 287 >> 24 = 287 / (256^3) = 0
-  data += (char)0;  // 287 >> 16 = 287 / (256^2) = 0
-  data += (char)1;  // 287 >> 8 = 287 / (256^1) = 1(.121)
-  data += (char)31; // 287 - 256 = 31
+  data += (char)0;  // 283 >> 24 = 283 / (256^3) = 0
+  data += (char)0;  // 283 >> 16 = 283 / (256^2) = 0
+  data += (char)1;  // 283 >> 8 = 283 / (256^1) = 1(.105)
+  data += (char)27; // 283 - 256 = 27
   data += text;
 
   clipboard.unmarshall(data, 0);
@@ -196,7 +196,7 @@ void ClipboardTests::unMarshalTextAndHtml()
   data += (char)0;
   data += (char)0;
   data += (char)0;
-  data += (char)14;
+  data += (char)12;
   data += kTestString1;
   data += (char)0;
   data += (char)0;

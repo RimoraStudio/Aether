@@ -86,6 +86,6 @@ if(NOT SKIP_BUILD_TESTS)
   add_custom_command (
     TARGET run_tests
     POST_BUILD
-    COMMAND ${qPA_Platform} ${CMAKE_CTEST_COMMAND} --test-dir  "${CMAKE_BINARY_DIR}/src/unittests" --output-on-failure
+    COMMAND ${qPA_Platform} ${CMAKE_CTEST_COMMAND} -C $<CONFIG> --test-dir "${CMAKE_BINARY_DIR}/src/unittests" --output-on-failure
   )
 endif()
