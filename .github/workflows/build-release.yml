@@ -108,10 +108,10 @@ jobs:
           if ! command -v wix &>/dev/null; then
             dotnet tool install --global wix --version 5.0.2
           fi
-          wix extension add -g WixToolset.UI.wixext/5.0.2
-          wix extension add -g WixToolset.Util.wixext/5.0.2
-          wix extension add -g WixToolset.Firewall.wixext/5.0.2
-          wix extension add -g WixToolset.Bal.wixext/5.0.2
+          for ext in WixToolset.UI.wixext WixToolset.Util.wixext WixToolset.Firewall.wixext WixToolset.Bal.wixext; do
+            wix extension remove -g "$ext" 2>/dev/null || true
+            wix extension add -g "$ext/5.0.2"
+          done
           wix extension list -g
         shell: bash
 
