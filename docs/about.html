@@ -357,11 +357,17 @@
         <h3>Phase 1: Core foundation</h3>
         <p>Keyboard and mouse sharing across Windows and Linux. Clipboard sharing for text, HTML, and BMP images. TLS encrypted network traffic. Synergy and Barrier protocol compatibility. Qt6 GUI with screen layout editor, system tray, and version checker. Multi-language UI in 7 languages. MSI, EXE, 7Z, DEB, RPM, and tar.gz installers. GitHub Actions CI/CD with Telegram notifications.</p>
       </div>
+      <div class="timeline-item done">
+        <div class="timeline-dot"></div>
+        <span class="timeline-status">Shipped - v1.1</span>
+        <h3>Phase 1: Workspace polish</h3>
+        <p>File transfer via clipboard between machines. LAN server auto-discovery so clients find servers without typing IPs. Redesigned main window with mode cards and live status. Light and dark theme with a theme picker. Branded Windows installer with app-local MSVC runtime so no redistributable is required. macOS arm64 DMG. Update check against GitHub releases.</p>
+      </div>
       <div class="timeline-item current">
         <div class="timeline-dot"></div>
-        <span class="timeline-status">In progress - v1.1</span>
-        <h3>Phase 1: Auto-updater</h3>
-        <p>Click the update notification, confirm, and Aether downloads and installs the new version automatically. Downloads the latest installer from GitHub releases, verifies the SHA-256 checksum, runs the MSI or DEB silently, and restarts. Includes a setting to disable update checks and proxy support via HTTPS_PROXY.</p>
+        <span class="timeline-status">Planned - v1.2</span>
+        <h3>Aether Port Share</h3>
+        <p>Forward localhost TCP ports between peers over the existing encrypted link. A dev server running on one machine's localhost:3000 becomes reachable at localhost:3000 on every connected machine. Opt-in per-port whitelist on the server, loopback-only on both ends, per-peer connection caps. Full design in the <a href="https://github.com/RimoraStudio/Aether/blob/main/docs/dev/port-sharing.md">port sharing plan</a>.</p>
       </div>
       <div class="timeline-item">
         <div class="timeline-dot"></div>
