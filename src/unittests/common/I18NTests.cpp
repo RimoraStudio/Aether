@@ -21,7 +21,18 @@ void I18NTests::initTestCase()
   Settings::setStateFile(m_stateFile);
 
   m_myTDir = QStringLiteral("%1/translations").arg(QCoreApplication::applicationDirPath());
-  const auto srcTDir = QStringLiteral("%1/../../../translations").arg(QCoreApplication::applicationDirPath());
+  // multi-config generators add a config level (e.g. Release/) to the app dir
+  const QStringList srcCandidates{
+      QStringLiteral("%1/../../../translations").arg(QCoreApplication::applicationDirPath()),
+      QStringLiteral("%1/../../../../translations").arg(QCoreApplication::applicationDirPath()),
+  };
+  QString srcTDir;
+  for (const auto &candidate : srcCandidates) {
+    if (QDir(candidate).exists()) {
+      srcTDir = candidate;
+      break;
+    }
+  }
 
   QDir dir;
   if (dir.exists(m_myTDir)) {

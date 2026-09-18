@@ -8,6 +8,8 @@
 #include "LogWidget.h"
 #include "SearchWidget.h"
 
+#include "gui/Theme.h"
+
 #include <QEvent>
 #include <QHBoxLayout>
 #include <QLabel>
@@ -25,28 +27,33 @@ LogDock::LogDock(QWidget *parent)
   connect(m_searchWidget, &SearchWidget::findNext, m_textLog, &LogWidget::findNext);
   connect(m_searchWidget, &SearchWidget::findPrevious, m_textLog, &LogWidget::findPrevious);
 
-  const auto iconSize = QSize(fontMetrics().height() - 2, fontMetrics().height() - 2);
-  const auto maxBtnSize = QSize(fontMetrics().height() + 2, fontMetrics().height() + 2);
+  const auto iconSize = QSize(fontMetrics().height() - 4, fontMetrics().height() - 4);
+  const auto maxBtnSize = QSize(fontMetrics().height() + 8, fontMetrics().height() + 8);
 
   m_btnFloat->setFixedSize(maxBtnSize);
   m_btnFloat->setCheckable(true);
   m_btnFloat->setFlat(true);
-  m_btnFloat->setIcon(QIcon::fromTheme(QStringLiteral("window-minimize-pip")));
+  m_btnFloat->setIcon(QIcon::fromTheme(QStringLiteral("log-detach")));
   m_btnFloat->setIconSize(iconSize);
   m_btnFloat->setToolTip(tr("Detach from window"));
   connect(m_btnFloat, &QPushButton::toggled, this, &LogDock::setFloating);
 
   m_btnClose->setFixedSize(maxBtnSize);
   m_btnClose->setFlat(true);
-  m_btnClose->setIcon(QIcon::fromTheme(QStringLiteral("view-close")));
+  m_btnClose->setIcon(QIcon::fromTheme(QStringLiteral("log-close")));
   m_btnClose->setIconSize(iconSize);
   m_btnClose->setToolTip(tr("Close Log"));
   connect(m_btnClose, &QPushButton::clicked, this, &QDockWidget::hide);
+
+  m_lblTitle->setStyleSheet(QStringLiteral("font-size: 11px; font-weight: 600; letter-spacing: 0.6px;"));
+  aether::gui::applySecondaryText(m_lblTitle);
 
   auto titleWidget = new QWidget(this);
   titleWidget->installEventFilter(this);
 
   auto titleLayout = new QHBoxLayout(titleWidget);
+  titleLayout->setContentsMargins(16, 0, 14, 0);
+  titleLayout->setSpacing(6);
   titleLayout->addWidget(m_lblTitle, Qt::AlignLeft | Qt::AlignVCenter);
   titleLayout->addSpacerItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Fixed));
   titleLayout->addWidget(m_searchWidget, Qt::AlignRight | Qt::AlignVCenter);
@@ -56,6 +63,8 @@ LogDock::LogDock(QWidget *parent)
 
   auto bodyWidget = new QWidget(this);
   auto bodyLayout = new QVBoxLayout(bodyWidget);
+  bodyLayout->setContentsMargins(16, 0, 16, 10);
+  bodyLayout->setSpacing(0);
   bodyLayout->addWidget(m_textLog);
   setWidget(bodyWidget);
 
@@ -75,11 +84,11 @@ void LogDock::setFloating(bool floating)
 {
   if (floating) {
     m_btnFloat->setToolTip(tr("Attach to window"));
-    m_btnFloat->setIcon(QIcon::fromTheme(QStringLiteral("window-restore-pip")));
+    m_btnFloat->setIcon(QIcon::fromTheme(QStringLiteral("log-detach")));
     setWindowFlags(Qt::Dialog);
   } else {
     m_btnFloat->setToolTip(tr("Detach from window"));
-    m_btnFloat->setIcon(QIcon::fromTheme(QStringLiteral("window-minimize-pip")));
+    m_btnFloat->setIcon(QIcon::fromTheme(QStringLiteral("log-detach")));
     setWindowFlags(Qt::Widget);
   }
   m_lblTitle->setVisible(!floating);

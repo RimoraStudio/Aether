@@ -15,6 +15,7 @@
 #include <QSystemTrayIcon>
 #include <QUrl>
 
+#include "LanDiscovery.h"
 #include "VersionChecker.h"
 #include "config/ServerConfig.h"
 #include "gui/core/CoreProcess.h"
@@ -140,6 +141,8 @@ private:
   void daemonIpcClientConnectionFailed();
   void toggleCanRunCore(bool enableButtons);
   void remoteHostChanged(const QString &newRemoteHost);
+  void onDiscoveredServer(const QString &screenName, const QString &address);
+  void updateAnnounceState();
   void updateIpLabel(const QStringList &addresses);
   void updateTimeoutDelay(int newDelay);
   void setHelpFilePath();
@@ -184,6 +187,7 @@ private:
 
   LogDock *m_logDock;
   StatusBar *m_statusBar = nullptr;
+  aether::gui::LanDiscovery m_discovery;
 
   // Window Menu
   QMenu *m_menuFile = nullptr;

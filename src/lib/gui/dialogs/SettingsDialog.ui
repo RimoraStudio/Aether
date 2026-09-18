@@ -79,6 +79,26 @@
         </layout>
        </item>
        <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_theme">
+         <item>
+          <widget class="QLabel" name="lblTheme">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Theme</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboTheme"/>
+         </item>
+        </layout>
+       </item>
+       <item>
         <widget class="QCheckBox" name="cbAutoUpdate">
          <property name="text">
           <string>Check for updates on startup</string>

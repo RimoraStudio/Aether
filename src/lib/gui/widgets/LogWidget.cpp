@@ -19,6 +19,11 @@ LogWidget::LogWidget(QWidget *parent) : QWidget{parent}, m_textLog{new QPlainTex
   m_textLog->setMaximumBlockCount(10000);
   m_textLog->setLineWrapMode(QPlainTextEdit::NoWrap);
   m_textLog->setFont(fixedFont());
+  m_textLog->setStyleSheet(
+      QStringLiteral("QPlainTextEdit { border: 1px solid palette(mid); border-radius: 8px; "
+                     "background: palette(base); padding: 6px 8px; } "
+                     "QPlainTextEdit:focus { border: 1px solid palette(mid); }")
+  );
 
   auto layout = new QVBoxLayout;
   layout->setContentsMargins(0, 0, 0, 0);

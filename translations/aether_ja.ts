@@ -339,13 +339,13 @@ Do you want to connect to the server?
     <message>
         <source>Use this computer&apos;s keyboard and mouse
 (make this computer the server)</source>
-        <translation>このコンピューターのキーボードとマウスを使用する
+        <translation type="vanished">このコンピューターのキーボードとマウスを使用する
 (このコンピューターをサーバーにする)</translation>
     </message>
     <message>
         <source>Use another computer’s mouse and keyboard
 (make this computer the client)</source>
-        <translation>別のコンピューターのキーボードとマウスを使用する
+        <translation type="vanished">別のコンピューターのキーボードとマウスを使用する
 (このコンピューターをクライアントにする)</translation>
     </message>
     <message>
@@ -551,7 +551,7 @@ Valid names:
     </message>
     <message>
         <source>&lt;html&gt;Hostname or IP address of the server computer.&lt;br/&gt;May contain a comma seperated list.&lt;/html&gt;</source>
-        <translation>&lt;html&gt;サーバーコンピューターのホスト名または IP アドレス。&lt;br/&gt;カンマ区切りのリストを含めることができます。&lt;/html&gt;</translation>
+        <translation type="vanished">&lt;html&gt;サーバーコンピューターのホスト名または IP アドレス。&lt;br/&gt;カンマ区切りのリストを含めることができます。&lt;/html&gt;</translation>
     </message>
     <message>
         <source>read</source>
@@ -584,6 +584,60 @@ Additionally, check you are able to %1 the server config file: %2</source>
     <message>
         <source>&lt;p&gt;Keyboard layout support requires matching layouts on all computers. The following layouts from the other computer are not installed on this computer:&lt;/p&gt;&lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Please install them to enable support for these layouts.&lt;/p&gt;</source>
         <translation>&lt;p&gt;キーボードレイアウトのサポートには対応するレイアウトが全てのコンピューターに必要です。別のコンピューターで使用されている以下のレイアウトがこのコンピューターにインストールされていません:&lt;/p&gt;&lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;&lt;p&gt;サポートを有効にするには、これらのレイアウトをインストールしてください。&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>font-size: 15px; font-weight: 600;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Aether</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>color: palette(mid);</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QFrame#modeCardServer { border: 1px solid palette(mid); border-radius: 10px; background: palette(base); }
+QFrame#modeCardServer[selected=&quot;true&quot;] { border: 2px solid palette(highlight); }</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This computer is the server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Share this computer&apos;s keyboard and mouse</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>color: palette(text); font-size: 11px;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other devices connect here and take control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QFrame#modeCardClient { border: 1px solid palette(mid); border-radius: 10px; background: palette(base); }
+QFrame#modeCardClient[selected=&quot;true&quot;] { border: 2px solid palette(highlight); }</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This computer is the client</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use another computer&apos;s mouse and keyboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This computer is controlled by a server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;Discovered servers appear in the list.&lt;br/&gt;You can also type a hostname or IP address manually.&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1256,6 +1310,22 @@ Enabling this setting will disable the server config GUI.</source>
     <message>
         <source>Remove all settings</source>
         <translation>すべての設定を消去する</translation>
+    </message>
+    <message>
+        <source>Theme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>System</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Light</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

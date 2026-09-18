@@ -16,6 +16,7 @@
 #include "gui/MainWindow.h"
 #include "gui/Messages.h"
 #include "gui/StyleUtils.h"
+#include "gui/Theme.h"
 
 #include <QApplication>
 #include <QCommandLineParser>
@@ -120,11 +121,11 @@ int main(int argc, char *argv[])
   }
 
   if (!aether::platform::isMac() && qEnvironmentVariable("XDG_CURRENT_DESKTOP") != QLatin1String("KDE")) {
+    applyTheme(app);
+  } else {
     QApplication::setStyle("fusion");
+    updateIconTheme();
   }
-
-  // Sets the fallback icon path and fallback theme
-  updateIconTheme();
 
   qInstallMessageHandler(aether::gui::messages::messageHandler);
   qInfo("%s v%s", kAppName, kDisplayVersion);

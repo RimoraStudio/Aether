@@ -9,6 +9,8 @@
 #include "common/Settings.h"
 #include "common/VersionInfo.h"
 
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QLocale>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -46,12 +48,17 @@ void VersionChecker::replyFinished(QNetworkReply *reply)
 
   qDebug("version check server success, http status: %d", httpStatus);
 
-  const auto newestVersion = QString(reply->readAll());
+  const auto body = reply->readAll();
   reply->deleteLater();
+
+  auto newestVersion = QJsonDocument::fromJson(body).object().value("tag_name").toString();
+  if (newestVersion.startsWith('v')) {
+    newestVersion.remove(0, 1);
+  }
   qDebug("version check response: %s", qPrintable(newestVersion));
 
   if (newestVersion.isEmpty()) {
-    qWarning() << "version check is response is empty";
+    qWarning() << "version check response has no tag_name";
     return;
   }
 

@@ -8,6 +8,8 @@
         <file>icons/aether-dark/actions/16/go-down.svg</file>
         <file>icons/aether-dark/actions/16/go-up.svg</file>
         <file>icons/aether-dark/actions/16/help-about.svg</file>
+    <file>icons/aether-dark/actions/16/log-close.svg</file>
+    <file>icons/aether-dark/actions/16/log-detach.svg</file>
         <file>icons/aether-dark/actions/16/network-connect.svg</file>
         <file>icons/aether-dark/actions/16/network-disconnect.svg</file>
         <file>icons/aether-dark/actions/16/process-stop.svg</file>
@@ -30,6 +32,8 @@
         <file>icons/aether-dark/actions/22/network-disconnect.svg</file>
         <file>icons/aether-dark/actions/22/process-stop.svg</file>
         <file>icons/aether-dark/actions/22/question.svg</file>
+    <file>icons/aether-dark/actions/22/remote-control.svg</file>
+    <file>icons/aether-dark/actions/22/share-screen.svg</file>
         <file>icons/aether-dark/actions/22/system-run.svg</file>
         <file>icons/aether-dark/actions/22/system-search.svg</file>
         <file>icons/aether-dark/actions/22/view-close.svg</file>
@@ -91,6 +95,8 @@
         <file>icons/aether-light/actions/16/go-down.svg</file>
         <file>icons/aether-light/actions/16/go-up.svg</file>
         <file>icons/aether-light/actions/16/help-about.svg</file>
+    <file>icons/aether-light/actions/16/log-close.svg</file>
+    <file>icons/aether-light/actions/16/log-detach.svg</file>
         <file>icons/aether-light/actions/16/network-connect.svg</file>
         <file>icons/aether-light/actions/16/network-disconnect.svg</file>
         <file>icons/aether-light/actions/16/process-stop.svg</file>
@@ -114,6 +120,8 @@
         <file>icons/aether-light/actions/22/help-about.svg</file>
         <file>icons/aether-light/actions/22/process-stop.svg</file>
         <file>icons/aether-light/actions/22/question.svg</file>
+    <file>icons/aether-light/actions/22/remote-control.svg</file>
+    <file>icons/aether-light/actions/22/share-screen.svg</file>
         <file>icons/aether-light/actions/22/system-run.svg</file>
         <file>icons/aether-light/actions/22/system-search.svg</file>
         <file>icons/aether-light/actions/22/view-close.svg</file>
@@ -165,5 +173,7 @@
         <file>icons/aether-light/status/64/security-low.svg</file>
         <file>icons/aether-light/status/64/security-medium.svg</file>
         <file>icons/aether-light/index.theme</file>
+        <file>themes/light.json</file>
+        <file>themes/dark.json</file>
     </qresource>
 </RCC>

@@ -49,6 +49,7 @@ inline void updateIconTheme()
     QIcon::setFallbackThemeName(themeName);
   QIcon::setFallbackSearchPaths({QStringLiteral(":/icons/%1").arg(themeName)});
 }
+
 } // namespace aether::gui
 
 inline QFont fixedFont()

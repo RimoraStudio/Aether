@@ -532,13 +532,13 @@ Nomi validi:
     <message>
         <source>Use this computer&apos;s keyboard and mouse
 (make this computer the server)</source>
-        <translation>Usa tastiera e mouse di questo computer
+        <translation type="vanished">Usa tastiera e mouse di questo computer
 (imposta questo computer come server)</translation>
     </message>
     <message>
         <source>Use another computer’s mouse and keyboard
 (make this computer the client)</source>
-        <translation>Usa mouse e tastiera di un altro computer
+        <translation type="vanished">Usa mouse e tastiera di un altro computer
 (imposta questo computer come client)</translation>
     </message>
     <message>
@@ -551,7 +551,7 @@ Nomi validi:
     </message>
     <message>
         <source>&lt;html&gt;Hostname or IP address of the server computer.&lt;br/&gt;May contain a comma seperated list.&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;Nome host o indirizzo IP del computer server.&lt;br/&gt;Può contenere un elenco separato da virgole.&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;Nome host o indirizzo IP del computer server.&lt;br/&gt;Può contenere un elenco separato da virgole.&lt;/html&gt;</translation>
     </message>
     <message>
         <source>read</source>
@@ -583,6 +583,60 @@ Inoltre, verifica di poter %1 il file di configurazione del server: %2</translat
     </message>
     <message>
         <source>&lt;p&gt;Keyboard layout support requires matching layouts on all computers. The following layouts from the other computer are not installed on this computer:&lt;/p&gt;&lt;p&gt;&lt;b&gt;%1&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Please install them to enable support for these layouts.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>font-size: 15px; font-weight: 600;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Aether</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>color: palette(mid);</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QFrame#modeCardServer { border: 1px solid palette(mid); border-radius: 10px; background: palette(base); }
+QFrame#modeCardServer[selected=&quot;true&quot;] { border: 2px solid palette(highlight); }</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This computer is the server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Share this computer&apos;s keyboard and mouse</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>color: palette(text); font-size: 11px;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other devices connect here and take control</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QFrame#modeCardClient { border: 1px solid palette(mid); border-radius: 10px; background: palette(base); }
+QFrame#modeCardClient[selected=&quot;true&quot;] { border: 2px solid palette(highlight); }</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This computer is the client</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use another computer&apos;s mouse and keyboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This computer is controlled by a server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;Discovered servers appear in the list.&lt;br/&gt;You can also type a hostname or IP address manually.&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1254,6 +1308,22 @@ L&apos;abilitazione di questa impostazione disabiliterà l&apos;interfaccia graf
     <message>
         <source>Remove all settings</source>
         <translation type="unfinished">Rimuovi tutte le impostazioni</translation>
+    </message>
+    <message>
+        <source>Theme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>System</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Light</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dark</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

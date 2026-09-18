@@ -19,6 +19,8 @@ add_library(${target} STATIC
   Diagnostic.h
   FileTail.cpp
   FileTail.h
+  LanDiscovery.cpp
+  LanDiscovery.h
   Logger.cpp
   Logger.h
   MainWindow.cpp
@@ -29,6 +31,8 @@ add_library(${target} STATIC
   ScreenSetupModel.cpp
   ScreenSetupModel.h
   StyleUtils.h
+  Theme.cpp
+  Theme.h
   TlsUtility.cpp
   TlsUtility.h
   VersionChecker.cpp
@@ -124,4 +128,6 @@ target_link_libraries(${target}
     platform
     net
     Qt6::Widgets
+  PRIVATE
+    qlementine
 )

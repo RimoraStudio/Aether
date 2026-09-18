@@ -13,6 +13,7 @@
 
 #include "common/I18N.h"
 #include "common/Settings.h"
+#include "gui/Theme.h"
 #include "gui/TlsUtility.h"
 #include "gui/core/NetworkMonitor.h"
 #include "gui/widgets/SettingsDialogButtonBox.h"
@@ -23,6 +24,15 @@
 #include <QMessageBox>
 
 using namespace aether::gui;
+
+namespace {
+// Unset value means "system".
+QString themeSetting()
+{
+  const auto theme = Settings::value(Settings::Gui::Theme).toString();
+  return theme.isEmpty() ? QStringLiteral("system") : theme;
+}
+} // namespace
 
 SettingsDialog::SettingsDialog(QWidget *parent, const ServerConfig &serverConfig)
     : QDialog(parent),
@@ -43,6 +53,10 @@ SettingsDialog::SettingsDialog(QWidget *parent, const ServerConfig &serverConfig
   I18N::reDetectLanguages();
   ui->comboLanguage->addItems(I18N::detectedLanguages());
   ui->comboLanguage->setCurrentText(I18N::toNativeName(I18N::currentLanguage()));
+
+  ui->comboTheme->addItem(tr("System"), QStringLiteral("system"));
+  ui->comboTheme->addItem(tr("Light"), QStringLiteral("light"));
+  ui->comboTheme->addItem(tr("Dark"), QStringLiteral("dark"));
 
   updateText();
 
@@ -228,6 +242,7 @@ void SettingsDialog::accept()
   Settings::setValue(Settings::Daemon::Elevate, ui->cbElevateDaemon->isChecked());
   Settings::setValue(Settings::Gui::Autohide, ui->rbAutoHide->isChecked());
   Settings::setValue(Settings::Gui::AutoUpdateCheck, ui->cbAutoUpdate->isChecked());
+  Settings::setValue(Settings::Gui::Theme, ui->comboTheme->currentData());
   Settings::setValue(Settings::Core::PreventSleep, ui->cbPreventSleep->isChecked());
   Settings::setValue(Settings::Security::Certificate, ui->lineTlsCertPath->text());
   Settings::setValue(Settings::Security::KeySize, ui->comboTlsKeyLength->currentText().toInt());
@@ -250,6 +265,8 @@ void SettingsDialog::accept()
     mode = Settings::ProcessMode::Desktop;
   Settings::setValue(Settings::Core::ProcessMode, mode);
 
+  reapplyTheme();
+
   QDialog::accept();
 }
 
@@ -264,6 +281,8 @@ void SettingsDialog::loadFromConfig()
   ui->cbPreventSleep->setChecked(Settings::value(Settings::Core::PreventSleep).toBool());
   ui->cbElevateDaemon->setChecked(Settings::value(Settings::Daemon::Elevate).toBool());
   ui->cbAutoUpdate->setChecked(Settings::value(Settings::Gui::AutoUpdateCheck).toBool());
+  const auto themeIndex = ui->comboTheme->findData(Settings::value(Settings::Gui::Theme).toString());
+  ui->comboTheme->setCurrentIndex(themeIndex == -1 ? 0 : themeIndex);
   ui->cbGuiDebug->setChecked(Settings::value(Settings::Log::GuiDebug).toBool());
   ui->cbShowVersion->setChecked(Settings::value(Settings::Gui::ShowVersionInTitle).toBool());
   ui->cbRunEnterCommand->setChecked(Settings::value(Settings::Core::EnableEnterCommand).toBool());
@@ -432,6 +451,7 @@ bool SettingsDialog::isModified() const
       (ui->rbCloseToTray->isChecked() != Settings::value(Settings::Gui::CloseToTray).toBool()) ||
       (ui->cbElevateDaemon->isChecked() != Settings::value(Settings::Daemon::Elevate).toBool()) ||
       (ui->cbAutoUpdate->isChecked() != Settings::value(Settings::Gui::AutoUpdateCheck).toBool()) ||
+      (ui->comboTheme->currentData().toString() != themeSetting()) ||
       (ui->cbGuiDebug->isChecked() != Settings::value(Settings::Log::GuiDebug).toBool()) ||
       (ui->cbShowVersion->isChecked() != Settings::value(Settings::Gui::ShowVersionInTitle).toBool()) ||
       (ui->rbIconMono->isChecked() != Settings::value(Settings::Gui::SymbolicTrayIcon).toBool()) ||
@@ -467,6 +487,7 @@ bool SettingsDialog::isDefault() const
       (ui->rbCloseToTray->isChecked() == Settings::defaultValue(Settings::Gui::CloseToTray).toBool()) &&
       (ui->cbElevateDaemon->isChecked() == Settings::defaultValue(Settings::Daemon::Elevate).toBool()) &&
       (ui->cbAutoUpdate->isChecked() == Settings::defaultValue(Settings::Gui::AutoUpdateCheck).toBool()) &&
+      (ui->comboTheme->currentData().toString() == QLatin1String("system")) &&
       (ui->cbGuiDebug->isChecked() == Settings::defaultValue(Settings::Log::GuiDebug).toBool()) &&
       (ui->cbShowVersion->isChecked() == Settings::defaultValue(Settings::Gui::ShowVersionInTitle).toBool()) &&
       (ui->rbIconMono->isChecked() == Settings::defaultValue(Settings::Gui::SymbolicTrayIcon).toBool()) &&
@@ -495,6 +516,7 @@ void SettingsDialog::resetToDefault()
   ui->cbPreventSleep->setChecked(Settings::defaultValue(Settings::Core::PreventSleep).toBool());
   ui->cbElevateDaemon->setChecked(Settings::defaultValue(Settings::Daemon::Elevate).toBool());
   ui->cbAutoUpdate->setChecked(Settings::defaultValue(Settings::Gui::AutoUpdateCheck).toBool());
+  ui->comboTheme->setCurrentIndex(0);
   ui->cbGuiDebug->setChecked(Settings::defaultValue(Settings::Log::GuiDebug).toBool());
   ui->cbShowVersion->setChecked(Settings::defaultValue(Settings::Gui::ShowVersionInTitle).toBool());
   ui->cbRunEnterCommand->setChecked(Settings::defaultValue(Settings::Core::EnableEnterCommand).toBool());

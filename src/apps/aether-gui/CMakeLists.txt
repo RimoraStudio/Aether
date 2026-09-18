@@ -71,7 +71,7 @@ if(WIN32)
   add_custom_command(
     TARGET ${target} POST_BUILD
     COMMAND ${DEPLOYQT}
-      --no-compiler-runtime
+      --compiler-runtime
       --no-system-d3d-compiler
       --no-opengl-sw
       --no-quick-import
@@ -88,6 +88,14 @@ if(WIN32)
     DESTINATION ${CMAKE_INSTALL_LIBDIR}
     PATTERN "dx*.dll" EXCLUDE
     PATTERN "icu*.dll" EXCLUDE
+  )
+
+  # Ship the MSVC runtime app-locally so installs work on machines
+  # without a matching VC++ redistributable.
+  include(InstallRequiredSystemLibraries)
+  install(
+    PROGRAMS ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS}
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}
   )
 
 elseif(APPLE)

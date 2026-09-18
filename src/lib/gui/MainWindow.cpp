@@ -12,6 +12,7 @@
 
 #include "Diagnostic.h"
 #include "StyleUtils.h"
+#include "Theme.h"
 
 #include "dialogs/AboutDialog.h"
 #include "dialogs/ClientConfigDialog.h"
@@ -32,10 +33,14 @@
 #include "net/FingerprintDatabase.h"
 #include "widgets/StatusBar.h"
 
+#include <QButtonGroup>
 #include <QCheckBox>
+#include <QClipboard>
 #include <QCloseEvent>
+#include <QComboBox>
 #include <QDesktopServices>
 #include <QFileDialog>
+#include <QGuiApplication>
 #include <QLocalServer>
 #include <QLocalSocket>
 #include <QMenu>
@@ -44,6 +49,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkInterface>
 #include <QPushButton>
+#include <QStyle>
 #include <QRegularExpression>
 #include <QRegularExpressionValidator>
 #include <QScreen>
@@ -220,6 +226,43 @@ void MainWindow::setupControls()
   ui->lineEditName->setValidator(new QRegularExpressionValidator(m_nameRegEx, this));
   ui->lineEditName->setVisible(false);
   ui->lineEditName->installEventFilter(this);
+  ui->modeCardServer->installEventFilter(this);
+  ui->modeCardClient->installEventFilter(this);
+  ui->lblModeServerDesc->installEventFilter(this);
+  ui->lblModeClientDesc->installEventFilter(this);
+  ui->iconModeServer->installEventFilter(this);
+  ui->iconModeClient->installEventFilter(this);
+  ui->lblModeServerTitle->installEventFilter(this);
+  ui->lblModeClientTitle->installEventFilter(this);
+
+  connect(&m_discovery, &LanDiscovery::serverFound, this, &MainWindow::onDiscoveredServer);
+  m_discovery.startListening();
+
+  ui->lblAppIcon->setPixmap(
+      QIcon(QStringLiteral(":/icons/%1-%2/apps/64/%3").arg(kAppId, iconMode(), kRevFqdnName)).pixmap(28)
+  );
+  ui->iconModeServer->setPixmap(QIcon::fromTheme(QStringLiteral("share-screen")).pixmap(28));
+  ui->iconModeClient->setPixmap(QIcon::fromTheme(QStringLiteral("remote-control")).pixmap(28));
+
+  for (auto *label : {ui->lblAppSubtitle, ui->labelComputerName, ui->lblModeServerDesc, ui->lblModeClientDesc,
+                      ui->lblNoMode, ui->m_pLabelServerName, ui->lblHeroDetail}) {
+    aether::gui::applySecondaryText(label);
+  }
+
+  connect(ui->btnCopyIp, &QPushButton::clicked, this, [this] {
+    if (m_currentIpAddress.isEmpty())
+      return;
+    QGuiApplication::clipboard()->setText(m_currentIpAddress);
+    ui->btnCopyIp->setToolTip(tr("Copied!"));
+    QTimer::singleShot(1500, this, [this] { ui->btnCopyIp->setToolTip(tr("Copy IP address")); });
+  });
+
+  // The radios live in separate card frames, so Qt's implicit autoExclusive
+  // grouping does not apply. Group them explicitly.
+  const auto modeGroup = new QButtonGroup(this);
+  modeGroup->setExclusive(true);
+  modeGroup->addButton(ui->rbModeServer);
+  modeGroup->addButton(ui->rbModeClient);
 
   if (aether::platform::isMac()) {
     ui->rbModeServer->setAttribute(Qt::WA_MacShowFocusRect, false);
@@ -287,8 +330,13 @@ void MainWindow::connectSlots()
 
   connect(ui->btnRestartCore, &QPushButton::clicked, this, &MainWindow::resetCore);
 
-  connect(ui->lineHostname, &QLineEdit::returnPressed, ui->btnRestartCore, &QPushButton::click);
-  connect(ui->lineHostname, &QLineEdit::textChanged, this, &MainWindow::remoteHostChanged);
+  connect(ui->comboRemoteHost->lineEdit(), &QLineEdit::returnPressed, ui->btnRestartCore, &QPushButton::click);
+  connect(ui->comboRemoteHost, &QComboBox::currentTextChanged, this, &MainWindow::remoteHostChanged);
+  connect(ui->comboRemoteHost, &QComboBox::activated, this, [this](int index) {
+    const auto name = ui->comboRemoteHost->itemData(index).toString();
+    if (!name.isEmpty())
+      ui->comboRemoteHost->setCurrentText(name);
+  });
 
   connect(ui->btnSaveServerConfig, &QPushButton::clicked, this, &MainWindow::saveServerConfig);
   connect(ui->btnConfigureServer, &QPushButton::clicked, this, [this] { showConfigureServer(""); });
@@ -530,11 +578,20 @@ void MainWindow::updateModeControls()
   ui->serverOptions->setVisible(isServer);
   ui->clientOptions->setVisible(isClient);
   ui->lblNoMode->setVisible(!isServer && !isClient);
+
+  const auto updateCard = [](QWidget *card, bool selected) {
+    card->setProperty("selected", selected);
+    card->style()->unpolish(card);
+    card->style()->polish(card);
+  };
+  updateCard(ui->modeCardServer, isServer);
+  updateCard(ui->modeCardClient, isClient);
   toggleCanRunCore(canRunCore());
 
-  ui->lblIpAddresses->setVisible(
-      (isClient && !Settings::value(Settings::Core::Interface).toString().isEmpty()) || isServer
-  );
+  const bool ipVisible =
+      (isClient && !Settings::value(Settings::Core::Interface).toString().isEmpty()) || isServer;
+  ui->lblIpAddresses->setVisible(ipVisible);
+  ui->btnCopyIp->setVisible(ipVisible);
 
   if (ui->lblIpAddresses->isVisible())
     updateNetworkInfo();
@@ -547,6 +604,8 @@ void MainWindow::updateModeControls()
 
   if (isServer || isClient)
     updateModeControlLabels();
+
+  updateStatus();
 }
 
 void MainWindow::updateModeControlLabels()
@@ -651,7 +710,7 @@ void MainWindow::open()
   }
 
   if (Settings::value(Settings::Gui::AutoStartCore).toBool()) {
-    if (ui->rbModeClient->isChecked() && ui->lineHostname->text().isEmpty())
+    if (ui->rbModeClient->isChecked() && ui->comboRemoteHost->currentText().isEmpty())
       return;
     startCore();
   }
@@ -704,7 +763,7 @@ void MainWindow::applyConfig()
   }
 
   if (const auto host = Settings::value(Settings::Client::RemoteHost).toString(); !host.isEmpty())
-    ui->lineHostname->setText(host);
+    ui->comboRemoteHost->setCurrentText(host);
 
   updateFingerprintButton();
   setTrayIcon();
@@ -724,8 +783,8 @@ void MainWindow::saveSettings() const
   } else if (ui->rbModeServer->isChecked()) {
     Settings::setValue(Settings::Core::CoreMode, Settings::CoreMode::Server);
   }
-  if (!ui->lineHostname->text().isEmpty())
-    Settings::setValue(Settings::Client::RemoteHost, ui->lineHostname->text());
+  if (!ui->comboRemoteHost->currentText().isEmpty())
+    Settings::setValue(Settings::Client::RemoteHost, ui->comboRemoteHost->currentText());
   Settings::save();
 }
 
@@ -942,12 +1001,87 @@ void MainWindow::updateStatus()
     ui->btnEditName->setVisible(process == Stopped);
   }
   m_statusBar->setStatus(connection, process, isServer);
+
+  const bool isClient = !isServer;
+  QString heroTitle;
+  QString heroDetail;
+  switch (process) {
+  case Starting:
+  case RetryPending:
+    heroTitle = tr("Starting…");
+    heroDetail = tr("Launching the Aether core");
+    break;
+  case Stopping:
+    heroTitle = tr("Stopping…");
+    heroDetail = tr("Shutting down the core process");
+    break;
+  case Started:
+    if (connection == ConnectionState::Connected) {
+      heroTitle = isServer ? tr("Sharing this device") : tr("Controlled remotely");
+      heroDetail = isServer ? tr("Move the cursor off the screen edge to switch devices")
+                            : tr("The server's mouse and keyboard drive this device");
+    } else if (connection == ConnectionState::Listening) {
+      heroTitle = tr("Sharing — waiting for devices");
+      heroDetail = tr("Clients can connect to this device now");
+    } else {
+      heroTitle = isClient ? tr("Connecting…") : tr("Running");
+      heroDetail = isClient ? tr("Looking for the server") : tr("Core is running");
+    }
+    break;
+  case Stopped:
+    heroTitle = tr("Ready");
+    if (isServer)
+      heroDetail = tr("Press Start to share this keyboard and mouse");
+    else if (isClient)
+      heroDetail = tr("Pick a server, then Connect");
+    else
+      heroDetail = tr("Choose a mode, then start sharing");
+    break;
+  }
+  ui->lblHeroStatus->setText(heroTitle);
+  ui->lblHeroDetail->setText(heroDetail);
+
+  if (process == Starting || process == RetryPending) {
+    ui->btnToggleCore->setText(tr("Starting…"));
+    ui->btnToggleCore->setIcon(QIcon::fromTheme(QStringLiteral("system-run")));
+  } else if (process == Stopping) {
+    ui->btnToggleCore->setText(tr("Stopping…"));
+    ui->btnToggleCore->setIcon(QIcon::fromTheme(QIcon::ThemeIcon::ProcessStop));
+  } else {
+    updateModeControlLabels();
+  }
+}
+
+void MainWindow::onDiscoveredServer(const QString &screenName, const QString &address)
+{
+  if (screenName == Settings::value(Settings::Core::ComputerName).toString())
+    return;
+
+  const auto label = QStringLiteral("%1 (%2)").arg(screenName, address);
+  const int i = ui->comboRemoteHost->findData(screenName);
+  if (i < 0)
+    ui->comboRemoteHost->addItem(label, screenName);
+  else
+    ui->comboRemoteHost->setItemText(i, label);
+}
+
+void MainWindow::updateAnnounceState()
+{
+  const bool announcing = m_coreProcess.mode() == Settings::CoreMode::Server && m_coreProcess.isStarted();
+  if (!announcing) {
+    m_discovery.stopAnnounce();
+    return;
+  }
+  const auto name = Settings::value(Settings::Core::ComputerName).toString();
+  const auto port = static_cast<quint16>(Settings::value(Settings::Core::Port).toInt());
+  m_discovery.startAnnounce(name, port);
 }
 
 void MainWindow::coreProcessStateChanged(ProcessState state)
 {
   using enum ProcessState;
   updateStatus();
+  updateAnnounceState();
   if (state == Started) {
     qDebug() << "recording that core has started";
     Settings::setValue(Settings::Gui::AutoStartCore, true);
@@ -1035,6 +1169,16 @@ void MainWindow::changeEvent(QEvent *e)
 
 bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 {
+  if (event->type() == QEvent::MouseButtonRelease &&
+      (obj == ui->modeCardServer || obj == ui->modeCardClient || obj == ui->lblModeServerDesc ||
+       obj == ui->lblModeClientDesc || obj == ui->iconModeServer || obj == ui->iconModeClient ||
+       obj == ui->lblModeServerTitle || obj == ui->lblModeClientTitle)) {
+    const bool isServerCard = obj == ui->modeCardServer || obj == ui->lblModeServerDesc ||
+                              obj == ui->iconModeServer || obj == ui->lblModeServerTitle;
+    (isServerCard ? ui->rbModeServer : ui->rbModeClient)->setChecked(true);
+    return true;
+  }
+
   if (obj != ui->lineEditName || event->type() != QEvent::KeyPress)
     return false;
   if (const auto keyEvent = static_cast<QKeyEvent *>(event); keyEvent->key() != Qt::Key_Escape)
@@ -1325,5 +1469,5 @@ bool MainWindow::canRunCore() const
   const auto mode = m_coreProcess.mode();
   const bool isServer = mode == Settings::CoreMode::Server;
   const bool isClient = mode == Settings::CoreMode::Client;
-  return ((isServer || isClient) && (isClient && !ui->lineHostname->text().isEmpty()) || isServer);
+  return ((isServer || isClient) && (isClient && !ui->comboRemoteHost->currentText().isEmpty()) || isServer);
 }
