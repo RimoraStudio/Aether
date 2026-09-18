@@ -113,6 +113,13 @@ jobs:
             wix extension remove -g "$ext" 2>/dev/null || true
             wix extension add -g "$ext/5.0.2"
           done
+          # The Bal nupkg ships WixToolset.BootstrapperApplications.wixext.dll,
+          # but '-ext WixToolset.Bal.wixext' resolves WixToolset.Bal.wixext.dll.
+          BALDIR="$USERPROFILE/.wix/extensions/WixToolset.Bal.wixext/5.0.2/wixext5"
+          if [ -f "$BALDIR/WixToolset.BootstrapperApplications.wixext.dll" ] && [ ! -f "$BALDIR/WixToolset.Bal.wixext.dll" ]; then
+            cp "$BALDIR/WixToolset.BootstrapperApplications.wixext.dll" "$BALDIR/WixToolset.Bal.wixext.dll"
+          fi
+          ls -la "$BALDIR"
           wix extension list -g
         shell: bash
 
