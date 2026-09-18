@@ -44,7 +44,12 @@ std::string getBinaryName()
 
 void errorMessageBox(const char *message, const char *title)
 {
-  MessageBoxA(nullptr, message, title, MB_ICONERROR | MB_OK);
+  // Never show a dialog in session 0 (services) -- there is no desktop and a
+  // modal message box would hang the process instead of reporting the error.
+  DWORD sessionId = 0;
+  if (ProcessIdToSessionId(GetCurrentProcessId(), &sessionId) && sessionId != 0) {
+    MessageBoxA(nullptr, message, title, MB_ICONERROR | MB_OK);
+  }
 }
 
 // Used by bootstrap logging to differentiate between daemon and client/server messages.

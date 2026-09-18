@@ -201,6 +201,8 @@ set(CMAKE_AUTORCC ON)
 
 message(STATUS "Qt version: ${Qt6_VERSION}")
 
+include(cmake/Qlementine.cmake)
+
 include(cmake/Libraries.cmake)
 configure_libs()
 

@@ -25,17 +25,15 @@
     <firewall:FirewallException Id="ClientFirewallException" Name="Aether Client" Program="[INSTALL_ROOT]aether-core.exe" Scope="any"/>
   </CPackWiXFragment>
 
-  <CPackWiXFragment Id="#PRODUCT">
-    <Property Id="VC_REDIST_INSTALLED">
-      <RegistrySearch
-        Id="FindVCRedist"
-        Root="HKLM"
-        Key="SOFTWARE\Microsoft\VisualStudio\@REQUIRED_MSVC_RUNTIME_MAJOR@.0\VC\Runtimes\@BUILD_ARCHITECTURE@"
-        Name="Installed"
-        Type="raw" />
-    </Property>
+  <CPackWiXFragment Id="CM_CP_aether.exe">
+    <firewall:FirewallException Id="DiscoveryFirewallException" Name="Aether Discovery" Program="[INSTALL_ROOT]aether.exe" Scope="localSubnet"/>
+  </CPackWiXFragment>
 
-    <Binary Id="CustomDLL" SourceFile="@CMAKE_CURRENT_BINARY_DIR@/wix-custom.dll" />
+  <CPackWiXFragment Id="#PRODUCT">
+
+    <!-- Force file rewrite on upgrades: older installs may ship newer-versioned
+         Qt/OpenSSL DLLs, and 'a' reinstalls files regardless of version. -->
+    <Property Id="REINSTALLMODE" Value="amus" />
 
     <!--
       Close any running Aether processes before file replacement so the
@@ -79,32 +77,11 @@
        <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Run Aether when finished" />
     </UI>
     <CustomAction
-      Id="CheckVCRedist"
-      BinaryRef="CustomDLL"
-      DllEntry="CheckVCRedist"
-      Execute="immediate" />
-
-    <CustomAction
-      Id="ShowVCRedistError"
-      Error="Microsoft Visual C++ Redistributable v@REQUIRED_MSVC_RUNTIME_MAJOR@.@REQUIRED_MSVC_RUNTIME_MINOR@ or later is required. Please download and install the latest version and then restart the installation. See our documentation for instructions." />
-
-    <CustomAction
       Id="RunAether"
       ExeCommand="[INSTALL_ROOT]aether.exe"
       Directory="INSTALL_ROOT"
       Execute="immediate"
       Impersonate="yes"
       Return="asyncNoWait" />
-
-    <InstallExecuteSequence>
-      <Custom
-        Action="CheckVCRedist"
-        Before="InstallInitialize"
-        Condition="NOT Installed AND VC_REDIST_INSTALLED" />
-      <Custom
-        Action="ShowVCRedistError"
-        Before="InstallInitialize"
-        Condition="NOT Installed AND (NOT VC_REDIST_INSTALLED OR NOT VC_REDIST_VERSION_OK)" />
-    </InstallExecuteSequence>
   </CPackWiXFragment>
 </CPackWiXPatch>

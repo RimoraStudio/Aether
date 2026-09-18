@@ -130,7 +130,11 @@ void handleError(const char *message)
   LOG_ERR("%s", message);
 
 #if defined(Q_OS_WIN)
-  // Show a message box for when run from MSI in Win32 subsystem.
-  MessageBoxA(nullptr, message, "Aether daemon error", MB_OK | MB_ICONERROR);
+  // Show a message box for when run from MSI in Win32 subsystem, but never in
+  // session 0 (services) where a modal dialog would hang the process forever.
+  DWORD sessionId = 0;
+  if (ProcessIdToSessionId(GetCurrentProcessId(), &sessionId) && sessionId != 0) {
+    MessageBoxA(nullptr, message, "Aether daemon error", MB_OK | MB_ICONERROR);
+  }
 #endif
 }
