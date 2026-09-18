@@ -301,9 +301,65 @@ jobs:
           path: ${{ github.workspace }}/build/aether-*.7z
           if-no-files-found: warn
 
+  build-macos:
+    name: macOS arm64
+    needs: verify
+    runs-on: macos-15
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install dependencies
+        run: brew install ninja openssl@3
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: "6.8.3"
+          cache: true
+          cache-key-prefix: macos-6.8.3
+
+      - name: Get version
+        run: |
+          echo "PACKAGE_VERSION=$(echo $GITHUB_REF | sed 's,refs/tags/v,,g')" >> $GITHUB_ENV
+
+      - name: Verify tools
+        run: |
+          echo "Qt: $(qmake --version 2>&1 | head -1)"
+          echo "CMake: $(cmake --version | head -1)"
+          echo "Ninja: $(ninja --version 2>&1)"
+
+      - name: Configure
+        run: |
+          cmake -Bbuild -DCMAKE_BUILD_TYPE=Release \
+            -DBUILD_TESTS=OFF \
+            -G Ninja \
+            -DCMAKE_PREFIX_PATH="$(brew --prefix openssl@3)" \
+            -DPACKAGE_VERSION_LABEL="${{ env.PACKAGE_VERSION }}"
+
+      - name: Build
+        run: cmake --build build --config Release -j4 --target package
+
+      - name: Verify artifacts
+        run: |
+          ls -la build/aether-* 2>/dev/null || echo "No aether-* artifacts found"
+          test -n "$(ls build/aether-*.dmg 2>/dev/null)" && echo "DMG: OK" || echo "DMG: MISSING"
+
+      - name: Upload DMG
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: macOS arm64 - DMG
+          path: ${{ github.workspace }}/build/aether-*.dmg
+          if-no-files-found: warn
+
   release:
     name: Release
-    needs: [build-windows, build-linux]
+    needs: [build-windows, build-linux, build-macos]
     if: contains(github.ref, '/tags/v')
     runs-on: ubuntu-latest
     permissions:
@@ -336,6 +392,7 @@ jobs:
           echo "Windows MSI: $(ls artifacts/aether-*.msi 2>/dev/null | wc -l) file(s)"
           echo "Windows EXE: $(ls artifacts/aether-*.exe 2>/dev/null | wc -l) file(s)"
           echo "Linux DEB: $(ls artifacts/aether-*.deb 2>/dev/null | wc -l) file(s)"
+          echo "macOS DMG: $(ls artifacts/aether-*.dmg 2>/dev/null | wc -l) file(s)"
           echo "7z: $(ls artifacts/aether-*.7z 2>/dev/null | wc -l) file(s)"
           if [ -z "$(ls artifacts/aether-*.msi 2>/dev/null)" ]; then
             echo "ERROR: Windows MSI missing"
@@ -343,6 +400,14 @@ jobs:
           fi
           if [ -z "$(ls artifacts/aether-*.deb 2>/dev/null)" ]; then
             echo "ERROR: Linux DEB missing"
+            exit 1
+          fi
+          if [ -z "$(ls artifacts/aether-*.dmg 2>/dev/null)" ]; then
+            echo "ERROR: macOS DMG missing"
+            exit 1
+          fi
+          if [ -z "$(ls artifacts/aether-*.exe 2>/dev/null)" ]; then
+            echo "ERROR: Windows EXE bootstrapper missing"
             exit 1
           fi
 
@@ -368,7 +433,7 @@ jobs:
 
   notify:
     name: Notify Telegram
-    needs: [build-windows, build-linux]
+    needs: [build-windows, build-linux, build-macos]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 2
@@ -380,6 +445,7 @@ jobs:
           TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
           WIN_RESULT: ${{ needs.build-windows.result }}
           LINUX_RESULT: ${{ needs.build-linux.result }}
+          MACOS_RESULT: ${{ needs.build-macos.result }}
           RELEASE_TAG: ${{ github.ref_name }}
           REPO_URL: ${{ github.repository }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
@@ -407,8 +473,16 @@ jobs:
             cancelled) LINUX_STATUS="cancelled" ;;
           esac
 
+          MACOS_STATUS="unknown"
+          case "$MACOS_RESULT" in
+            success) MACOS_STATUS="passed" ;;
+            failure) MACOS_STATUS="failed" ;;
+            skipped) MACOS_STATUS="skipped" ;;
+            cancelled) MACOS_STATUS="cancelled" ;;
+          esac
+
           # Overall status
-          if [ "$WIN_RESULT" = "success" ] && [ "$LINUX_RESULT" = "success" ]; then
+          if [ "$WIN_RESULT" = "success" ] && [ "$LINUX_RESULT" = "success" ] && [ "$MACOS_RESULT" = "success" ]; then
             OVERALL="PASSED"
             HEADER_EMOJI="white_check_mark"
           else
@@ -448,6 +522,7 @@ jobs:
             "" \
             "<b>Windows:</b> $WIN_STATUS" \
             "<b>Linux:</b> $LINUX_STATUS" \
+            "<b>macOS:</b> $MACOS_STATUS" \
             "" \
             "<b>Started:</b> $START_TIME" \
             "<b>Completed:</b> $END_TIME" \
