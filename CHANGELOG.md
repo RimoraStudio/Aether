@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.1.0] - 2026-09-18
+
 ### Added
 - File transfer via clipboard: copy files or folders on one machine and paste
   them on another. Files are staged under `%TEMP%\AetherClipboard` on Windows.
@@ -93,5 +95,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - No dark mode in GUI
 - No mDNS discovery (manual IP entry required)
 
-[Unreleased]: https://github.com/RimoraStudio/Aether/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/RimoraStudio/Aether/compare/v1.1.0...HEAD
+[v1.1.0]: https://github.com/RimoraStudio/Aether/compare/v1.0.0...v1.1.0
 [v1.0.0]: https://github.com/RimoraStudio/Aether/releases/tag/v1.0.0
