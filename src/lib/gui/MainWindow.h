@@ -188,6 +188,7 @@ private:
   LogDock *m_logDock;
   StatusBar *m_statusBar = nullptr;
   aether::gui::LanDiscovery m_discovery;
+  std::function<void()> m_updatePortShareSave;
 
   // Window Menu
   QMenu *m_menuFile = nullptr;

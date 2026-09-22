@@ -255,9 +255,44 @@ void MainWindow::setupControls()
 
   ui->editSharedPorts->setText(Settings::value(Settings::Server::SharedPorts).toString());
   ui->editForwardPorts->setText(Settings::value(Settings::Client::ForwardPorts).toString());
+  aether::gui::applySecondaryText(ui->lblPortShareNote);
+
+  m_updatePortShareSave = [this] {
+    const auto validPorts = [](const QString &text) {
+      const auto isPort = [](const QString &s) {
+        bool ok = false;
+        const int port = s.trimmed().toInt(&ok);
+        return ok && port >= 1 && port <= 65535;
+      };
+      for (const QString &part : text.split(',')) {
+        const QString trimmed = part.trimmed();
+        if (trimmed.isEmpty())
+          continue;
+        const QStringList pair = trimmed.split(':');
+        if (pair.size() > 2 || !isPort(pair.value(0)) || (pair.size() == 2 && !isPort(pair.value(1))))
+          return false;
+      }
+      return true;
+    };
+    const bool sharedOk = validPorts(ui->editSharedPorts->text());
+    const bool forwardOk = validPorts(ui->editForwardPorts->text());
+    const QString badStyle = QStringLiteral("border: 1px solid #d32f2f; border-radius: 4px;");
+    ui->editSharedPorts->setStyleSheet(sharedOk ? QString() : badStyle);
+    ui->editForwardPorts->setStyleSheet(forwardOk ? QString() : badStyle);
+
+    const bool dirty = ui->editSharedPorts->text().trimmed() !=
+                           Settings::value(Settings::Server::SharedPorts).toString() ||
+                       ui->editForwardPorts->text().trimmed() !=
+                           Settings::value(Settings::Client::ForwardPorts).toString();
+    ui->btnSavePortShare->setEnabled(dirty && sharedOk && forwardOk);
+  };
+  connect(ui->editSharedPorts, &QLineEdit::textChanged, this, [this] { m_updatePortShareSave(); });
+  connect(ui->editForwardPorts, &QLineEdit::textChanged, this, [this] { m_updatePortShareSave(); });
   connect(ui->btnSavePortShare, &QPushButton::clicked, this, [this] {
     Settings::setValue(Settings::Server::SharedPorts, ui->editSharedPorts->text().trimmed());
     Settings::setValue(Settings::Client::ForwardPorts, ui->editForwardPorts->text().trimmed());
+    Settings::save();
+    m_updatePortShareSave();
     m_statusBar->showMessage(tr("Port share settings saved"));
   });
 
@@ -616,6 +651,9 @@ void MainWindow::updateModeControls()
 
   if (isServer || isClient)
     updateModeControlLabels();
+
+  ui->portShareServerCard->setEnabled(isServer || (!isServer && !isClient));
+  ui->portShareClientCard->setEnabled(isClient || (!isServer && !isClient));
 
   updateStatus();
 }

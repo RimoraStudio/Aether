@@ -322,15 +322,21 @@
        <widget class="QWidget" name="navRail" native="true">
         <property name="minimumSize">
          <size>
-          <width>120</width>
+          <width>140</width>
           <height>0</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>120</width>
+          <width>140</width>
           <height>16777215</height>
          </size>
+        </property>
+        <property name="styleSheet">
+         <string>QWidget#navRail { border-right: 1px solid palette(mid); }
+QPushButton#navWorkspace, QPushButton#navPortShare { border: none; border-radius: 8px; padding: 8px 12px; text-align: left; font-size: 13px; min-height: 22px; icon-size: 16px; color: palette(text); background: transparent; }
+QPushButton#navWorkspace:hover:!checked, QPushButton#navPortShare:hover:!checked { background: palette(alternate-base); }
+QPushButton#navWorkspace:checked, QPushButton#navPortShare:checked { background: palette(highlight); color: palette(highlighted-text); font-weight: 600; }</string>
         </property>
         <layout class="QVBoxLayout" name="navLayout">
          <property name="spacing">
@@ -1098,6 +1104,31 @@ QPushButton#btnToggleCore:disabled { background: palette(button);  }</string>
       </layout>
      </widget>
         <widget class="QWidget" name="portSharePage" native="true">
+         <layout class="QVBoxLayout" name="portSharePageLayout">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QScrollArea" name="portShareScroll">
+            <property name="frameShape">
+             <enum>QFrame::Shape::NoFrame</enum>
+            </property>
+            <property name="widgetResizable">
+             <bool>true</bool>
+            </property>
+            <property name="horizontalScrollBarPolicy">
+             <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+            </property>
+            <widget class="QWidget" name="portShareScrollContent" native="true">
          <layout class="QVBoxLayout" name="portShareLayout">
           <property name="spacing">
            <number>14</number>
@@ -1143,7 +1174,7 @@ QPushButton#btnToggleCore:disabled { background: palette(button);  }</string>
              <enum>QFrame::Shape::StyledPanel</enum>
             </property>
             <property name="styleSheet">
-             <string>QFrame { border: 1px solid palette(mid); border-radius: 10px; background: palette(base); }</string>
+             <string>QFrame#portShareServerCard { border: 1px solid palette(mid); border-radius: 12px; background: palette(base); }</string>
             </property>
             <layout class="QVBoxLayout" name="portShareServerLayout">
              <property name="spacing">
@@ -1200,7 +1231,7 @@ QPushButton#btnToggleCore:disabled { background: palette(button);  }</string>
              <enum>QFrame::Shape::StyledPanel</enum>
             </property>
             <property name="styleSheet">
-             <string>QFrame { border: 1px solid palette(mid); border-radius: 10px; background: palette(base); }</string>
+             <string>QFrame#portShareClientCard { border: 1px solid palette(mid); border-radius: 12px; background: palette(base); }</string>
             </property>
             <layout class="QVBoxLayout" name="portShareClientLayout">
              <property name="spacing">
@@ -1237,14 +1268,14 @@ QPushButton#btnToggleCore:disabled { background: palette(button);  }</string>
                 <string>font-size: 11px;</string>
                </property>
                <property name="text">
-                <string>While connected, these localhost ports on this machine reach the server's localhost. Comma separated.</string>
+                <string>While connected, these localhost ports on this machine reach the server's localhost. Use serverPort:localPort to remap, e.g. 3001:8080 listens on localhost:8080 and reaches the server's port 3001.</string>
                </property>
               </widget>
              </item>
              <item>
               <widget class="QLineEdit" name="editForwardPorts">
                <property name="placeholderText">
-                <string>3000, 5173</string>
+                <string>3000, 5173, 3001:8080</string>
                </property>
               </widget>
              </item>
@@ -1255,8 +1286,24 @@ QPushButton#btnToggleCore:disabled { background: palette(button);  }</string>
            <layout class="QHBoxLayout" name="portShareButtonRow">
             <item>
              <widget class="QPushButton" name="btnSavePortShare">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="text">
-               <string>Save port settings</string>
+               <string>Save</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="lblPortShareNote">
+              <property name="wordWrap">
+               <bool>true</bool>
+              </property>
+              <property name="styleSheet">
+               <string>font-size: 11px;</string>
+              </property>
+              <property name="text">
+               <string>Applies the next time the core starts.</string>
               </property>
              </widget>
             </item>
@@ -1278,7 +1325,11 @@ QPushButton#btnToggleCore:disabled { background: palette(button);  }</string>
           </item>
          </layout>
         </widget>
-       </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     </widget>
       </item>
      </layout>
     </item>

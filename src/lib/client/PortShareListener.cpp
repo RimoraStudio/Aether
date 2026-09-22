@@ -45,7 +45,7 @@ PortShareListener::~PortShareListener()
   stop();
 }
 
-void PortShareListener::setPorts(std::vector<uint16_t> ports)
+void PortShareListener::setPorts(std::vector<PortMap> ports)
 {
   const bool running = !m_listeners.empty();
   if (running) {
@@ -70,13 +70,14 @@ void PortShareListener::start()
     LOG_WARN("port share: cannot resolve server address: %s", e.what());
   }
 
-  for (uint16_t port : m_ports) {
+  for (const auto &map : m_ports) {
     try {
-      NetworkAddress local("127.0.0.1", port);
+      NetworkAddress local("127.0.0.1", map.local);
       local.resolve();
 
       auto listener = std::make_unique<Listener>();
-      listener->port = port;
+      listener->localPort = map.local;
+      listener->remotePort = map.remote;
       listener->socket = new TCPListenSocket(m_events, m_multiplexer, ARCH->getAddrFamily(local.getAddress()));
 
       auto *listenSocket = listener->socket;
@@ -87,9 +88,9 @@ void PortShareListener::start()
       listenSocket->bind(local);
 
       m_listeners.push_back(std::move(listener));
-      LOG_INFO("port share: forwarding localhost:%d to server", port);
+      LOG_INFO("port share: forwarding localhost:%d to server port %d", map.local, map.remote);
     } catch (BaseException &e) {
-      LOG_WARN("port share: cannot listen on localhost:%d: %s", port, e.what());
+      LOG_WARN("port share: cannot listen on localhost:%d: %s", map.local, e.what());
     }
   }
 }
@@ -110,22 +111,23 @@ void PortShareListener::stop()
 size_t PortShareListener::connCount(uint16_t port) const
 {
   return static_cast<size_t>(std::count_if(m_conns.begin(), m_conns.end(), [port](const auto &conn) {
-    return conn->port == port;
+    return conn->localPort == port;
   }));
 }
 
 void PortShareListener::handleAccept(Listener *listener)
 {
   while (auto socket = listener->socket->accept()) {
-    if (connCount(listener->port) >= kMaxForwardsPerPort) {
-      LOG_WARN("port share: too many forwards on port %d, refusing connection", listener->port);
+    if (connCount(listener->localPort) >= kMaxForwardsPerPort) {
+      LOG_WARN("port share: too many forwards on port %d, refusing connection", listener->localPort);
       socket->close();
       continue;
     }
 
     auto conn = std::make_unique<ForwardConn>();
     conn->local = socket.release();
-    conn->port = listener->port;
+    conn->localPort = listener->localPort;
+    conn->remotePort = listener->remotePort;
 
     try {
       conn->forward = m_socketFactory->create(ARCH->getAddrFamily(m_serverAddress.getAddress()), m_securityLevel);
@@ -151,14 +153,14 @@ void PortShareListener::handleAccept(Listener *listener)
 
     c->timer = m_events->newOneShotTimer(kHelloTimeout, nullptr);
     m_events->addHandler(EventTypes::Timer, c->timer, [this, c](const auto &) {
-      LOG_WARN("port share: timed out waiting for server hello on port %d", c->port);
+      LOG_WARN("port share: timed out waiting for server hello on port %d", c->localPort);
       removeConn(c);
     });
 
     try {
       c->forward->connect(m_serverAddress);
     } catch (BaseException &e) {
-      LOG_WARN("port share: forward connect failed on port %d: %s", c->port, e.what());
+      LOG_WARN("port share: forward connect failed on port %d: %s", c->localPort, e.what());
       removeConn(c);
     }
   }
@@ -171,7 +173,7 @@ void PortShareListener::handleForwardConnected(ForwardConn *conn)
   m_events->removeHandler(EventTypes::DataSocketSecureConnected, target);
   m_events->removeHandler(EventTypes::DataSocketConnectionFailed, target);
 
-  LOG_VERBOSE("port share: forward connected for port %d, waiting for hello", conn->port);
+  LOG_VERBOSE("port share: forward connected for port %d, waiting for hello", conn->localPort);
   if (conn->forward->isReady()) {
     m_events->addEvent(Event(EventTypes::StreamInputReady, target));
   }
@@ -180,7 +182,7 @@ void PortShareListener::handleForwardConnected(ForwardConn *conn)
 void PortShareListener::handleForwardFailed(ForwardConn *conn, const Event &event)
 {
   auto *info = static_cast<IDataSocket::ConnectionFailedInfo *>(event.getData());
-  LOG_WARN("port share: forward connect failed on port %d: %s", conn->port, info ? info->m_what.c_str() : "unknown");
+  LOG_WARN("port share: forward connect failed on port %d: %s", conn->localPort, info ? info->m_what.c_str() : "unknown");
   delete info;
   removeConn(conn);
 }
@@ -194,19 +196,19 @@ void PortShareListener::handleForwardHello(ForwardConn *conn)
   if (!ProtocolUtil::readf(conn->forward, kMsgHello, &protocolName, &serverMajor, &serverMinor) ||
       networkProtocolFromString(QString::fromStdString(protocolName)) == NetworkProtocol::Unknown ||
       serverMajor != kProtocolMajorVersion) {
-    LOG_WARN("port share: bad hello from server on port %d", conn->port);
+    LOG_WARN("port share: bad hello from server on port %d", conn->localPort);
     removeConn(conn);
     return;
   }
 
   const int16_t helloBackMinor = serverMinor < kProtocolMinorVersion ? serverMinor : kProtocolMinorVersion;
-  std::string name = std::string(kPortShareNamePrefix) + std::to_string(conn->port);
+  std::string name = std::string(kPortShareNamePrefix) + std::to_string(conn->remotePort);
   const std::string helloBackMessage = protocolName + kMsgHelloBackArgs;
 
   try {
     ProtocolUtil::writef(conn->forward, helloBackMessage.c_str(), kProtocolMajorVersion, helloBackMinor, &name);
   } catch (BaseException &e) {
-    LOG_WARN("port share: hello-back write failed on port %d: %s", conn->port, e.what());
+    LOG_WARN("port share: hello-back write failed on port %d: %s", conn->localPort, e.what());
     removeConn(conn);
     return;
   }
@@ -220,7 +222,7 @@ void PortShareListener::handleForwardHello(ForwardConn *conn)
     conn->timer = nullptr;
   }
 
-  LOG_INFO("port share: tunneling localhost:%d to server", conn->port);
+  LOG_INFO("port share: tunneling localhost:%d to server port %d", conn->localPort, conn->remotePort);
   conn->pump = new StreamPump(conn->local, conn->forward, m_events, [this, conn]() { removeConn(conn); });
 
   if (conn->forward->isReady()) {

@@ -64,11 +64,13 @@ same way they reject any unconfigured client.
 - Runs `StreamPump`; logs open/close at INFO.
 
 ### `src/lib/client` — `PortShareListener.{h,cpp}`
-- For each configured port P (from `Settings::Client::ForwardPorts`):
-  binds `127.0.0.1:P` with `TCPListenSocket` (loopback only).
+- For each configured entry (from `Settings::Client::ForwardPorts`):
+  binds `127.0.0.1:<local>` with `TCPListenSocket` (loopback only).
+  Entries are either `P` (same port both ends) or `remote:local`
+  (server port `remote` reachable at this machine's `localhost:<local>`).
 - On accept: opens a new socket via the client's `ISocketFactory` (same TLS
   security level as the main connection), answers the server hello with
-  name `aetherfwd:P`, then pumps.
+  name `aetherfwd:<remote>`, then pumps.
 - Caps: 8 concurrent forwards per port, 10s hello timeout.
 - Bind failure (port in use): WARN log, other ports still start.
 - Wired in `ClientApp`: created on client connect, torn down on disconnect.

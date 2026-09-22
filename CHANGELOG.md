@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   "Share my ports" (server whitelist, `server/sharedPorts`) and "Tunnel server
   ports" (client, `client/forwardPorts`). While connected, a listed port on the
   client's localhost reaches the same port on the server's localhost.
+  Client entries support `serverPort:localPort` remapping (e.g. `3001:8080`
+  listens on `localhost:8080` and reaches the server's port 3001).
   Loopback-only on both ends; forwards ride the normal TLS connection
   with a reserved `aetherfwd:<port>` client name.
 - Nav rail in the main window with Workspace and Port Share pages.

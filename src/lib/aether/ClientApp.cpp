@@ -182,13 +182,19 @@ void ClientApp::startPortShare()
 {
   stopPortShare();
 
-  std::vector<uint16_t> ports;
+  std::vector<PortShareListener::PortMap> ports;
   const auto portsSetting = Settings::value(Settings::Client::ForwardPorts).toString();
   for (const QString &part : portsSetting.split(',', Qt::SkipEmptyParts)) {
-    bool ok = false;
-    const int port = part.trimmed().toInt(&ok);
-    if (ok && port > 0 && port <= 65535) {
-      ports.push_back(static_cast<uint16_t>(port));
+    const QStringList pair = part.trimmed().split(':');
+    bool remoteOk = false;
+    bool localOk = false;
+    const int remote = pair.value(0).trimmed().toInt(&remoteOk);
+    const int local = pair.size() > 1 ? pair.value(1).trimmed().toInt(&localOk) : remote;
+    const bool valid =
+        remoteOk && remote > 0 && remote <= 65535 && (pair.size() == 1 || (localOk && local > 0 && local <= 65535)) &&
+        pair.size() <= 2;
+    if (valid) {
+      ports.push_back({static_cast<uint16_t>(remote), static_cast<uint16_t>(local)});
     } else {
       LOG_WARN("ignoring invalid forward port: %s", qPrintable(part));
     }

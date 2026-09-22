@@ -40,7 +40,13 @@ public:
   PortShareListener &operator=(const PortShareListener &) = delete;
   ~PortShareListener();
 
-  void setPorts(std::vector<uint16_t> ports);
+  struct PortMap
+  {
+    uint16_t remote = 0; ///< port on the server's localhost
+    uint16_t local = 0;  ///< port bound on this machine's localhost
+  };
+
+  void setPorts(std::vector<PortMap> ports);
   void start();
   void stop();
 
@@ -48,7 +54,8 @@ private:
   struct Listener
   {
     IListenSocket *socket = nullptr;
-    uint16_t port = 0;
+    uint16_t remotePort = 0;
+    uint16_t localPort = 0;
   };
 
   struct ForwardConn
@@ -57,7 +64,8 @@ private:
     IDataSocket *local = nullptr;
     StreamPump *pump = nullptr;
     EventQueueTimer *timer = nullptr;
-    uint16_t port = 0;
+    uint16_t remotePort = 0;
+    uint16_t localPort = 0;
   };
 
   void handleAccept(Listener *listener);
@@ -75,7 +83,7 @@ private:
   std::unique_ptr<ISocketFactory> m_socketFactory;
   NetworkAddress m_serverAddress;
   SecurityLevel m_securityLevel;
-  std::vector<uint16_t> m_ports;
+  std::vector<PortMap> m_ports;
   std::vector<std::unique_ptr<Listener>> m_listeners;
   std::vector<std::unique_ptr<ForwardConn>> m_conns;
 };
