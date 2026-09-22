@@ -12,6 +12,7 @@
 #include "base/IEventQueue.h"
 #include "base/Log.h"
 #include "client/Client.h"
+#include "client/PortShareListener.h"
 #include "common/ExitCodes.h"
 #include "common/PlatformInfo.h"
 #include "common/Settings.h"
@@ -174,6 +175,39 @@ void ClientApp::handleClientConnected()
   // Reset server index on successful connection
   m_currentServerIndex = 0;
   m_lastServerAddressIndex = 0;
+  startPortShare();
+}
+
+void ClientApp::startPortShare()
+{
+  stopPortShare();
+
+  std::vector<uint16_t> ports;
+  const auto portsSetting = Settings::value(Settings::Client::ForwardPorts).toString();
+  for (const QString &part : portsSetting.split(',', Qt::SkipEmptyParts)) {
+    bool ok = false;
+    const int port = part.trimmed().toInt(&ok);
+    if (ok && port > 0 && port <= 65535) {
+      ports.push_back(static_cast<uint16_t>(port));
+    } else {
+      LOG_WARN("ignoring invalid forward port: %s", qPrintable(part));
+    }
+  }
+  if (ports.empty() || m_client == nullptr) {
+    return;
+  }
+
+  m_portShare = std::make_unique<PortShareListener>(
+      getEvents(), getSocketMultiplexer(), std::unique_ptr<ISocketFactory>(getSocketFactory()),
+      m_client->getServerAddress(), Settings::value(Settings::Security::TlsEnabled).toBool()
+  );
+  m_portShare->setPorts(std::move(ports));
+  m_portShare->start();
+}
+
+void ClientApp::stopPortShare()
+{
+  m_portShare.reset();
 }
 
 void ClientApp::handleClientFailed(const Event &e)
@@ -222,6 +256,7 @@ void ClientApp::handleClientRefused(const Event &e)
 
 void ClientApp::handleClientDisconnected()
 {
+  stopPortShare();
   m_retryCount = 0;
   LOG_DEBUG("disconnected from server");
   ipcSendConnectionState(aether::core::ConnectionState::Disconnected);
@@ -309,6 +344,7 @@ bool ClientApp::startClient()
 
 void ClientApp::stopClient()
 {
+  stopPortShare();
   closeClient(m_client);
   closeClientScreen(m_clientScreen);
   m_client = nullptr;

@@ -245,9 +245,21 @@ void MainWindow::setupControls()
   ui->iconModeClient->setPixmap(QIcon::fromTheme(QStringLiteral("remote-control")).pixmap(28));
 
   for (auto *label : {ui->lblAppSubtitle, ui->labelComputerName, ui->lblModeServerDesc, ui->lblModeClientDesc,
-                      ui->lblNoMode, ui->m_pLabelServerName, ui->lblHeroDetail}) {
+                      ui->lblNoMode, ui->m_pLabelServerName, ui->lblHeroDetail, ui->lblPortShareDesc,
+                      ui->lblSharePortsHint, ui->lblForwardPortsHint}) {
     aether::gui::applySecondaryText(label);
   }
+
+  connect(ui->navWorkspace, &QPushButton::clicked, this, [this] { ui->stackedPages->setCurrentWidget(ui->contentArea); });
+  connect(ui->navPortShare, &QPushButton::clicked, this, [this] { ui->stackedPages->setCurrentWidget(ui->portSharePage); });
+
+  ui->editSharedPorts->setText(Settings::value(Settings::Server::SharedPorts).toString());
+  ui->editForwardPorts->setText(Settings::value(Settings::Client::ForwardPorts).toString());
+  connect(ui->btnSavePortShare, &QPushButton::clicked, this, [this] {
+    Settings::setValue(Settings::Server::SharedPorts, ui->editSharedPorts->text().trimmed());
+    Settings::setValue(Settings::Client::ForwardPorts, ui->editForwardPorts->text().trimmed());
+    m_statusBar->showMessage(tr("Port share settings saved"));
+  });
 
   connect(ui->btnCopyIp, &QPushButton::clicked, this, [this] {
     if (m_currentIpAddress.isEmpty())

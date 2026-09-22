@@ -188,6 +188,10 @@ QTextStream &operator<<(QTextStream &outStream, const ServerConfig &config)
   for (const Hotkey &hotkey : config.hotkeys())
     outStream << hotkey;
 
+  if (const auto sharedPorts = Settings::value(Settings::Server::SharedPorts).toString(); !sharedPorts.isEmpty()) {
+    outStream << "\tsharedPorts = " << sharedPorts << Qt::endl;
+  }
+
   outStream << "end" << Qt::endl << Qt::endl;
 
   return outStream;

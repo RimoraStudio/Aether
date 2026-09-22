@@ -13,6 +13,8 @@
 
 #include <QList>
 
+#include <memory>
+
 namespace aether {
 class Screen;
 class ClientArgs;
@@ -20,6 +22,7 @@ class ClientArgs;
 
 class Event;
 class Client;
+class PortShareListener;
 class Thread;
 class ISocketFactory;
 
@@ -88,9 +91,12 @@ private:
   ISocketFactory *getSocketFactory() const;
   NetworkAddress &getCurrentServerAddress();
   void tryNextServer();
+  void startPortShare();
+  void stopPortShare();
 
   bool m_suspended = false;
   Client *m_client = nullptr;
+  std::unique_ptr<PortShareListener> m_portShare;
   aether::Screen *m_clientScreen = nullptr;
   QList<NetworkAddress> m_serverAddresses;
   size_t m_currentServerIndex = 0;

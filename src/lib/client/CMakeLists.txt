@@ -6,6 +6,8 @@
 add_library(client STATIC
   Client.cpp
   Client.h
+  PortShareListener.cpp
+  PortShareListener.h
   ServerProxy.cpp
   ServerProxy.h
 )

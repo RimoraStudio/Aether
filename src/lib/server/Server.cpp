@@ -188,6 +188,11 @@ size_t Server::getMaximumClipboardSizeBytes() const
   return m_maximumClipboardSize * 1024;
 }
 
+std::vector<uint16_t> Server::sharedPorts() const
+{
+  return m_config->sharedPorts();
+}
+
 bool Server::setConfig(const ServerConfig &config)
 {
   // refuse configuration if it doesn't include the primary screen

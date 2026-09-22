@@ -30,6 +30,14 @@ create_test(
 )
 
 create_test(
+  NAME StreamPumpTests
+  DEPENDS app
+  LIBS arch base io ${extra_libs}
+  SOURCE StreamPumpTests.cpp
+  WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/src/lib/aether"
+)
+
+create_test(
   NAME IKeyStateTests
   DEPENDS app
   LIBS arch base ${extra_libs}

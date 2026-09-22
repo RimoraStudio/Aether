@@ -330,11 +330,11 @@ Vuoi connetterti al server?
     </message>
     <message>
         <source>Edit Computer Name</source>
-        <translation>Modifica nome computer</translation>
+        <translation type="vanished">Modifica nome computer</translation>
     </message>
     <message>
         <source>&amp;Configure Server</source>
-        <translation>&amp;Configura Server</translation>
+        <translation type="vanished">&amp;Configura Server</translation>
     </message>
     <message>
         <source>Export server configuration</source>
@@ -342,7 +342,7 @@ Vuoi connetterti al server?
     </message>
     <message>
         <source>You must select a mode</source>
-        <translation>Devi selezionare una modalità</translation>
+        <translation type="vanished">Devi selezionare una modalità</translation>
     </message>
     <message>
         <source>&amp;Start</source>
@@ -527,7 +527,7 @@ Nomi validi:
     </message>
     <message>
         <source>This computer&apos;s name:</source>
-        <translation>Nome di questo computer:</translation>
+        <translation type="vanished">Nome di questo computer:</translation>
     </message>
     <message>
         <source>Use this computer&apos;s keyboard and mouse
@@ -586,20 +586,7 @@ Inoltre, verifica di poter %1 il file di configurazione del server: %2</translat
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>font-size: 15px; font-weight: 600;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Aether</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>color: palette(mid);</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>QFrame#modeCardServer { border: 1px solid palette(mid); border-radius: 10px; background: palette(base); }
-QFrame#modeCardServer[selected=&quot;true&quot;] { border: 2px solid palette(highlight); }</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -607,36 +594,225 @@ QFrame#modeCardServer[selected=&quot;true&quot;] { border: 2px solid palette(hig
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Share this computer&apos;s keyboard and mouse</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>color: palette(text); font-size: 11px;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Other devices connect here and take control</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>QFrame#modeCardClient { border: 1px solid palette(mid); border-radius: 10px; background: palette(base); }
-QFrame#modeCardClient[selected=&quot;true&quot;] { border: 2px solid palette(highlight); }</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>This computer is the client</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Use another computer&apos;s mouse and keyboard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This computer is controlled by a server</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&lt;html&gt;Discovered servers appear in the list.&lt;br/&gt;You can also type a hostname or IP address manually.&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>font-size: 17px; font-weight: 700;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>font-size: 11px;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Distributed Workspace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>font-weight: 600;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit device name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy IP address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Workspace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port Share</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QFrame#modeCardServer { border: 1px solid palette(mid); border-radius: 12px; background: palette(base); }
+QFrame#modeCardServer:hover { border: 1px solid palette(highlight); }
+QFrame#modeCardServer[selected=&quot;true&quot;] { border: 2px solid palette(highlight); background: palette(alternate-base); }</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>font-size: 13px; font-weight: 600;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Share this computer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other devices connect here and use this keyboard and mouse</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QFrame#modeCardClient { border: 1px solid palette(mid); border-radius: 12px; background: palette(base); }
+QFrame#modeCardClient:hover { border: 1px solid palette(highlight); }
+QFrame#modeCardClient[selected=&quot;true&quot;] { border: 2px solid palette(highlight); background: palette(alternate-base); }</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Control this computer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Another computer&apos;s keyboard and mouse drives this one</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Configure screen layout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>font-size: 12px;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a mode above to get started</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QFrame#heroCard { border: 1px solid palette(mid); border-radius: 14px; background: palette(alternate-base); }</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>font-size: 18px; font-weight: 700;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ready</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose a mode, then start sharing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QPushButton#btnToggleCore { border-radius: 24px; padding: 0 30px; font-size: 15px; font-weight: 700; }
+QPushButton#btnToggleCore:enabled { background: palette(highlight); color: palette(highlighted-text); border: none; }
+QPushButton#btnToggleCore:disabled { background: palette(button);  }</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>font-size: 17px; font-weight: 600;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Share localhost TCP ports between machines. A dev server on one computer&apos;s localhost becomes reachable at the same port on connected computers.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QFrame { border: 1px solid palette(mid); border-radius: 10px; background: palette(base); }</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Share my ports (server)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ports on this machine&apos;s localhost that peers may reach. Comma separated, e.g. 3000, 5173, 8080.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>3000, 5173, 8080</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tunnel server ports (client)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>While connected, these localhost ports on this machine reach the server&apos;s localhost. Comma separated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>3000, 5173</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save port settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port share settings saved</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copied!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Starting…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Launching the Aether core</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stopping…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Shutting down the core process</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sharing this device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Controlled remotely</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move the cursor off the screen edge to switch devices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The server&apos;s mouse and keyboard drive this device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sharing — waiting for devices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clients can connect to this device now</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connecting…</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Running</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Looking for the server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Core is running</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press Start to share this keyboard and mouse</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pick a server, then Connect</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -12,6 +12,7 @@
 
 class ClientProxy;
 class EventQueueTimer;
+class PortForwardSession;
 namespace aether {
 class IStream;
 }
@@ -65,6 +66,7 @@ private:
   aether::IStream *m_stream = nullptr;
   EventQueueTimer *m_timer = nullptr;
   ClientProxy *m_proxy = nullptr;
+  PortForwardSession *m_forwardSession = nullptr;
   bool m_ready = false;
   Server *m_server = nullptr;
   IEventQueue *m_events = nullptr;

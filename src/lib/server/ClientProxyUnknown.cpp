@@ -23,7 +23,11 @@
 #include "server/ClientProxy1_6.h"
 #include "server/ClientProxy1_7.h"
 #include "server/ClientProxy1_8.h"
+#include "server/PortForwardSession.h"
 #include "server/Server.h"
+
+#include <algorithm>
+#include <cstring>
 
 //
 // ClientProxyUnknown
@@ -53,6 +57,7 @@ ClientProxyUnknown::~ClientProxyUnknown()
   removeTimer();
   delete m_stream;
   delete m_proxy;
+  delete m_forwardSession;
 }
 
 ClientProxy *ClientProxyUnknown::orphanClientProxy()
@@ -78,6 +83,8 @@ void ClientProxyUnknown::sendFailure()
 {
   delete m_proxy;
   m_proxy = nullptr;
+  delete m_forwardSession;
+  m_forwardSession = nullptr;
   m_ready = false;
   removeHandlers();
   removeTimer();
@@ -217,6 +224,35 @@ void ClientProxyUnknown::handleData()
     // may install its own handlers and we don't want to accidentally
     // remove those later.
     removeHandlers();
+
+    // a client name of "aetherfwd:<port>" requests a raw tunnel to a
+    // whitelisted localhost port instead of a screen-sharing session
+    if (name.compare(0, std::strlen(kPortShareNamePrefix), kPortShareNamePrefix) == 0) {
+      int port = 0;
+      try {
+        port = std::stoi(name.substr(std::strlen(kPortShareNamePrefix)));
+      } catch (...) {
+        port = 0;
+      }
+
+      bool allowed = port > 0 && port <= 65535;
+      if (allowed) {
+        const auto sharedPorts = m_server->sharedPorts();
+        allowed = std::find(sharedPorts.begin(), sharedPorts.end(), static_cast<uint16_t>(port)) != sharedPorts.end();
+      }
+      if (!allowed) {
+        LOG_WARN("rejected port share request \"%s\"", name.c_str());
+        sendFailure();
+        return;
+      }
+
+      removeTimer();
+      m_forwardSession = new PortForwardSession(
+          m_stream, static_cast<uint16_t>(port), m_server, m_events, [this] { sendFailure(); }
+      );
+      m_stream = nullptr;
+      return;
+    }
 
     // create client proxy for highest version supported by the client
     initProxy(name, major, minor);

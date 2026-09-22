@@ -18,6 +18,7 @@
 #include "server/Config.h"
 
 #include <climits>
+#include <cstdint>
 #include <map>
 #include <set>
 #include <vector>
@@ -199,6 +200,13 @@ public:
   void getClients(std::vector<std::string> &list) const;
   void sendConnectedClientsIpc() const;
   size_t getMaximumClipboardSizeBytes() const;
+
+  //! Get the shared ports whitelist
+  /*!
+  Returns the configured list of localhost TCP ports that forwarding
+  clients may connect to. An empty list disables port sharing.
+  */
+  std::vector<uint16_t> sharedPorts() const;
 
   //@}
 

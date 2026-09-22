@@ -473,6 +473,14 @@ void Config::readSectionOptions(ConfigReadContext &s)
   addOption("", kOptionClipboardSharing, Settings::value(Settings::Server::EnableClipboard).toBool());
   addOption("", kOptionClipboardSharingSize, Settings::value(Settings::Server::ClipboardSize).toUInt() * 1024);
 
+  for (const auto &part : Settings::value(Settings::Server::SharedPorts).toString().split(',', Qt::SkipEmptyParts)) {
+    bool ok = false;
+    const int port = part.trimmed().toInt(&ok);
+    if (ok && port > 0 && port <= 65535) {
+      m_sharedPorts.push_back(static_cast<uint16_t>(port));
+    }
+  }
+
   if (const auto address = Settings::value(Settings::Core::Interface).toString(); !address.isEmpty()) {
     m_aetherAddress = NetworkAddress(address.toStdString(), Settings::value(Settings::Core::Port).toInt());
   } else {
@@ -488,8 +496,25 @@ void Config::readSectionOptions(ConfigReadContext &s)
   while (s.readLine(line)) {
     if (line == "end") {
       return;
-    } else if (const auto l = QString::fromStdString(line).simplified();
-               !l.startsWith(QStringLiteral("keystroke")) && !l.startsWith(QStringLiteral("mousepress"))) {
+    }
+
+    const auto simplified = QString::fromStdString(line).simplified();
+    if (simplified.startsWith(QStringLiteral("sharedPorts"))) {
+      // sharedPorts = 3000,5173
+      const auto eq = simplified.indexOf('=');
+      if (eq != -1) {
+        for (const auto &part : simplified.mid(eq + 1).split(',', Qt::SkipEmptyParts)) {
+          bool ok = false;
+          const int port = part.trimmed().toInt(&ok);
+          if (!ok || port <= 0 || port > 65535) {
+            throw ServerConfigReadException(s, "invalid sharedPorts value \"%{1}\"", line);
+          }
+          m_sharedPorts.push_back(static_cast<uint16_t>(port));
+        }
+      }
+      continue;
+    }
+    if (!simplified.startsWith(QStringLiteral("keystroke")) && !simplified.startsWith(QStringLiteral("mousepress"))) {
       continue;
     }
 

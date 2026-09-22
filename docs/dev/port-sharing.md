@@ -22,83 +22,86 @@ distributed workspace.
   the existing TLS-encrypted link (inherits fingerprint trust).
 - Later: per-share permission prompts, UDP, named shares, session multiplexing.
 
-## Wire design (v1)
+## Wire design (v1, as implemented)
 
-No new listen ports, no new protocol version. A forward is a normal Aether
-TCP+TLS connection on port 24800 that, after the standard hello exchange,
-sends a new top-level message instead of input traffic:
+No new listen ports, no new protocol version, no new messages. A forward is
+a normal Aether TCP+TLS connection on port 24800 whose hello-back client
+name is the port-share prefix plus the target port:
 
 ```
-Client → Server:  hello-back (protocol, version, name)     [existing]
-Client → Server:  FWD<port:uint16>                         [new kMsgForward]
-Server → Client:  FWDOK | FWDERR<reason>                   [new kMsgForwardAck/Err]
+Client → Server:  hello-back (protocol, version, name="aetherfwd:<port>")
 Then: raw bidirectional byte pump to 127.0.0.1:<port> on the server side
 ```
 
-Server-side dispatch: `ClientProxyUnknown` completes the handshake and hands
-the socket to the versioned `ClientProxy`. The first post-hello message is
-inspected — if it is `kMsgForward`, the connection is routed to a
-`PortForwardSession` instead of the input/screen flow. Old servers simply
-reject the unknown message; old clients never send it.
+Server-side dispatch: `ClientProxyUnknown::handleData` parses the hello-back,
+sees the `aetherfwd:` name prefix (`kPortShareNamePrefix`), validates the port
+against the whitelist, and hands the socket to `PortForwardSession` instead of
+a `ClientProxy`. There is no ack message — a rejected port or failed dial
+simply closes the connection, which the client surfaces as a closed local
+socket.
 
 This keeps `ClientListener`, the hello exchange, TLS upgrade, and fingerprint
-verification untouched.
+verification untouched, and old servers reject the unknown screen name the
+same way they reject any unconfigured client.
 
 ## Components
 
-### `src/lib/aether` — protocol
-- `ProtocolTypes.h/.cpp`: `kMsgForward`, `kMsgForwardAck`, `kMsgForwardErr`
-  + `ProtocolUtil` read/write helpers.
-- `PortForwardPump.{h,cpp}`: bidirectional relay between two `IDataSocket`s
-  on the event queue. Half-close semantics: one side closes → finish pending
-  writes → close the other.
+### `src/lib/aether` — shared
+- `ProtocolTypes.h/.cpp`: `kPortShareNamePrefix` (`"aetherfwd:"`).
+- `StreamPump.{h,cpp}`: event-driven bidirectional relay between two
+  `aether::IStream`s. Half-close semantics: input shutdown on one side →
+  flush + output shutdown on the peer; both shutdown or any stream error →
+  close both + done callback.
+- `unittests/aether/StreamPumpTests.cpp`: relay both directions, shutdown
+  propagation, close-on-error.
 
 ### `src/lib/server` — `PortForwardSession.{h,cpp}`
 - Receives the post-hello socket + requested port.
-- Validates against `server/sharedPorts` whitelist (empty = sharing off).
-- Dials `127.0.0.1:<port>` via `ISocketFactory` (plaintext — it is loopback).
-- Runs `PortForwardPump`; logs open/close at INFO.
+- Whitelist: `Server::sharedPorts()` → `Config::m_sharedPorts`, seeded from
+  `Settings::Server::SharedPorts` and the `sharedPorts = <csv>` line in the
+  generated config's `options:` section. Empty = all requests refused.
+- Dials `127.0.0.1:<port>` with a `TCPSocket` (plaintext — loopback).
+- Runs `StreamPump`; logs open/close at INFO.
 
 ### `src/lib/client` — `PortShareListener.{h,cpp}`
-- For each configured port P (from `client/forwardPorts`):
-  bind `127.0.0.1:P` with `IListenSocket`.
-- On accept: open a new `IDataSocket` (TLS) to `server:24800`, do the normal
-  hello + `kMsgForward(P)`, then pump.
-- Bind failure (port in use): WARN log, continue with other ports.
-- Listeners live only while the client session is connected; torn down on
-  disconnect.
+- For each configured port P (from `Settings::Client::ForwardPorts`):
+  binds `127.0.0.1:P` with `TCPListenSocket` (loopback only).
+- On accept: opens a new socket via the client's `ISocketFactory` (same TLS
+  security level as the main connection), answers the server hello with
+  name `aetherfwd:P`, then pumps.
+- Caps: 8 concurrent forwards per port, 10s hello timeout.
+- Bind failure (port in use): WARN log, other ports still start.
+- Wired in `ClientApp`: created on client connect, torn down on disconnect.
 
-### Config & GUI
-- Settings keys: `server/sharedPorts` (string list, e.g. `3000,5173`),
-  `client/forwardPorts` (same format, or `Auto` to mirror server's list later).
-- `ServerConfigDialog`: "Share localhost ports" field (comma list) + hint.
-- `ClientConfigDialog`: "Tunnel server localhost ports" field.
-- Status bar (later): indicator when a forward is active.
+### GUI
+- Dedicated "Port Share" page in the main window nav rail with two fields:
+  `server/sharedPorts` (ports peers may reach on this machine) and
+  `client/forwardPorts` (ports tunneled from the server while connected).
+- `ServerConfig` writes `sharedPorts = <csv>` into the generated config.
 
 ## Security model (v1)
 
 - Forwarding is opt-in on the server (`sharedPorts` empty by default → all
-  `FWD` requests refused with `FWDERR`).
+  forward connections refused).
 - Both ends bind `127.0.0.1` only — nothing is exposed on the LAN.
 - TLS + fingerprint trust: only verified peers can open forwards.
-- Rate-limit/guard: cap concurrent forwards per peer (e.g. 32) to prevent
-  fd exhaustion.
-- `FWDERR` reasons: `denied`, `port-not-shared`, `dial-failed`, `limit`.
+- Cap concurrent forwards per port (8) to limit fd exhaustion.
+- Rejection is silent close (no reason codes) — acceptable for v1 since the
+  GUI owns configuration on both ends.
 
 ## Testing
 
-- `unittests/aether/PortForwardPumpTests.cpp`: loopback sockets, verify
-  byte-for-byte relay both directions + clean close.
+- `StreamPumpTests` — byte relay both directions, half-close, error close.
 - Manual: `node -e "http server"` on A :3000 → B `curl localhost:3000`.
 - Two-machine: dev server (vite/next) on A, browser on B hits
   `localhost:3000` — HMR websockets must work (they are just TCP).
 
 ## Milestones
 
-1. **Protocol + pump** — messages, `PortForwardPump`, unit tests.
-2. **Server side** — post-hello `FWD` dispatch, whitelist check, dial.
-3. **Client side** — `PortShareListener`, reconnect lifecycle.
-4. **Config/GUI** — settings keys + dialog fields + changelog.
+1. **Protocol + pump** — `kPortShareNamePrefix`, `StreamPump`, tests. ✅
+2. **Server side** — name-prefix dispatch, whitelist check, dial. ✅
+3. **Client side** — `PortShareListener`, reconnect lifecycle. ✅
+4. **Config/GUI** — Port Share page + settings keys. ✅
 5. **Dogfood** — vite/next dev server across two machines incl. websockets.
 
 ## Post-v1 ideas

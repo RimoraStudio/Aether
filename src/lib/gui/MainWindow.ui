@@ -314,7 +314,94 @@
      </widget>
     </item>
     <item>
-     <widget class="QWidget" name="contentArea" native="true">
+     <layout class="QHBoxLayout" name="rootRow">
+      <property name="spacing">
+       <number>14</number>
+      </property>
+      <item>
+       <widget class="QWidget" name="navRail" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>120</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>120</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <layout class="QVBoxLayout" name="navLayout">
+         <property name="spacing">
+          <number>4</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QPushButton" name="navWorkspace">
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+           <property name="text">
+            <string>Workspace</string>
+           </property>
+           <property name="icon">
+            <iconset theme="share-screen"/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="navPortShare">
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+           <property name="text">
+            <string>Port Share</string>
+           </property>
+           <property name="icon">
+            <iconset theme="remote-control"/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="navSpacer">
+           <property name="orientation">
+            <enum>Qt::Orientation::Vertical</enum>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QStackedWidget" name="stackedPages">
+        <widget class="QWidget" name="contentArea" native="true">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
         <horstretch>0</horstretch>
@@ -1010,6 +1097,190 @@ QPushButton#btnToggleCore:disabled { background: palette(button);  }</string>
        </item>
       </layout>
      </widget>
+        <widget class="QWidget" name="portSharePage" native="true">
+         <layout class="QVBoxLayout" name="portShareLayout">
+          <property name="spacing">
+           <number>14</number>
+          </property>
+          <property name="leftMargin">
+           <number>8</number>
+          </property>
+          <property name="topMargin">
+           <number>8</number>
+          </property>
+          <property name="rightMargin">
+           <number>8</number>
+          </property>
+          <property name="bottomMargin">
+           <number>8</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="lblPortShareTitle">
+            <property name="styleSheet">
+             <string>font-size: 17px; font-weight: 600;</string>
+            </property>
+            <property name="text">
+             <string>Port Share</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lblPortShareDesc">
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+            <property name="styleSheet">
+             <string>font-size: 12px;</string>
+            </property>
+            <property name="text">
+             <string>Share localhost TCP ports between machines. A dev server on one computer's localhost becomes reachable at the same port on connected computers.</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="portShareServerCard">
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="styleSheet">
+             <string>QFrame { border: 1px solid palette(mid); border-radius: 10px; background: palette(base); }</string>
+            </property>
+            <layout class="QVBoxLayout" name="portShareServerLayout">
+             <property name="spacing">
+              <number>8</number>
+             </property>
+             <property name="leftMargin">
+              <number>14</number>
+             </property>
+             <property name="topMargin">
+              <number>12</number>
+             </property>
+             <property name="rightMargin">
+              <number>14</number>
+             </property>
+             <property name="bottomMargin">
+              <number>12</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="lblSharePortsTitle">
+               <property name="styleSheet">
+                <string>font-size: 13px; font-weight: 600;</string>
+               </property>
+               <property name="text">
+                <string>Share my ports (server)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lblSharePortsHint">
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+               <property name="styleSheet">
+                <string>font-size: 11px;</string>
+               </property>
+               <property name="text">
+                <string>Ports on this machine's localhost that peers may reach. Comma separated, e.g. 3000, 5173, 8080.</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="editSharedPorts">
+               <property name="placeholderText">
+                <string>3000, 5173, 8080</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="portShareClientCard">
+            <property name="frameShape">
+             <enum>QFrame::Shape::StyledPanel</enum>
+            </property>
+            <property name="styleSheet">
+             <string>QFrame { border: 1px solid palette(mid); border-radius: 10px; background: palette(base); }</string>
+            </property>
+            <layout class="QVBoxLayout" name="portShareClientLayout">
+             <property name="spacing">
+              <number>8</number>
+             </property>
+             <property name="leftMargin">
+              <number>14</number>
+             </property>
+             <property name="topMargin">
+              <number>12</number>
+             </property>
+             <property name="rightMargin">
+              <number>14</number>
+             </property>
+             <property name="bottomMargin">
+              <number>12</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="lblForwardPortsTitle">
+               <property name="styleSheet">
+                <string>font-size: 13px; font-weight: 600;</string>
+               </property>
+               <property name="text">
+                <string>Tunnel server ports (client)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lblForwardPortsHint">
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+               <property name="styleSheet">
+                <string>font-size: 11px;</string>
+               </property>
+               <property name="text">
+                <string>While connected, these localhost ports on this machine reach the server's localhost. Comma separated.</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="editForwardPorts">
+               <property name="placeholderText">
+                <string>3000, 5173</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="portShareButtonRow">
+            <item>
+             <widget class="QPushButton" name="btnSavePortShare">
+              <property name="text">
+               <string>Save port settings</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="portShareBtnSpacer">
+              <property name="orientation">
+               <enum>Qt::Orientation::Horizontal</enum>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="portShareVSpacer">
+            <property name="orientation">
+             <enum>Qt::Orientation::Vertical</enum>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>

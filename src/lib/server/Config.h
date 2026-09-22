@@ -15,9 +15,11 @@
 #include "net/NetworkAddress.h"
 #include "server/InputFilter.h"
 
+#include <cstdint>
 #include <iosfwd>
 #include <map>
 #include <set>
+#include <vector>
 
 namespace aether::server {
 class Config;
@@ -351,6 +353,17 @@ public:
   */
   const ScreenOptions *getOptions(const std::string &name) const;
 
+  //! Get the shared ports whitelist
+  /*!
+  Returns the list of localhost TCP ports that forwarding clients
+  ("aetherfwd:<port>" connections) are permitted to reach. An empty
+  list means port sharing is disabled.
+  */
+  const std::vector<uint16_t> &sharedPorts() const
+  {
+    return m_sharedPorts;
+  }
+
   //! Check for lock to screen action
   /*!
   Returns \c true if this configuration has a lock to screen action.
@@ -416,6 +429,7 @@ private:
   NameMap m_nameToCanonicalName;
   NetworkAddress m_aetherAddress;
   ScreenOptions m_globalOptions;
+  std::vector<uint16_t> m_sharedPorts;
   InputFilter m_inputFilter;
   bool m_hasLockToScreenAction = false;
   IEventQueue *m_events;

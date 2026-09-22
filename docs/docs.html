@@ -87,6 +87,7 @@
       <li><a href="#" data-doc="dev/build.md">Build guide</a></li>
       <li><a href="#" data-doc="dev/protocol_reference.md">Protocol reference</a></li>
       <li><a href="#" data-doc="dev/virtual-display-plan.md">Virtual display plan</a></li>
+      <li><a href="#" data-doc="dev/port-sharing.md">Port sharing</a></li>
     </ul>
   </aside>
   <div class="docs-content">
@@ -134,6 +135,8 @@
                .replace(/protocol_reference\.md/g, '#dev/protocol_reference.md')
                .replace(/dev\/virtual-display-plan\.md/g, '#dev/virtual-display-plan.md')
                .replace(/virtual-display-plan\.md/g, '#dev/virtual-display-plan.md')
+               .replace(/dev\/port-sharing\.md/g, '#dev/port-sharing.md')
+               .replace(/port-sharing\.md/g, '#dev/port-sharing.md')
                .replace(/Readme\.md/g, '#Readme.md');
         render.innerHTML = marked.parse(md);
         window.scrollTo(0, 0);

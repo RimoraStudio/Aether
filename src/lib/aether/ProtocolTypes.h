@@ -139,6 +139,18 @@ static constexpr uint32_t PROTOCOL_MAX_LIST_LENGTH = 1024 * 1024;
  */
 static constexpr uint32_t PROTOCOL_MAX_STRING_LENGTH = 1024 * 1024;
 
+/**
+ * @brief Client-name prefix marking a port share forward connection
+ *
+ * A secondary that connects only to relay a localhost TCP port sends a
+ * normal hello-back with the client name set to this prefix plus the target
+ * port, e.g. `aetherfwd:3000`. The primary treats the connection as a raw
+ * byte tunnel to `127.0.0.1:<port>` instead of a screen client.
+ *
+ * @since Protocol version 1.8
+ */
+extern const char *const kPortShareNamePrefix;
+
 /** @} */ // end of protocol_constants group
 
 /**

@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Port Share: forward localhost TCP ports between machines over the existing
+  encrypted link. A new "Port Share" page in the main window holds two fields:
+  "Share my ports" (server whitelist, `server/sharedPorts`) and "Tunnel server
+  ports" (client, `client/forwardPorts`). While connected, a listed port on the
+  client's localhost reaches the same port on the server's localhost.
+  Loopback-only on both ends; forwards ride the normal TLS connection
+  with a reserved `aetherfwd:<port>` client name.
+- Nav rail in the main window with Workspace and Port Share pages.
+
 ## [v1.1.0] - 2026-09-18
 
 ### Added
