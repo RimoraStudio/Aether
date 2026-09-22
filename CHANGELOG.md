@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.2.0] - 2026-09-22
+
 ### Added
 - Port Share: forward localhost TCP ports between machines over the existing
   encrypted link. A new "Port Share" page in the main window holds two fields:
