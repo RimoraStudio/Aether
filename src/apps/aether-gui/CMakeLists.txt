@@ -81,6 +81,9 @@ if(WIN32)
     COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different
       ${QT_DEPENDS_DIR}
       $<TARGET_FILE_DIR:${target}>
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+      "${CMAKE_BINARY_DIR}/qt.conf"
+      $<TARGET_FILE_DIR:${target}>
   )
 
   install(
@@ -89,6 +92,11 @@ if(WIN32)
     PATTERN "dx*.dll" EXCLUDE
     PATTERN "icu*.dll" EXCLUDE
   )
+
+  # Point Qt at the bundled plugin dir explicitly so portable/install
+  # layouts resolve platforms/qwindows regardless of cwd or layout.
+  file(WRITE "${CMAKE_BINARY_DIR}/qt.conf" "[Paths]\nPlugins = plugins\n")
+  install(FILES "${CMAKE_BINARY_DIR}/qt.conf" DESTINATION ${CMAKE_INSTALL_BINDIR})
 
   # Ship the MSVC runtime app-locally so installs work on machines
   # without a matching VC++ redistributable.

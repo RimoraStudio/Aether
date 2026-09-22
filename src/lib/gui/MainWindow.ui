@@ -1303,7 +1303,7 @@ QPushButton#btnToggleCore:disabled { background: palette(button);  }</string>
                <string>font-size: 11px;</string>
               </property>
               <property name="text">
-               <string>Applies the next time the core starts.</string>
+               <string>Saving restarts the core if it's running.</string>
               </property>
              </widget>
             </item>

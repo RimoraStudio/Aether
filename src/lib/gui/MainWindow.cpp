@@ -293,7 +293,12 @@ void MainWindow::setupControls()
     Settings::setValue(Settings::Client::ForwardPorts, ui->editForwardPorts->text().trimmed());
     Settings::save();
     m_updatePortShareSave();
-    m_statusBar->showMessage(tr("Port share settings saved"));
+    if (m_coreProcess.isStarted()) {
+      m_coreProcess.restart();
+      m_statusBar->showMessage(tr("Port share settings saved. Restarting core to apply..."));
+    } else {
+      m_statusBar->showMessage(tr("Port share settings saved"));
+    }
   });
 
   connect(ui->btnCopyIp, &QPushButton::clicked, this, [this] {
