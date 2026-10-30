@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.2.1] - 2026-10-30
+
+### Changed
+- Windows mouse movement is dispatched asynchronously to reduce stutter on
+  remote screens, while button and screen-transition messages remain ordered.
+
 ## [v1.2.0] - 2026-09-22
 
 ### Added
@@ -109,6 +115,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - No dark mode in GUI
 - No mDNS discovery (manual IP entry required)
 
-[Unreleased]: https://github.com/RimoraStudio/Aether/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/RimoraStudio/Aether/compare/v1.2.1...HEAD
+[v1.2.1]: https://github.com/RimoraStudio/Aether/compare/v1.2.0...v1.2.1
+[v1.2.0]: https://github.com/RimoraStudio/Aether/compare/v1.1.0...v1.2.0
 [v1.1.0]: https://github.com/RimoraStudio/Aether/compare/v1.0.0...v1.1.0
 [v1.0.0]: https://github.com/RimoraStudio/Aether/releases/tag/v1.0.0

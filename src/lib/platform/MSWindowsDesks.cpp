@@ -8,14 +8,14 @@
 
 #include "platform/MSWindowsDesks.h"
 
+#include "aether/IScreenSaver.h"
+#include "aether/ScreenException.h"
+#include "aether/win32/AppUtilWindows.h"
 #include "arch/Arch.h"
 #include "base/IEventQueue.h"
 #include "base/IJob.h"
 #include "base/Log.h"
 #include "base/TMethodJob.h"
-#include "aether/IScreenSaver.h"
-#include "aether/ScreenException.h"
-#include "aether/win32/AppUtilWindows.h"
 #include "mt/Lock.h"
 #include "mt/Thread.h"
 #include "platform/MSWindowsHook.h"
@@ -118,6 +118,7 @@ MSWindowsDesks::MSWindowsDesks(
       m_isOnScreen(m_isPrimary),
       m_screensaver(screensaver),
       m_deskReady(&m_mutex, false),
+      m_mouseMovesDrained(&m_mutex, true),
       m_updateKeys(updateKeys),
       m_events(events)
 {
@@ -302,12 +303,12 @@ void MSWindowsDesks::fakeMouseButton(ButtonID button, bool press)
 
 void MSWindowsDesks::fakeMouseMove(int32_t x, int32_t y) const
 {
-  sendMessage(AETHER_MSG_FAKE_MOVE, static_cast<WPARAM>(x), static_cast<LPARAM>(y));
+  postMouseMove(AETHER_MSG_FAKE_MOVE, static_cast<WPARAM>(x), static_cast<LPARAM>(y));
 }
 
 void MSWindowsDesks::fakeMouseRelativeMove(int32_t dx, int32_t dy) const
 {
-  sendMessage(AETHER_MSG_FAKE_REL_MOVE, static_cast<WPARAM>(dx), static_cast<LPARAM>(dy));
+  postMouseMove(AETHER_MSG_FAKE_REL_MOVE, static_cast<WPARAM>(dx), static_cast<LPARAM>(dy));
 }
 
 void MSWindowsDesks::fakeMouseWheel(int32_t xDelta, int32_t yDelta) const
@@ -351,8 +352,36 @@ bool MSWindowsDesks::restoreRelativeCursorPosition(Desk *desk) const
 void MSWindowsDesks::sendMessage(UINT msg, WPARAM wParam, LPARAM lParam) const
 {
   if (m_activeDesk != nullptr && m_activeDesk->m_window != nullptr) {
-    PostThreadMessage(m_activeDesk->m_threadID, msg, wParam, lParam);
+    waitForMouseMoves();
+    auto *self = const_cast<MSWindowsDesks *>(this);
+    {
+      Lock lock(&self->m_mutex);
+      self->m_deskReady = false;
+      PostThreadMessage(m_activeDesk->m_threadID, msg, wParam, lParam);
+    }
     waitForDesk();
+  }
+}
+
+void MSWindowsDesks::postMouseMove(UINT msg, WPARAM wParam, LPARAM lParam) const
+{
+  if (m_activeDesk == nullptr || m_activeDesk->m_window == nullptr) {
+    return;
+  }
+
+  auto *self = const_cast<MSWindowsDesks *>(this);
+  Lock lock(&self->m_mutex);
+  ++self->m_pendingMouseMoves;
+  self->m_mouseMovesDrained = false;
+  self->m_deskReady = false;
+  if (!PostThreadMessage(m_activeDesk->m_threadID, msg, wParam, lParam)) {
+    --self->m_pendingMouseMoves;
+    if (self->m_pendingMouseMoves == 0) {
+      self->m_mouseMovesDrained = true;
+      self->m_mouseMovesDrained.broadcast();
+      self->m_deskReady = true;
+      self->m_deskReady.broadcast();
+    }
   }
 }
 
@@ -784,7 +813,16 @@ void MSWindowsDesks::deskThread(const void *vdesk)
 
     // notify that message was processed
     Lock lock(&m_mutex);
-    m_deskReady = true;
+    if (msg.message == AETHER_MSG_FAKE_MOVE || msg.message == AETHER_MSG_FAKE_REL_MOVE) {
+      if (m_pendingMouseMoves > 0) {
+        --m_pendingMouseMoves;
+      }
+      if (m_pendingMouseMoves == 0) {
+        m_mouseMovesDrained = true;
+        m_mouseMovesDrained.broadcast();
+      }
+    }
+    m_deskReady = (m_pendingMouseMoves == 0);
     m_deskReady.broadcast();
   }
 
@@ -800,6 +838,8 @@ void MSWindowsDesks::deskThread(const void *vdesk)
 
 MSWindowsDesks::Desk *MSWindowsDesks::addDesk(const std::wstring &name, HDESK hdesk)
 {
+  waitForMouseMoves();
+
   Desk *desk = new Desk;
   desk->m_name = name;
   desk->m_desk = hdesk;
@@ -897,6 +937,15 @@ void MSWindowsDesks::waitForDesk() const
     m_deskReady.wait();
   }
   self->m_deskReady = false;
+}
+
+void MSWindowsDesks::waitForMouseMoves() const
+{
+  auto *self = const_cast<MSWindowsDesks *>(this);
+  Lock lock(&self->m_mutex);
+  while (!(bool)self->m_mouseMovesDrained) {
+    self->m_mouseMovesDrained.wait();
+  }
 }
 
 void MSWindowsDesks::handleCheckDesk()

@@ -219,6 +219,8 @@ private:
 
   // communication with desk threads
   void waitForDesk() const;
+  void waitForMouseMoves() const;
+  void postMouseMove(UINT, WPARAM, LPARAM) const;
   void sendMessage(UINT, WPARAM, LPARAM) const;
 
   // work around for messed up keyboard events from low-level hooks
@@ -273,6 +275,8 @@ private:
   // one desk per desktop and a cond var to communicate with it
   Mutex m_mutex;
   CondVar<bool> m_deskReady;
+  CondVar<bool> m_mouseMovesDrained;
+  uint32_t m_pendingMouseMoves = 0;
   Desks m_desks;
 
   // keyboard stuff
