@@ -89,6 +89,15 @@ MainWindow::MainWindow()
 {
   ui->setupUi(this);
   ui->connectionMetricsLayout->setAlignment(Qt::AlignCenter);
+  m_btnCheckUpdates = new QPushButton(tr("Check for updates"), this);
+  m_btnCheckUpdates->setIcon(QIcon::fromTheme(QStringLiteral("software-updates")));
+  m_btnCheckUpdates->setToolTip(tr("Check whether a newer Aether version is available"));
+  m_btnCheckUpdates->setMinimumHeight(30);
+  ui->horizontalLayout_5->addWidget(m_btnCheckUpdates);
+  connect(m_btnCheckUpdates, &QPushButton::clicked, this, [this] {
+    m_manualUpdateCheck = true;
+    m_versionChecker.checkLatest();
+  });
 
   setWindowIcon(QIcon::fromTheme(kRevFqdnName));
 
@@ -406,6 +415,39 @@ void MainWindow::connectSlots()
   connect(m_statusBar, &StatusBar::requestShowMyFingerprints, this, &MainWindow::showMyFingerprint);
   connect(m_statusBar, &StatusBar::requestUpdateVersion, this, &MainWindow::openGetNewVersionUrl);
   connect(&m_versionChecker, &VersionChecker::updateFound, m_statusBar, &StatusBar::updateFound);
+  connect(&m_versionChecker, &VersionChecker::checkStarted, this, [this] {
+    m_btnCheckUpdates->setEnabled(false);
+    m_btnCheckUpdates->setText(tr("Checking…"));
+  });
+  connect(&m_versionChecker, &VersionChecker::upToDate, this, [this] {
+    m_btnCheckUpdates->setEnabled(true);
+    m_btnCheckUpdates->setText(tr("Check for updates"));
+    if (m_manualUpdateCheck)
+      QMessageBox::information(this, tr("Aether is up to date"), tr("You’re running the latest version of Aether."));
+    m_manualUpdateCheck = false;
+  });
+  connect(&m_versionChecker, &VersionChecker::checkFailed, this, [this](const QString &error) {
+    m_btnCheckUpdates->setEnabled(true);
+    m_btnCheckUpdates->setText(tr("Check for updates"));
+    if (m_manualUpdateCheck)
+      QMessageBox::warning(this, tr("Update check failed"), tr("Could not check for updates.\n\n%1").arg(error));
+    m_manualUpdateCheck = false;
+  });
+  connect(&m_versionChecker, &VersionChecker::updateFound, this, [this](const QString &version) {
+    m_btnCheckUpdates->setEnabled(true);
+    m_btnCheckUpdates->setText(tr("Check for updates"));
+    if (!m_manualUpdateCheck)
+      return;
+    m_manualUpdateCheck = false;
+    QMessageBox message(this);
+    message.setWindowTitle(tr("Update available"));
+    message.setText(tr("Aether %1 is available. Would you like to download it?").arg(version));
+    auto *downloadButton = message.addButton(tr("Download"), QMessageBox::AcceptRole);
+    message.addButton(tr("Later"), QMessageBox::RejectRole);
+    message.exec();
+    if (message.clickedButton() == downloadButton)
+      openGetNewVersionUrl();
+  });
 
   connect(m_guiDupeChecker, &QLocalServer::newConnection, this, &MainWindow::showAndActivate);
 

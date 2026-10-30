@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v1.2.3] - 2026-10-30
+
+### Added
+- Always-visible top-bar update check with checking, up-to-date, failure, and
+  update-available feedback. A user-initiated update check offers to open the
+  release download page.
+
+### Fixed
+- Update-check network errors now release their reply and restore the check
+  control instead of leaving the request state stuck.
+
 ## [v1.2.2] - 2026-10-30
 
 ### Added

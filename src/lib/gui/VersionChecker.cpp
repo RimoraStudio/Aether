@@ -24,8 +24,12 @@ VersionChecker::VersionChecker(QObject *parent) : QObject(parent), m_network{new
   connect(m_network, &QNetworkAccessManager::finished, this, &VersionChecker::replyFinished, Qt::UniqueConnection);
 }
 
-void VersionChecker::checkLatest() const
+void VersionChecker::checkLatest()
 {
+  if (m_checkInProgress)
+    return;
+  m_checkInProgress = true;
+  Q_EMIT checkStarted();
   const QString url = Settings::value(Settings::Gui::UpdateCheckUrl).toString();
   qDebug("checking for updates at: %s", qPrintable(url));
   auto request = QNetworkRequest(url);
@@ -43,6 +47,10 @@ void VersionChecker::replyFinished(QNetworkReply *reply)
     qWarning("version check server error: %s", qPrintable(reply->errorString()));
     qWarning("version check server response: %s", qPrintable(QString(reply->readAll())));
     qWarning("error checking for updates, http status: %d", httpStatus);
+    const auto error = reply->errorString();
+    reply->deleteLater();
+    m_checkInProgress = false;
+    Q_EMIT checkFailed(error);
     return;
   }
 
@@ -50,6 +58,7 @@ void VersionChecker::replyFinished(QNetworkReply *reply)
 
   const auto body = reply->readAll();
   reply->deleteLater();
+  m_checkInProgress = false;
 
   auto newestVersion = QJsonDocument::fromJson(body).object().value("tag_name").toString();
   if (newestVersion.startsWith('v')) {
@@ -59,6 +68,7 @@ void VersionChecker::replyFinished(QNetworkReply *reply)
 
   if (newestVersion.isEmpty()) {
     qWarning() << "version check response has no tag_name";
+    Q_EMIT checkFailed(tr("The update server returned an invalid response."));
     return;
   }
 
@@ -68,6 +78,7 @@ void VersionChecker::replyFinished(QNetworkReply *reply)
     Q_EMIT updateFound(newestVersion);
   } else {
     qDebug().noquote() << QStringLiteral("current version %1 is upto date").arg(kVersion);
+    Q_EMIT upToDate();
   }
 }
 
