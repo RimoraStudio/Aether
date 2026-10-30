@@ -633,6 +633,15 @@ void CoreProcess::onCoreIpcMessageReceived(const QString &command, const QString
   } else if (command == "connectedClients") {
     const auto clients = args.isEmpty() ? QStringList() : args.split(",");
     Q_EMIT connectedClientsChanged(clients);
+  } else if (command == "peerLatency") {
+    const auto parts = args.split(QLatin1Char('|'));
+    bool ok = false;
+    const auto latencyMs = parts.size() == 2 ? parts[1].toInt(&ok) : -1;
+    if (parts.size() != 2 || parts[0].isEmpty() || !ok || latencyMs < 0) {
+      qWarning("core ipc got invalid peer latency: %s", args.toUtf8().constData());
+      return;
+    }
+    Q_EMIT peerLatencyChanged(parts[0], latencyMs);
   } else if (command == "secureSocket") {
     Q_EMIT secureSocket(true);
     if (args != m_secureSocketVersion) {

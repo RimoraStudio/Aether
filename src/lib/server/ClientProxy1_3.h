@@ -10,6 +10,9 @@
 
 #include "server/ClientProxy1_2.h"
 
+#include <chrono>
+#include <deque>
+
 //! Proxy for client implementing protocol version 1.3
 class ClientProxy1_3 : public ClientProxy1_2
 {
@@ -39,4 +42,5 @@ private:
   double m_keepAliveRate = kKeepAliveRate;
   EventQueueTimer *m_keepAliveTimer = nullptr;
   IEventQueue *m_events = nullptr;
+  std::deque<std::chrono::steady_clock::time_point> m_pendingKeepAlives;
 };

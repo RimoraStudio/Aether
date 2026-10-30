@@ -88,6 +88,7 @@ MainWindow::MainWindow()
       m_networkMonitor{new NetworkMonitor(this)}
 {
   ui->setupUi(this);
+  ui->connectionMetricsLayout->setAlignment(Qt::AlignCenter);
 
   setWindowIcon(QIcon::fromTheme(kRevFqdnName));
 
@@ -308,6 +309,7 @@ void MainWindow::setupControls()
     ui->btnCopyIp->setToolTip(tr("Copied!"));
     QTimer::singleShot(1500, this, [this] { ui->btnCopyIp->setToolTip(tr("Copy IP address")); });
   });
+  connect(ui->btnCopyConnectionDetails, &QPushButton::clicked, this, &MainWindow::copyConnectionDetails);
 
   // The radios live in separate card frames, so Qt's implicit autoExclusive
   // grouping does not apply. Group them explicitly.
@@ -368,6 +370,7 @@ void MainWindow::connectSlots()
     connect(m_trayIcon, &QSystemTrayIcon::activated, this, &MainWindow::trayIconActivated);
 
   connect(&m_coreProcess, &CoreProcess::connectedClientsChanged, this, &MainWindow::serverClientsChanged);
+  connect(&m_coreProcess, &CoreProcess::peerLatencyChanged, this, &MainWindow::peerLatencyChanged);
   connect(&m_coreProcess, &CoreProcess::unrecognisedClient, this, &MainWindow::handleUnrecognisedClient);
   connect(&m_coreProcess, &CoreProcess::connectionRefused, this, &MainWindow::handleConnectionRefused);
   connect(&m_coreProcess, &CoreProcess::retryIn, this, &MainWindow::updateTimeoutDelay);
@@ -1051,6 +1054,10 @@ void MainWindow::updateStatus()
   const auto connection = m_coreProcess.connectionState();
   const auto process = m_coreProcess.processState();
   const bool isServer = (m_coreProcess.mode() == CoreMode::Server);
+  if (process == ProcessState::Stopped) {
+    m_connectedPeers.clear();
+    m_peerLatencies.clear();
+  }
   if (process == Stopped || process == Started) {
     updateNetworkInfo();
     ui->btnEditName->setVisible(process == Stopped);
@@ -1095,6 +1102,7 @@ void MainWindow::updateStatus()
   }
   ui->lblHeroStatus->setText(heroTitle);
   ui->lblHeroDetail->setText(heroDetail);
+  updateConnectionMetrics();
 
   if (process == Starting || process == RetryPending) {
     ui->btnToggleCore->setText(tr("Starting…"));
@@ -1302,6 +1310,7 @@ void MainWindow::secureSocket(bool secureSocket)
 {
   m_secureSocket = secureSocket;
   updateSecurityIcon(m_statusBar->securityIconVisible());
+  updateConnectionMetrics();
 }
 
 void MainWindow::updateScreenName()
@@ -1404,7 +1413,79 @@ void MainWindow::serverClientsChanged(const QStringList &clients)
 {
   if (m_coreProcess.mode() != CoreMode::Server || !m_coreProcess.isStarted())
     return;
+
+  for (auto it = m_peerLatencies.begin(); it != m_peerLatencies.end();) {
+    if (!clients.contains(it.key()))
+      it = m_peerLatencies.erase(it);
+    else
+      ++it;
+  }
+
+  m_connectedPeers = clients;
   m_statusBar->setServerClients(clients);
+  updateConnectionMetrics();
+}
+
+void MainWindow::peerLatencyChanged(const QString &peer, int latencyMs)
+{
+  if (m_coreProcess.mode() != CoreMode::Server || latencyMs < 0)
+    return;
+
+  m_peerLatencies.insert(peer, latencyMs);
+  updateConnectionMetrics();
+}
+
+void MainWindow::updateConnectionMetrics()
+{
+  const bool isServer = m_coreProcess.mode() == CoreMode::Server;
+  ui->lblLatencyPill->setVisible(isServer);
+  const auto peerCount =
+      isServer ? m_connectedPeers.size() : (m_coreProcess.connectionState() == ConnectionState::Connected ? 1 : 0);
+  ui->lblPeerPill->setText(tr("Peers · %1").arg(peerCount));
+  ui->lblSecurityPill->setText(m_secureSocket ? tr("TLS secure") : tr("TLS off"));
+  ui->lblSecurityPill->setToolTip(
+      m_secureSocket ? tr("The Aether connection is encrypted") : tr("The Aether connection is not encrypted")
+  );
+
+  if (m_peerLatencies.isEmpty()) {
+    ui->lblLatencyPill->setText(tr("RTT · —"));
+    ui->lblLatencyPill->setToolTip(tr("Round-trip latency appears after a connected peer replies to a heartbeat"));
+    return;
+  }
+
+  auto worstLatency = m_peerLatencies.cbegin();
+  for (auto it = m_peerLatencies.cbegin(); it != m_peerLatencies.cend(); ++it) {
+    if (it.value() > worstLatency.value())
+      worstLatency = it;
+  }
+
+  ui->lblLatencyPill->setText(
+      (m_peerLatencies.size() > 1 ? tr("Max RTT · %1 ms") : tr("RTT · %1 ms")).arg(worstLatency.value())
+  );
+  QStringList details;
+  for (auto it = m_peerLatencies.cbegin(); it != m_peerLatencies.cend(); ++it)
+    details.append(QStringLiteral("%1: %2 ms").arg(it.key()).arg(it.value()));
+  ui->lblLatencyPill->setToolTip(details.join(QLatin1Char('\n')));
+}
+
+void MainWindow::copyConnectionDetails() const
+{
+  const auto peerCount = m_coreProcess.mode() == CoreMode::Server
+                             ? m_connectedPeers.size()
+                             : (m_coreProcess.connectionState() == ConnectionState::Connected ? 1 : 0);
+  QStringList details{
+      QStringLiteral("%1 %2").arg(kAppName, kVersion),
+      tr("Mode: %1").arg(m_coreProcess.mode() == CoreMode::Server ? tr("Server") : tr("Client")),
+      tr("Status: %1").arg(ui->lblHeroStatus->text()),
+      tr("Security: %1").arg(m_secureSocket ? tr("TLS secure") : tr("TLS off")),
+      tr("Connected peers: %1").arg(peerCount),
+  };
+
+  for (auto it = m_peerLatencies.cbegin(); it != m_peerLatencies.cend(); ++it)
+    details.append(QStringLiteral("%1: %2 ms RTT").arg(it.key()).arg(it.value()));
+
+  QGuiApplication::clipboard()->setText(details.join(QLatin1Char('\n')));
+  m_statusBar->showMessage(tr("Connection details copied"), 2500);
 }
 
 void MainWindow::daemonIpcClientConnectionFailed()

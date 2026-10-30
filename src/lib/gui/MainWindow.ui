@@ -970,6 +970,77 @@ QFrame#modeCardClient[selected="true"] { border: 2px solid palette(highlight); b
            </widget>
           </item>
           <item>
+           <layout class="QHBoxLayout" name="connectionMetricsLayout">
+            <property name="spacing">
+             <number>8</number>
+            </property>
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>4</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item alignment="Qt::AlignmentFlag::AlignHCenter">
+             <widget class="QLabel" name="lblLatencyPill">
+              <property name="styleSheet">
+               <string>QLabel#lblLatencyPill { border: 1px solid palette(mid); border-radius: 10px; padding: 4px 10px; font-size: 11px; font-weight: 600; }</string>
+              </property>
+              <property name="text">
+               <string>RTT · —</string>
+              </property>
+             </widget>
+            </item>
+            <item alignment="Qt::AlignmentFlag::AlignHCenter">
+             <widget class="QLabel" name="lblPeerPill">
+              <property name="styleSheet">
+               <string>QLabel#lblPeerPill { border: 1px solid palette(mid); border-radius: 10px; padding: 4px 10px; font-size: 11px; font-weight: 600; }</string>
+              </property>
+              <property name="text">
+               <string>Peers · 0</string>
+              </property>
+             </widget>
+            </item>
+            <item alignment="Qt::AlignmentFlag::AlignHCenter">
+             <widget class="QLabel" name="lblSecurityPill">
+              <property name="styleSheet">
+               <string>QLabel#lblSecurityPill { border: 1px solid palette(mid); border-radius: 10px; padding: 4px 10px; font-size: 11px; font-weight: 600; }</string>
+              </property>
+              <property name="text">
+               <string>TLS off</string>
+              </property>
+             </widget>
+            </item>
+            <item alignment="Qt::AlignmentFlag::AlignHCenter">
+             <widget class="QPushButton" name="btnCopyConnectionDetails">
+              <property name="toolTip">
+               <string>Copy connection status and peer latency details</string>
+              </property>
+              <property name="icon">
+               <iconset theme="edit-copy"/>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>14</width>
+                <height>14</height>
+               </size>
+              </property>
+              <property name="flat">
+               <bool>true</bool>
+              </property>
+              <property name="text">
+               <string>Copy details</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
            <widget class="QWidget" name="heroButtonRow" native="true">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">

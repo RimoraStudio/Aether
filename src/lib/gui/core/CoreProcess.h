@@ -88,6 +88,7 @@ Q_SIGNALS:
   void secureSocket(bool enabled);
   void daemonIpcClientConnectionFailed();
   void connectedClientsChanged(const QStringList &clients);
+  void peerLatencyChanged(const QString &peer, int latencyMs);
   void securityLevelChanged(QString securityLevel);
   void unrecognisedClient(const QString &clientName);
   void connectionRefused(aether::core::ConnectionRefusal reason);

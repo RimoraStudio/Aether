@@ -9,6 +9,7 @@
 
 #pragma once
 
+#include <QHash>
 #include <QMainWindow>
 #include <QProcess>
 #include <QRegularExpression>
@@ -165,6 +166,9 @@ private:
   Fingerprint m_fingerprint;
 
   void serverClientsChanged(const QStringList &clients);
+  void peerLatencyChanged(const QString &peer, int latencyMs);
+  void updateConnectionMetrics();
+  void copyConnectionDetails() const;
 
   inline static const auto m_guiSocketName = QStringLiteral("aether-gui");
   inline static const auto m_nameRegEx = QRegularExpression(QStringLiteral("^[\\w\\-_\\.]{0,255}$"));
@@ -181,6 +185,8 @@ private:
   QSize m_expandedSize = QSize();
   QStringList m_checkedClients;
   QStringList m_checkedServers;
+  QStringList m_connectedPeers;
+  QHash<QString, int> m_peerLatencies;
   QSystemTrayIcon *m_trayIcon = nullptr;
   QLocalServer *m_guiDupeChecker = nullptr;
   aether::gui::ipc::DaemonIpcClient *m_daemonIpcClient = nullptr;

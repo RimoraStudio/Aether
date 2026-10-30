@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Connection overview pills for peer RTT, peer count, and encryption state, plus
+  a copyable connection-details summary for troubleshooting.
+
 ## [v1.2.1] - 2026-10-30
 
 ### Changed

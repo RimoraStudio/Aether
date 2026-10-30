@@ -8,9 +8,10 @@
 
 #include "server/ClientProxy1_3.h"
 
+#include "aether/ProtocolUtil.h"
+#include "aether/ipc/CoreIpc.h"
 #include "base/IEventQueue.h"
 #include "base/Log.h"
-#include "aether/ProtocolUtil.h"
 
 #include <cstring>
 
@@ -41,7 +42,15 @@ bool ClientProxy1_3::parseMessage(const uint8_t *code)
 {
   // process message
   if (memcmp(code, kMsgCKeepAlive, 4) == 0) {
-    // reset alarm
+    if (!m_pendingKeepAlives.empty()) {
+      const auto sentAt = m_pendingKeepAlives.front();
+      m_pendingKeepAlives.pop_front();
+      const auto latencyMs =
+          std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - sentAt).count();
+      const auto payload = QString::fromStdString(getName()) + QLatin1Char('|') + QString::number(latencyMs);
+      ipcSendToClient(QStringLiteral("peerLatency"), payload);
+    }
+
     resetHeartbeatTimer();
     return true;
   } else {
@@ -94,5 +103,9 @@ void ClientProxy1_3::removeHeartbeatTimer()
 
 void ClientProxy1_3::keepAlive()
 {
+  m_pendingKeepAlives.push_back(std::chrono::steady_clock::now());
+  if (m_pendingKeepAlives.size() > 8) {
+    m_pendingKeepAlives.pop_front();
+  }
   ProtocolUtil::writef(getStream(), kMsgCKeepAlive);
 }
